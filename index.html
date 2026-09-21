@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🎀 Glam Bio Quest — The Bio Frame</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/fredoka@latest/index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/quicksand@latest/index.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/caveat@latest/index.css" />
+<style>
+:root{
+  --bg:#fff5fa;--paper:#fffafc;--ink:#5d3a54;--ink2:#9a7391;
+  --pink:#ff6fae;--pink2:#ff9ecb;--pink-deep:#e14f93;--blush:#ffe3ef;--line:#ffd4e7;
+  --lilac:#c9a7ff;--mint:#7eddb8;--butter:#ffd98a;--sky:#9fd4ff;--coral:#ff9d8a;
+  --chunk:0 6px 0 #ffd0e4,0 16px 30px rgba(233,132,182,.16);
+  --chunk-sm:0 4px 0 #ffd9e9,0 10px 18px rgba(233,132,182,.13);
+  --r:22px;
+  --font-h:'Fredoka Variable','Fredoka','Quicksand Variable',system-ui,sans-serif;
+  --font-b:'Quicksand Variable','Quicksand',system-ui,-apple-system,sans-serif;
+  --font-hand:'Caveat Variable','Caveat',cursive;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+body{margin:0;font-family:var(--font-b);color:var(--ink);background:var(--bg);overflow-x:hidden;line-height:1.62;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(900px 520px at 8% -6%,#ffe6f2 0%,transparent 62%),
+  radial-gradient(760px 460px at 100% 4%,#efe6ff 0%,transparent 60%),
+  radial-gradient(700px 520px at 50% 108%,#e2fbf1 0%,transparent 60%),
+  linear-gradient(180deg,#fff7fb,#fff2f8 45%,#f7f2ff)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.45;
+  background-image:radial-gradient(#ffd7ea 1.1px,transparent 1.2px);background-size:22px 22px;
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.1))}
+h1,h2,h3,h4,h5{font-family:var(--font-h);line-height:1.2;margin:0}
+button{font-family:inherit}
+::selection{background:#ffc2dd}
+.deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.deco span{position:absolute;opacity:.45;animation:floaty 15s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-26px) rotate(8deg)}}
+
+/* TOP BAR */
+.topbar{position:sticky;top:0;z-index:60;background:rgba(255,250,253,.93);backdrop-filter:blur(10px);border-bottom:2px dashed var(--line);padding:.5rem .9rem;box-shadow:0 8px 22px rgba(233,132,182,.12)}
+.topbar-in{max-width:1200px;margin:0 auto;display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
+.brand{font-family:var(--font-h);font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:.45rem;white-space:nowrap}
+.brand i{width:30px;height:30px;border-radius:11px;background:linear-gradient(160deg,var(--pink2),var(--pink));display:grid;place-items:center;font-style:normal;color:#fff;box-shadow:var(--chunk-sm)}
+.nav{display:flex;gap:.28rem;flex-wrap:wrap;margin-left:auto}
+.nav a{padding:.38rem .7rem;border-radius:999px;font-weight:700;font-size:.8rem;color:var(--ink2);border:2px solid transparent;transition:.18s}
+.nav a:hover{background:var(--blush);color:var(--pink-deep)}
+.nav a.on{background:#fff;border-color:var(--line);color:var(--pink-deep);box-shadow:var(--chunk-sm)}
+.statbar{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:.28rem;background:#fff;border:2px solid var(--line);border-radius:999px;padding:.2rem .58rem;font-weight:700;font-size:.74rem;box-shadow:var(--chunk-sm);white-space:nowrap}
+.chip.hot{border-color:#ffc9b6;background:#fff5f1}
+.chip.xp{border-color:#e5d6ff;background:#faf6ff}
+.chip.rank{border-color:#cdeedd;background:#f3fdf8}
+.chip.cloud{border-color:#cfe6ff;background:#f4f9ff;cursor:pointer}
+.chip.cloud.busy{border-color:#ffe0b8;background:#fffaf2}
+.chip.cloud.off{border-color:#e6dfe6;background:#faf8fa;color:#a58fa0}
+.iconbtn{width:33px;height:33px;border-radius:12px;border:2px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center;font-size:.9rem;box-shadow:var(--chunk-sm);transition:.15s}
+.iconbtn:hover{transform:translateY(-2px)}
+.iconbtn.off{opacity:.45}
+
+.wrap{max-width:1200px;margin:0 auto;padding:1.3rem .95rem 5rem;position:relative;z-index:1}
+section{margin-bottom:2.5rem}
+.sec-head{display:flex;align-items:flex-end;gap:.7rem;flex-wrap:wrap;margin-bottom:.8rem}
+.sec-head .em{font-size:1.65rem}
+.sec-head h2{font-size:clamp(1.3rem,3.4vw,1.8rem);font-weight:700;text-transform:lowercase}
+.sec-head p{margin:0;font-family:var(--font-hand);font-size:1.2rem;color:var(--ink2)}
+.rule{display:flex;align-items:center;gap:.55rem;color:var(--pink2);font-size:.78rem;margin:.1rem 0 .95rem}
+.rule::before,.rule::after{content:"";height:2px;flex:1;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 16px)}
+.card{background:var(--paper);border:2px solid var(--line);border-radius:var(--r);box-shadow:var(--chunk);padding:1.1rem 1.15rem;position:relative}
+.card.frame{box-shadow:inset 0 0 0 5px #fff,inset 0 0 0 7px #ffe4f0,var(--chunk)}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1.3fr .95fr;gap:1rem;align-items:stretch}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.hero-main{padding:1.2rem 1.25rem;overflow:hidden}
+.hero-kicker{font-family:var(--font-hand);font-size:1.45rem;color:var(--pink-deep);transform:rotate(-1.2deg)}
+.hero-main h1{font-size:clamp(1.9rem,6vw,3.1rem);font-weight:700;letter-spacing:-.5px;margin:.1rem 0 .25rem}
+.hero-main h1 em{font-style:normal;background:linear-gradient(180deg,var(--pink),var(--lilac));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{font-family:var(--font-h);font-size:1rem;font-weight:600}
+.hero-p{color:var(--ink2);font-size:.92rem;max-width:54ch}
+.hero-cta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
+.hero-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.85rem}
+.tag{background:#fff;border:2px dashed var(--line);border-radius:999px;padding:.2rem .68rem;font-size:.74rem;font-weight:700;color:var(--ink2)}
+.hero-side{display:flex;flex-direction:column;gap:.75rem}
+.sparkle-card{background:linear-gradient(165deg,#fff3f9,#f6efff);text-align:center}
+.sparkle-card h3{font-size:1rem;text-transform:lowercase}
+.sparkle-card p{margin:.12rem 0 .6rem;font-size:.83rem;color:var(--ink2)}
+.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.mini{background:#fff;border:2px solid var(--line);border-radius:16px;padding:.5rem;text-align:center;box-shadow:var(--chunk-sm)}
+.mini b{display:block;font-family:var(--font-h);font-size:1.25rem;color:var(--pink-deep);line-height:1.1}
+.mini span{font-size:.68rem;font-weight:700;color:var(--ink2);text-transform:lowercase}
+
+/* BUTTONS */
+.pill{border:none;cursor:pointer;border-radius:999px;padding:.66rem 1.2rem;font-weight:700;font-size:.88rem;font-family:var(--font-h);background:linear-gradient(180deg,var(--pink2),var(--pink));color:#fff;box-shadow:0 5px 0 var(--pink-deep);transition:transform .12s,box-shadow .12s,filter .12s;display:inline-flex;gap:.4rem;align-items:center}
+.pill:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--pink-deep)}
+.pill:active{transform:translateY(3px);box-shadow:0 2px 0 var(--pink-deep)}
+.pill.ghost{background:#fff;color:var(--pink-deep);box-shadow:0 5px 0 #ffd0e4;border:2px solid var(--line)}
+.pill.ghost:hover{box-shadow:0 7px 0 #ffd0e4}
+.pill.ghost:active{box-shadow:0 2px 0 #ffd0e4}
+.pill.mint{background:linear-gradient(180deg,#a4ecd0,var(--mint));color:#1f5b45;box-shadow:0 5px 0 #56c79d}
+.pill.sky{background:linear-gradient(180deg,#c6e6ff,var(--sky));color:#1d4f77;box-shadow:0 5px 0 #6fb4e6}
+.pill.sm{padding:.4rem .8rem;font-size:.78rem}
+.pill:disabled{filter:grayscale(.7);opacity:.6;cursor:not-allowed;transform:none}
+
+/* DASHBOARD */
+.dash{display:grid;grid-template-columns:1.05fr .95fr;gap:1rem}
+@media(max-width:900px){.dash{grid-template-columns:1fr}}
+.bigpic{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.ring{width:128px;height:128px;border-radius:50%;flex:none;display:grid;place-items:center;background:conic-gradient(var(--pink) calc(var(--p)*1%),#ffe6f1 0);box-shadow:var(--chunk-sm);position:relative;transition:background .6s}
+.ring::before{content:"";position:absolute;inset:12px;background:#fff;border-radius:50%;border:2px dashed var(--line)}
+.ring b{position:relative;font-family:var(--font-h);font-size:1.5rem;color:var(--pink-deep)}
+.ring small{position:relative;display:block;text-align:center;font-size:.62rem;font-weight:700;color:var(--ink2);text-transform:lowercase}
+.counters{flex:1;min-width:210px;display:grid;gap:.4rem}
+.counter{background:#fff;border:2px solid var(--line);border-radius:14px;padding:.4rem .65rem;display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:.83rem}
+.counter b{margin-left:auto;font-family:var(--font-h);color:var(--pink-deep)}
+.bar{height:9px;border-radius:99px;background:#ffe9f3;overflow:hidden;border:1px solid #ffd9e9}
+.bar>div{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--pink2),var(--lilac));width:0;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.howto{font-size:.82rem;color:var(--ink2);background:#fff8fc;border:2px dashed var(--line);border-radius:16px;padding:.65rem .8rem;margin-top:.8rem}
+.terms{display:grid;gap:.55rem}
+.term{background:#fff;border:2px solid var(--line);border-radius:18px;padding:.7rem .8rem;box-shadow:var(--chunk-sm)}
+.term h4{font-size:.95rem;text-transform:lowercase}
+.term p{margin:.05rem 0 .45rem;font-size:.74rem;color:var(--ink2)}
+.term .cnt{font-family:var(--font-h);font-size:.76rem;color:var(--pink-deep);font-weight:700;display:block;margin-top:.32rem}
+.badge-shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:.55rem;margin-top:.9rem}
+.badge{background:#fff;border:2px solid var(--line);border-radius:18px;padding:.6rem .45rem;text-align:center;box-shadow:var(--chunk-sm);transition:.2s}
+.badge .e{font-size:1.6rem;display:block;filter:grayscale(1);opacity:.32;transition:.25s}
+.badge b{display:block;font-family:var(--font-h);font-size:.72rem;margin-top:.15rem;color:var(--ink2)}
+.badge small{font-size:.6rem;color:#c2a2b8;line-height:1.25;display:block}
+.badge.on{border-color:#ffc0dc;background:linear-gradient(180deg,#fff6fa,#ffeef7)}
+.badge.on .e{filter:none;opacity:1;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+.badge.on b{color:var(--pink-deep)}
+.badge:hover{transform:translateY(-3px) rotate(-1deg)}
+@keyframes pop{0%{transform:scale(.4) rotate(-14deg)}70%{transform:scale(1.18)}100%{transform:scale(1)}}
+
+/* CLOUD PANEL */
+.cloudgrid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.6rem}
+@media(max-width:620px){.cloudgrid{grid-template-columns:1fr}}
+.cbox{background:#fff;border:2px solid var(--line);border-radius:16px;padding:.6rem .7rem}
+.cbox h5{font-size:.82rem;text-transform:lowercase;color:var(--pink-deep);margin-bottom:.3rem}
+.cbox p{margin:.1rem 0 .45rem;font-size:.72rem;color:var(--ink2)}
+.inp{width:100%;border:2px solid var(--line);border-radius:12px;padding:.4rem .55rem;font-family:inherit;font-weight:700;font-size:.78rem;color:var(--ink);background:#fffdfd}
+.inp:focus{outline:none;border-color:var(--pink2);box-shadow:0 0 0 3px #ffe6f2}
+.crow{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.4rem}
+.sw{display:inline-flex;align-items:center;gap:.4rem;font-size:.74rem;font-weight:700;color:var(--ink2)}
+.sw input{width:17px;height:17px;accent-color:var(--pink)}
+
+/* GUIDE */
+.guide-tools{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:.85rem}
+.search{flex:1;min-width:200px;display:flex;align-items:center;gap:.5rem;background:#fff;border:2px solid var(--line);border-radius:999px;padding:.4rem .85rem;box-shadow:var(--chunk-sm)}
+.search input{border:none;outline:none;background:none;font-family:inherit;font-weight:700;color:var(--ink);width:100%;font-size:.86rem}
+.filters{display:flex;gap:.3rem;flex-wrap:wrap}
+.fbtn{border:2px solid var(--line);background:#fff;border-radius:999px;padding:.3rem .7rem;font-size:.74rem;font-weight:700;color:var(--ink2);cursor:pointer;transition:.16s}
+.fbtn:hover{background:var(--blush)}
+.fbtn.on{background:linear-gradient(180deg,var(--pink2),var(--pink));color:#fff;border-color:transparent;box-shadow:0 4px 0 var(--pink-deep)}
+.voicebar{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;background:#fff;border:2px solid var(--line);border-radius:16px;padding:.45rem .6rem;box-shadow:var(--chunk-sm);margin-bottom:.85rem;font-size:.76rem;font-weight:700;color:var(--ink2)}
+.voicebar select{border:2px solid var(--line);border-radius:10px;padding:.25rem .4rem;font-family:inherit;font-weight:700;font-size:.75rem;color:var(--pink-deep);background:#fff;max-width:230px}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:.85rem}
+.gcard{background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:.95rem 1rem;box-shadow:var(--chunk-sm);transition:.22s;display:flex;flex-direction:column}
+.gcard:hover{transform:translateY(-3px);box-shadow:0 8px 0 #ffd0e4,0 18px 30px rgba(233,132,182,.18)}
+.gcard.wide{grid-column:1/-1}
+.gcard h3{font-size:1rem;text-transform:lowercase;display:flex;gap:.4rem;align-items:center;margin-bottom:.35rem;flex-wrap:wrap}
+.gcard h3 .n{background:linear-gradient(160deg,var(--pink2),var(--pink));color:#fff;border-radius:10px;font-size:.7rem;padding:.1rem .42rem;font-family:var(--font-h)}
+.gcard h3 .done{margin-left:auto;font-size:.7rem;background:#e9fbf2;border:2px solid #bfe9d6;color:#2f8b66;border-radius:999px;padding:.05rem .5rem}
+.gcard h4{font-size:.85rem;margin:.7rem 0 .2rem;color:var(--pink-deep);font-family:var(--font-h)}
+.gcard p,.gcard li{font-size:.85rem;color:#6d4a63}
+.gcard ul{margin:.18rem 0;padding-left:1.02rem}
+.gcard li{margin:.13rem 0}
+.gcard ol{margin:.18rem 0;padding-left:1.15rem}
+.hide{display:none!important}
+.warn{background:#fff4ef;border:2px dashed #ffc9b6;border-radius:14px;padding:.45rem .65rem;font-size:.82rem;font-weight:700;color:#c05a3d;margin:.4rem 0}
+.note{background:#f4fbf8;border:2px dashed #bfe9d6;border-radius:14px;padding:.45rem .65rem;font-size:.82rem;color:#31705a;margin:.4rem 0}
+.tipbox{background:#faf6ff;border:2px dashed #ddccff;border-radius:14px;padding:.45rem .65rem;font-size:.8rem;color:#6a4fa0;margin:.4rem 0}
+.say{background:linear-gradient(180deg,#fff,#fff0f7);border:1.5px solid var(--line);border-radius:999px;padding:.02rem .46rem;font-weight:700;color:var(--pink-deep);cursor:pointer;font-size:.86em;transition:.15s;display:inline-block}
+.say:hover{background:var(--blush);transform:translateY(-1px)}
+.say.speaking,.hot.speaking rect,.hot.speaking ellipse{fill:#ff6fae!important}
+.say.speaking{color:#fff;border-color:transparent;animation:pulse .7s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.chips{display:flex;gap:.32rem;flex-wrap:wrap;margin:.32rem 0}
+.chips span{background:#fff;border:2px solid var(--line);border-radius:999px;padding:.16rem .58rem;font-size:.76rem;font-weight:700;color:var(--ink2)}
+.flow{display:flex;gap:.28rem;flex-wrap:wrap;align-items:center;margin:.35rem 0}
+.flow b{background:linear-gradient(180deg,#fff,#fff2f8);border:2px solid var(--line);border-radius:13px;padding:.24rem .5rem;font-family:var(--font-h);font-size:.76rem;font-weight:600}
+.flow i{font-style:normal;color:var(--pink2);font-weight:700}
+table.bio{width:100%;border-collapse:separate;border-spacing:0;font-size:.78rem;margin-top:.35rem}
+table.bio th{background:linear-gradient(180deg,var(--pink2),var(--pink));color:#fff;font-family:var(--font-h);font-weight:600;padding:.36rem .42rem;text-align:left;font-size:.76rem}
+table.bio th:first-child{border-radius:12px 0 0 0}table.bio th:last-child{border-radius:0 12px 0 0}
+table.bio td{background:#fff;padding:.36rem .42rem;border-bottom:1px dashed var(--line);color:#6d4a63;vertical-align:top}
+table.bio tr td:first-child{font-weight:700;color:var(--ink)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.35rem}
+@media(max-width:540px){.vs{grid-template-columns:1fr}}
+.vsbox{border-radius:16px;padding:.55rem .65rem;border:2px solid var(--line);background:#fff}
+.vsbox.a{background:linear-gradient(180deg,#f2fbf7,#fff)}
+.vsbox.b{background:linear-gradient(180deg,#fff5ef,#fff)}
+.vsbox h5{margin:0 0 .2rem;font-family:var(--font-h);font-size:.86rem;color:var(--pink-deep)}
+.vsbox p{margin:.1rem 0;font-size:.78rem;color:#6d4a63}
+.cellgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:.5rem;margin-top:.35rem}
+.cellcard{background:#fff;border:2px solid var(--line);border-radius:15px;padding:.5rem .58rem;box-shadow:var(--chunk-sm)}
+.cellcard b{display:block;font-family:var(--font-h);font-size:.83rem;color:var(--pink-deep)}
+.cellcard p{margin:.08rem 0 0;font-size:.75rem;color:#6d4a63}
+.gfoot{margin-top:auto;padding-top:.7rem;display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.empty{display:none;text-align:center;padding:1.8rem 1rem;color:var(--ink2)}
+.empty.show{display:block}
+.empty b{font-family:var(--font-h);display:block;font-size:1.02rem;color:var(--pink-deep)}
+
+/* FIGURES */
+.fig{margin:.5rem 0 .3rem;border:2px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#fff,#fff8fc);cursor:zoom-in}
+.fig svg{display:block;width:100%;height:auto}
+.fig svg text{font-family:var(--font-b);font-weight:700}
+.figcap{font-size:.7rem;font-weight:700;color:var(--ink2);text-align:center;padding:.32rem .5rem;border-top:2px dashed var(--line);background:#fff}
+.hot{cursor:pointer}
+.hot rect,.hot ellipse{transition:.15s}
+.hot:hover rect,.hot:hover ellipse{fill:#ffe3ef!important}
+.hot.speaking text{fill:#fff!important}
+.lightbox{position:fixed;inset:0;z-index:180;background:rgba(90,50,80,.62);backdrop-filter:blur(6px);display:grid;place-items:center;padding:1.1rem;animation:fade .2s}
+.lightbox .lb-in{background:#fff;border-radius:22px;border:2px solid var(--line);padding:.7rem;max-width:min(1000px,96vw);max-height:92vh;overflow:auto;box-shadow:var(--chunk);animation:rise .3s cubic-bezier(.2,1.4,.4,1)}
+.lightbox svg{width:100%;height:auto;display:block}
+.lightbox .lb-bar{display:flex;gap:.4rem;justify-content:flex-end;margin-bottom:.5rem}
+
+/* ACTIVITIES */
+.acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem}
+.act{background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:.9rem;box-shadow:var(--chunk-sm);transition:.2s;position:relative;overflow:hidden}
+.act:hover{transform:translateY(-3px)}
+.act .em{font-size:1.7rem}
+.act h3{font-size:.98rem;text-transform:lowercase;margin:.15rem 0}
+.act p{margin:0 0 .55rem;font-size:.78rem;color:var(--ink2);min-height:2.2em}
+.act .row{display:flex;gap:.45rem;align-items:center}
+
+/* LEVELS */
+.levels{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:.78rem}
+.level{background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:.85rem;box-shadow:var(--chunk-sm);display:flex;gap:.7rem;align-items:flex-start;transition:.2s;position:relative;overflow:hidden}
+.level:hover{transform:translateY(-3px);box-shadow:0 8px 0 #ffd0e4,0 18px 30px rgba(233,132,182,.2)}
+.level::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:var(--tint,#ffe9f4);opacity:.6}
+.level .em{font-size:1.65rem;position:relative;z-index:1}
+.level .info{flex:1;position:relative;z-index:1;min-width:0}
+.level .lv{font-family:var(--font-hand);font-size:1.05rem;color:var(--ink2);line-height:1}
+.level h3{font-size:.96rem;text-transform:lowercase;margin:.08rem 0}
+.level p{margin:0;font-size:.75rem;color:var(--ink2);min-height:2.1em}
+.level .row{display:flex;align-items:center;gap:.45rem;margin-top:.5rem;flex-wrap:wrap}
+.best{font-size:.7rem;font-weight:700;color:var(--ink2);background:#fff;border:2px solid var(--line);border-radius:999px;padding:.08rem .48rem}
+.tick{width:42px;height:42px;flex:none;border-radius:50%;border:3px dashed #ffd0e4;background:#fff;cursor:pointer;display:grid;place-items:center;font-size:1rem;color:#e5bcd0;position:relative;z-index:1;transition:.2s}
+.tick:hover{border-color:var(--pink);color:var(--pink)}
+.tick.on{border-style:solid;border-color:var(--pink);background:linear-gradient(180deg,#ffd7e8,#ffb0d2);color:#fff;box-shadow:0 4px 0 #ef86b6}
+.tick.on::after{content:"💖";position:absolute;font-size:.92rem}
+.tick.on span{display:none}
+
+/* OVERLAYS */
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(120,70,100,.34);backdrop-filter:blur(6px);display:grid;place-items:center;padding:1rem;overflow-y:auto;animation:fade .25s}
+.overlay.hidden{display:none}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.quiz{width:min(680px,100%);background:var(--paper);border:2px solid var(--line);border-radius:26px;box-shadow:0 18px 0 rgba(255,190,220,.5),0 30px 60px rgba(120,60,100,.28);padding:1.05rem;animation:rise .32s cubic-bezier(.2,1.4,.4,1)}
+@keyframes rise{from{transform:translateY(26px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+.q-top{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin-bottom:.6rem}
+.q-top .ttl{font-family:var(--font-h);font-size:.98rem;text-transform:lowercase;display:flex;gap:.35rem;align-items:center}
+.q-top .sp{margin-left:auto;display:flex;gap:.32rem;align-items:center}
+.dots{display:flex;gap:.22rem;flex-wrap:wrap;margin:.5rem 0 .75rem}
+.dot{width:100%;flex:1;height:8px;min-width:11px;border-radius:99px;background:#ffe6f1;border:1px solid #ffd9e9}
+.dot.right{background:linear-gradient(90deg,#8fe6bf,#5fd3a3);border-color:#a9ecd0}
+.dot.wrong{background:linear-gradient(90deg,#ffc4b8,#ff9d8a);border-color:#ffd3c9}
+.dot.now{background:linear-gradient(90deg,var(--pink2),var(--pink));border-color:transparent;animation:pulse .9s infinite}
+.qcard{background:linear-gradient(180deg,#fff,#fff6fb);border:2px solid var(--line);border-radius:20px;padding:.95rem}
+.qtext{font-family:var(--font-h);font-size:1.06rem;font-weight:600;margin:0 0 .75rem;line-height:1.4}
+.opts{display:grid;gap:.48rem}
+.opt{display:flex;gap:.58rem;align-items:center;text-align:left;background:#fff;border:2px solid var(--line);border-radius:16px;padding:.58rem .75rem;cursor:pointer;font-weight:700;font-size:.86rem;color:var(--ink);transition:.15s;box-shadow:0 3px 0 #ffe0ee}
+.opt:hover:not(:disabled){border-color:var(--pink);transform:translateY(-2px);box-shadow:0 5px 0 #ffd7e8}
+.opt k{width:26px;height:26px;flex:none;border-radius:9px;background:var(--blush);color:var(--pink-deep);display:grid;place-items:center;font-family:var(--font-h);font-size:.76rem;font-weight:700}
+.opt:disabled{cursor:default}
+.opt.right{border-color:#7eddb8;background:#f2fdf8;box-shadow:0 3px 0 #b7ebd5}
+.opt.right k{background:#7eddb8;color:#fff}
+.opt.wrong{border-color:#ffb0a1;background:#fff5f2;box-shadow:0 3px 0 #ffd9d0}
+.opt.wrong k{background:#ff9d8a;color:#fff}
+.opt.dim{opacity:.5}
+.fb{margin-top:.75rem;border-radius:16px;padding:.65rem .78rem;font-size:.84rem;display:none;border:2px dashed var(--line);background:#fff8fc}
+.fb.show{display:block;animation:rise .28s}
+.fb b{font-family:var(--font-h);display:block;font-size:.94rem}
+.fb.good{background:#f2fdf8;border-color:#bfe9d6}.fb.good b{color:#2f8b66}
+.fb.bad{background:#fff5f2;border-color:#ffd3c9}.fb.bad b{color:#c0553d}
+.fb .next{margin-top:.55rem}
+.q-foot{display:flex;gap:.45rem;align-items:center;margin-top:.85rem;flex-wrap:wrap}
+.q-foot .hint{font-family:var(--font-hand);font-size:1.02rem;color:var(--ink2);margin-left:auto}
+.modal{width:min(490px,100%);background:var(--paper);border:2px solid var(--line);border-radius:26px;padding:1.2rem 1.15rem;text-align:center;box-shadow:0 18px 0 rgba(255,190,220,.5),0 30px 60px rgba(120,60,100,.3);animation:rise .34s cubic-bezier(.2,1.5,.4,1)}
+.modal .big{font-size:2.8rem;line-height:1;display:block;animation:pop .6s}
+.modal h3{font-size:1.3rem;text-transform:lowercase;margin:.35rem 0 .18rem}
+.modal p{color:var(--ink2);font-size:.88rem;margin:.18rem 0 .75rem}
+.score-ring{width:116px;height:116px;margin:.25rem auto .55rem;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(var(--pink) calc(var(--p)*1%),#ffe9f4 0)}
+.score-ring::before{content:"";position:absolute;inset:11px;border-radius:50%;background:#fff;border:2px dashed var(--line)}
+.score-ring b{position:relative;font-family:var(--font-h);font-size:1.45rem;color:var(--pink-deep)}
+.score-ring small{position:relative;display:block;font-size:.6rem;font-weight:700;color:var(--ink2);text-transform:lowercase}
+.xpline{display:flex;gap:.35rem;justify-content:center;flex-wrap:wrap;margin-bottom:.75rem}
+.mrow{display:flex;gap:.45rem;justify-content:center;flex-wrap:wrap}
+
+/* ACTIVITY MODAL */
+.actbox{width:min(560px,100%);background:var(--paper);border:2px solid var(--line);border-radius:26px;padding:1.1rem;box-shadow:0 18px 0 rgba(255,190,220,.5),0 30px 60px rgba(120,60,100,.3);animation:rise .32s cubic-bezier(.2,1.4,.4,1)}
+.actbox .ttl{font-family:var(--font-h);font-size:1.05rem;text-transform:lowercase;display:flex;gap:.4rem;align-items:center;margin-bottom:.5rem}
+.actbox .ttl .sp{margin-left:auto;display:flex;gap:.3rem}
+.wordstage{background:linear-gradient(180deg,#fff,#fff4fa);border:2px solid var(--line);border-radius:20px;padding:1.4rem .9rem;text-align:center}
+.wordstage .w{font-family:var(--font-h);font-size:clamp(1.5rem,6vw,2.3rem);color:var(--pink-deep);display:block;margin-bottom:.2rem}
+.wordstage .m{font-size:.8rem;color:var(--ink2);margin-bottom:.9rem;display:block}
+.flash{perspective:900px;height:230px;margin:.4rem 0 .7rem}
+.flashcard{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .flashcard{transform:rotateY(180deg)}
+.fside{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;border:2px solid var(--line);display:grid;place-items:center;padding:1rem;text-align:center;box-shadow:var(--chunk-sm)}
+.ffront{background:linear-gradient(165deg,#fff,#fff1f8)}
+.ffront .e{font-size:2.6rem;display:block}
+.ffront b{font-family:var(--font-h);font-size:1.15rem;color:var(--pink-deep);text-transform:lowercase}
+.fback{background:linear-gradient(165deg,#f3fdf8,#fff);transform:rotateY(180deg);font-size:.86rem;color:#31705a;font-weight:700}
+.sortstage{background:linear-gradient(180deg,#fff,#fff8f3);border:2px solid var(--line);border-radius:20px;padding:1.1rem .9rem;text-align:center}
+.sortstage .item{font-family:var(--font-h);font-size:1.5rem;color:var(--ink);display:block;margin-bottom:.15rem}
+.sortstage .sub{font-size:.78rem;color:var(--ink2);margin-bottom:.85rem;display:block}
+.buckets{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
+@media(max-width:480px){.buckets{grid-template-columns:1fr}}
+.bucket{border:2px solid var(--line);background:#fff;border-radius:14px;padding:.55rem;font-weight:700;font-size:.82rem;cursor:pointer;color:var(--ink);transition:.15s;box-shadow:0 3px 0 #ffe0ee}
+.bucket:hover{border-color:var(--pink);transform:translateY(-2px)}
+.bucket.good{background:#f2fdf8;border-color:#7eddb8;color:#2f8b66}
+.bucket.bad{background:#fff5f2;border-color:#ffb0a1;color:#c0553d;animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+.toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:1rem;z-index:200;display:grid;gap:.42rem;width:min(370px,92vw)}
+.toast{background:#fff;border:2px solid var(--line);border-radius:16px;padding:.5rem .75rem;box-shadow:var(--chunk);font-size:.82rem;font-weight:700;display:flex;gap:.45rem;align-items:center;animation:toastin .3s cubic-bezier(.2,1.5,.4,1)}
+@keyframes toastin{from{transform:translateY(20px) scale(.95);opacity:0}to{transform:none;opacity:1}}
+.toast.out{animation:toastout .3s forwards}
+@keyframes toastout{to{transform:translateY(14px) scale(.95);opacity:0}}
+.norman{position:fixed;right:1rem;bottom:1rem;z-index:90;display:flex;align-items:flex-end;gap:.45rem;max-width:min(330px,88vw)}
+.nbubble{background:#fff;border:2px solid var(--line);border-radius:18px 18px 4px 18px;padding:.5rem .7rem;box-shadow:var(--chunk-sm);font-size:.78rem;font-weight:700;cursor:pointer}
+.nbubble em{font-style:normal;font-family:var(--font-hand);font-size:1.02rem;color:var(--pink-deep);display:block}
+.nface{width:54px;height:54px;flex:none;border-radius:18px;background:linear-gradient(165deg,#fff,#ffe9f4);border:2px solid var(--line);display:grid;place-items:center;font-size:1.55rem;box-shadow:var(--chunk-sm);cursor:pointer;animation:bob 3.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
+@media(max-width:560px){.norman{right:.5rem;bottom:.5rem}.nbubble{font-size:.72rem}}
+.conf{position:fixed;top:-14px;z-index:150;pointer-events:none;font-size:15px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.15}}
+footer{border-top:2px dashed var(--line);background:rgba(255,250,253,.85);padding:1.3rem 1rem;text-align:center}
+footer .fl{display:flex;gap:.45rem;justify-content:center;flex-wrap:wrap;margin-bottom:.55rem}
+footer a{font-size:.78rem;font-weight:700;color:var(--ink2);border:2px solid var(--line);background:#fff;border-radius:999px;padding:.22rem .68rem}
+footer a:hover{background:var(--blush);color:var(--pink-deep)}
+footer .hand{font-family:var(--font-hand);font-size:1.45rem;color:var(--pink-deep)}
+footer small{display:block;color:#c0a1b7;font-size:.7rem;margin-top:.28rem}
+.reveal{opacity:0;transform:translateY(16px);transition:.55s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media print{.topbar,.norman,.deco,.toasts,.overlay,footer .fl,.fig{display:none!important}body{background:#fff}.card,.gcard,.level{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="deco" id="deco" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand"><i>🎀</i> Glam Bio Quest</div>
+    <nav class="nav" id="nav">
+      <a href="#hero" class="on">🏠 Hub</a>
+      <a href="#dash">📊 Dashboard</a>
+      <a href="#guide">📖 Study Guide</a>
+      <a href="#acts">🎨 Activities</a>
+      <a href="#levels">🎯 Quiz Levels</a>
+      <a href="#badges">🏅 Badges</a>
+    </nav>
+    <div class="statbar">
+      <span class="chip hot" title="daily streak">🔥 <b id="sStreak">0</b>-day</span>
+      <span class="chip xp" title="total XP">⭐ <b id="sXp">0</b></span>
+      <span class="chip" title="ticks">✅ <b id="sDone">0</b>/22</span>
+      <span class="chip rank" id="sRank">📔 Cell Rookie</span>
+      <span class="chip cloud" id="cloudChip" title="cloud save status">☁️ …</span>
+      <button class="iconbtn" id="soundBtn" title="sound & pronunciation on/off">🔊</button>
+      <button class="iconbtn" id="printBtn" title="print planner">🖨️</button>
+      <button class="iconbtn" id="resetBtn" title="reset progress">♻️</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero">
+      <div class="card frame hero-main">
+        <div class="hero-kicker">🌸 2026–27 · edexcel biology · your whole course in one frame 🤍</div>
+        <h1>Glam <em>Bio</em> Quest ✨</h1>
+        <div class="hero-sub">slay your edexcel biology revision!</div>
+        <p class="hero-p">Welcome to the academy, gorgeous! 💖 Master classification, cells, specialised cells and molecule movement. Read the <b>illustrated study guide</b> 📖, tap any keyword to <b>hear it pronounced</b> 🔊, play the <b>activities</b> 🎨 then test yourself across <b>10 fabulous levels</b> 🎯 — and your progress is saved to the <b>cloud</b> ☁️.</p>
+        <div class="hero-cta">
+          <button class="pill" data-scroll="#guide">📚 Study guide</button>
+          <button class="pill ghost" data-scroll="#acts">🎨 Activities</button>
+          <button class="pill ghost" data-scroll="#levels">🚀 Quiz levels</button>
+          <button class="pill ghost" data-scroll="#dash">📊 My dashboard</button>
+        </div>
+        <div class="fig" style="margin-top:.9rem" data-lb>
+          <svg viewBox="0 0 860 300" role="img" aria-label="Norman the notebook with a plant cell, a red blood cell and DNA">
+            <defs><linearGradient id="hbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0f7"/><stop offset=".55" stop-color="#f7f0ff"/><stop offset="1" stop-color="#e9f8f1"/></linearGradient></defs>
+            <rect width="860" height="300" fill="url(#hbg)"/>
+            <circle cx="110" cy="52" r="44" fill="#ffe3ef" opacity=".75"/><circle cx="760" cy="252" r="56" fill="#dff5e9" opacity=".8"/><circle cx="430" cy="286" r="34" fill="#eae0ff" opacity=".7"/>
+            <g transform="translate(58,72)">
+              <rect x="0" y="0" width="132" height="152" rx="20" fill="#fff" stroke="#ffb3d4" stroke-width="6"/>
+              <path d="M18 6 h108 a8 8 0 0 1 8 8 v130 a8 8 0 0 1 -8 8 h-108 z" fill="#ffe9f4"/>
+              <path d="M18 6 h108 a8 8 0 0 1 8 8 v34 h-116 z" fill="#ff9ecb"/>
+              <circle cx="54" cy="90" r="7" fill="#5d3a54"/><circle cx="94" cy="90" r="7" fill="#5d3a54"/>
+              <path d="M54 112 q20 16 40 0" stroke="#5d3a54" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <circle cx="36" cy="104" r="8" fill="#ffc4dd" opacity=".85"/><circle cx="112" cy="104" r="8" fill="#ffc4dd" opacity=".85"/>
+              <g stroke="#c9a7ff" stroke-width="6" stroke-linecap="round"><path d="M-8 30 h20"/><path d="M-8 64 h20"/><path d="M-8 98 h20"/><path d="M-8 132 h20"/></g>
+              <path d="M30 24 h84" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+            </g>
+            <g transform="translate(250,104)">
+              <rect x="0" y="0" width="152" height="112" rx="28" fill="#dff7e8" stroke="#7eddb8" stroke-width="7"/>
+              <ellipse cx="42" cy="30" rx="21" ry="13" fill="#9fe8b6" stroke="#57c98a" stroke-width="4"/>
+              <ellipse cx="112" cy="84" rx="21" ry="13" fill="#9fe8b6" stroke="#57c98a" stroke-width="4"/>
+              <circle cx="76" cy="58" r="26" fill="#ffd7e8" stroke="#ff9ecb" stroke-width="5"/>
+              <circle cx="68" cy="54" r="4.5" fill="#5d3a54"/><circle cx="85" cy="54" r="4.5" fill="#5d3a54"/>
+              <path d="M67 66 q9 9 18 0" stroke="#5d3a54" stroke-width="4" fill="none" stroke-linecap="round"/>
+            </g>
+            <g transform="translate(452,116)">
+              <circle cx="52" cy="52" r="50" fill="#ff9d9d" stroke="#f27272" stroke-width="6"/>
+              <circle cx="52" cy="52" r="25" fill="#ffc9c9"/>
+              <circle cx="38" cy="42" r="5" fill="#5d3a54"/><circle cx="66" cy="42" r="5" fill="#5d3a54"/>
+              <path d="M38 64 q14 13 28 0" stroke="#5d3a54" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+            </g>
+            <g transform="translate(628,42)" fill="none" stroke-linecap="round">
+              <path d="M0 0 q44 42 0 84 q-44 42 0 84 q44 42 0 84" stroke="#c9a7ff" stroke-width="7"/>
+              <path d="M64 0 q-44 42 0 84 q44 42 0 84 q-44 42 0 84" stroke="#ff9ecb" stroke-width="7"/>
+              <g stroke="#ffd98a" stroke-width="5"><path d="M12 22 h40"/><path d="M4 62 h56"/><path d="M12 106 h40"/><path d="M4 148 h56"/><path d="M12 190 h40"/></g>
+            </g>
+            <g fill="#ffd98a"><path d="M210 46 l7 16 16 7 -16 7 -7 16 -7 -16 -16 -7 16 -7z"/><path d="M580 60 l6 13 13 6 -13 6 -6 13 -6 -13 -13 -6 13 -6z"/></g>
+            <g fill="#ff9ecb"><path d="M770 78 c10 -14 30 -6 26 10 c-3 12 -18 18 -26 26 c-8 -8 -23 -14 -26 -26 c-4 -16 16 -24 26 -10z"/></g>
+          </svg>
+          <div class="figcap">🤍 norman the notebook · cell squad · dna — tap to zoom 📖</div>
+        </div>
+        <div class="hero-tags">
+          <span class="tag">📖 9 illustrated sessions</span><span class="tag">🎨 3 activities</span>
+          <span class="tag">🎯 10 levels · 100 questions</span><span class="tag">🏅 16 badges</span>
+          <span class="tag">🔊 every keyword speaks</span><span class="tag">☁️ cloud saved</span>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="card sparkle-card">
+          <h3>claim today's sparkle ✨</h3>
+          <p>+5 XP · keeps your streak alive 💗</p>
+          <button class="pill mint" id="sparkleBtn">✨ Claim sparkle</button>
+          <div class="mini-stats" style="margin-top:.75rem">
+            <div class="mini"><b id="mXp">0</b><span>total XP</span></div>
+            <div class="mini"><b id="mNext">60</b><span>XP to next rank</span></div>
+            <div class="mini"><b id="mBest">–</b><span>best level</span></div>
+            <div class="mini"><b id="mBadges">0</b><span>badges</span></div>
+          </div>
+        </div>
+        <div class="card" id="cloudMini">
+          <h3 style="font-size:.95rem;text-transform:lowercase">☁️ cloud save</h3>
+          <p style="margin:.1rem 0 .5rem;font-size:.78rem;color:var(--ink2)" id="cloudStatus">connecting…</p>
+          <div class="crow"><button class="pill sm sky" id="syncNow">☁️ Sync now</button><button class="pill sm ghost" id="cloudPanel">🔑 Cloud ID</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dash" class="reveal">
+    <div class="sec-head"><span class="em">📊</span><div><h2>my bio dashboard</h2><p>every tick makes the bars bloom 🌸</p></div></div>
+    <div class="rule">✦ ─ ─ ─ ✦ ─ ─ ─ ✦</div>
+    <div class="dash">
+      <div class="card">
+        <h3 style="text-transform:lowercase;font-size:.98rem;margin-bottom:.55rem">🌸 the big picture</h3>
+        <div class="bigpic">
+          <div class="ring" id="ring" style="--p:0"><div><b id="ringPct">0%</b><small>of the course framed</small></div></div>
+          <div class="counters">
+            <div class="counter">📖 Sessions read <b id="cSess">0/9</b></div><div class="bar"><div id="bSess"></div></div>
+            <div class="counter">🎨 Activities done <b id="cAct">0/3</b></div><div class="bar"><div id="bAct"></div></div>
+            <div class="counter">🎯 Quizzes passed <b id="cLv">0/10</b></div><div class="bar"><div id="bLv"></div></div>
+            <div class="counter">🏅 Badges earned <b id="cBadges">0/16</b></div><div class="bar"><div id="bBadges"></div></div>
+          </div>
+        </div>
+        <div class="howto"><b>how it works:</b> read a session card & tap <b>tick as read</b> 💖 → play an activity → open a quiz level → tap the circle to tick it. Every new tick = <b>+10 XP</b>, first time only! Pass a level with 6/10 to unlock its badge. 🎀</div>
+        <h3 style="text-transform:lowercase;font-size:.98rem;margin:.9rem 0 .45rem">📔 planner rank</h3>
+        <p style="margin:0 0 .4rem;font-size:.8rem;color:var(--ink2)" id="rankLine">Cell Rookie · 0 XP</p>
+        <div class="bar" style="height:12px"><div id="bRank"></div></div>
+        <p style="font-family:var(--font-hand);font-size:1.12rem;color:var(--ink2);margin:.35rem 0 0" id="rankHint">next rank at 60 XP ✨</p>
+      </div>
+      <div class="card">
+        <h3 style="text-transform:lowercase;font-size:.98rem;margin-bottom:.5rem">🗓️ term tracker</h3>
+        <div class="terms" id="terms"></div>
+        <div class="cloudgrid">
+          <div class="cbox">
+            <h5>☁️ my cloud ID</h5>
+            <p>Save this code — it restores your progress on any device.</p>
+            <input class="inp" id="myCloudId" readonly value="not connected yet">
+            <div class="crow"><button class="pill sm ghost" id="copyId">📋 Copy</button><button class="pill sm sky" id="syncNow2">☁️ Sync now</button></div>
+          </div>
+          <div class="cbox">
+            <h5>🔑 restore on this device</h5>
+            <p>Paste a Cloud ID (or a sync code) to pull that progress here.</p>
+            <input class="inp" id="restoreId" placeholder="paste cloud ID or sync code…">
+            <div class="crow"><button class="pill sm mint" id="restoreBtn">⬇️ Restore</button><button class="pill sm ghost" id="exportCode">🎁 Sync code</button></div>
+            <label class="sw" style="margin-top:.45rem"><input type="checkbox" id="autoSync" checked> auto-sync to cloud</label>
+          </div>
+        </div>
+        <div class="crow" style="margin-top:.55rem"><button class="pill sm ghost" id="dlBackup">💾 Download backup</button><button class="pill sm ghost" id="upBackup">📂 Import backup file</button><input type="file" id="fileIn" accept="application/json" style="display:none"></div>
+      </div>
+    </div>
+    <div class="card" id="badges" style="margin-top:1rem">
+      <h3 style="text-transform:lowercase;font-size:.98rem;margin-bottom:.55rem">🏅 badge shelf ✨</h3>
+      <div class="badge-shelf" id="badgeShelf"></div>
+    </div>
+  </section>
+
+  <!-- STUDY GUIDE -->
+  <section id="guide" class="reveal">
+    <div class="sec-head"><span class="em">📖</span><div><h2>study guide</h2><p>tap the highlighted words to hear how they sound 🔊</p></div></div>
+    <div class="rule">sessions · notes · spelling it out ♡ be brilliant! 🤍</div>
+
+    <div class="voicebar">
+      🗣️ pronunciation voice:
+      <select id="voiceSel" title="choose a voice"></select>
+      <button class="pill sm ghost" id="voiceTest">🔊 Test</button>
+      <span style="color:#c2a2b8">· rate <b id="rateLab">calm</b></span>
+      <button class="pill sm ghost" id="rateBtn">🐢 slower</button>
+      <span style="margin-left:auto;color:#c2a2b8">tap any <b style="color:var(--pink-deep)">pink keyword</b> or diagram label to hear it</span>
+    </div>
+
+    <div class="guide-tools">
+      <label class="search">🔎 <input id="gsearch" type="search" placeholder="find something: osmosis, xylem, plasmid, chelicerae…" aria-label="search the study guide"></label>
+      <div class="filters" id="gfilters">
+        <button class="fbtn on" data-f="all">🎀 Everything</button>
+        <button class="fbtn" data-f="class">👑 Classification</button>
+        <button class="fbtn" data-f="cells">🧬 Cells</button>
+        <button class="fbtn" data-f="micro">🦠 Micro</button>
+        <button class="fbtn" data-f="move">💧 Movement</button>
+      </div>
+    </div>
+
+    <div class="guide-grid" id="guideGrid">
+
+      <!-- SESSION 1 -->
+      <article class="gcard" data-cat="class" data-s="0" data-key="classification naming kingdom phylum class order family genus species binomial homo sapiens virus living five groups kpcogs latin identification study">
+        <h3><span class="n">1</span> 👑 classification &amp; naming <span class="done hide">💖 read</span></h3>
+        <div class="fig" data-lb>
+          <svg viewBox="0 0 860 400" role="img" aria-label="Classification hierarchy from kingdom to species">
+            <rect width="860" height="400" fill="#fffafc"/>
+            <path d="M400 22 l10 20 22 3 -16 15 4 22 -20 -11 -20 11 4 -22 -16 -15 22 -3z" fill="#ffd98a" stroke="#f0b64b" stroke-width="3"/>
+            <g id="clsBars"></g>
+            <g font-size="26" text-anchor="middle">
+              <text x="150" y="378">🐾</text><text x="290" y="378">🌿</text><text x="430" y="378">🍄</text><text x="570" y="378">🦠</text><text x="710" y="378">🔬</text>
+            </g>
+          </svg>
+          <div class="figcap">👑 the classification ladder — tap any rank to hear it 🔊</div>
+        </div>
+        <p><b>5 major groups:</b></p>
+        <div class="chips"><span>🐾 Animals</span><span>🌿 Plants</span><span>🍄 Fungi</span><span>🦠 Bacteria</span><span>🔬 Protista</span></div>
+        <div class="warn">⚠️ <span class="say" data-w="Viruses">Viruses 🔊</span> are <b>NOT</b> considered living organisms — no cells, and they can only reproduce inside a living host.</div>
+        <h4>the order (KPCOFGS)</h4>
+        <div class="flow"><b>Kingdom</b><i>➔</i><b>Phylum</b><i>➔</i><b>Class</b><i>➔</i><b>Order</b><i>➔</i><b>Family</b><i>➔</i><b>Genus</b><i>➔</i><b>Species</b></div>
+        <p class="say" data-w="King Philip Came Over From Great Spain" style="font-family:var(--font-hand);font-size:1.18rem;color:var(--pink-deep)">King Philip Came Over From Great Spain 🔊</p>
+        <h4>key definitions</h4>
+        <ul>
+          <li><span class="say" data-w="Genus">Genus 🔊</span>: a group of similar <span class="say" data-w="species">species 🔊</span>.</li>
+          <li><span class="say" data-w="Species">Species 🔊</span>: a group that can reproduce and give <span class="say" data-w="fertile offspring">fertile offspring 🔊</span>.</li>
+        </ul>
+        <h4><span class="say" data-w="Binomial system">Binomial system 🔊</span></h4>
+        <ul>
+          <li>Internationally approved <b>Latin</b> names.</li>
+          <li><span class="say" data-w="Genus">Genus 🔊</span> (capitalised) + species (lowercase).</li>
+          <li>Must be <i>underlined</i> or <i>italicised</i> → <i><span class="say" data-w="Homo sapiens">Homo sapiens 🔊</span></i></li>
+          <li><b>Importance:</b> 1. facilitates <span class="say" data-w="identification">identification 🔊</span> 2. facilitates <span class="say" data-w="study">study 🔊</span></li>
+        </ul>
+        <div class="gfoot"><button class="pill sm readtick" data-s="0">📖 Tick as read 💖</button><button class="pill sm ghost sayall">🔊 Pronounce all keywords</button></div>
+      </article>
+
+      <!-- SESSION 2 -->
+      <article class="gcard" data-cat="class" data-s="1" data-key="mrs gren characteristics of life movement respiration sensitivity growth reproduction excretion nutrition stimuli metabolism">
+        <h3><span class="n">2</span> 🎀 characteristics of life <span class="done hide">💖 read</span></h3>
+        <div class="fig" data-lb>
+          <svg viewBox="0 0 860 210" role="img" aria-label="MRS GREN seven life processes">
+            <rect width="860" height="210" fill="#fffafc"/>
+            <g id="mrsRow"></g>
+          </svg>
+          <div class="figcap">🎀 MRS GREN — tap a circle to hear the word 🔊</div>
+        </div>
+        <ul>
+          <li><span class="say" data-w="Movement">Movement 🔊</span>: action by an organism causing a change of position or place.</li>
+          <li><span class="say" data-w="Respiration">Respiration 🔊</span>: chemical reactions that break down nutrient molecules and release energy.</li>
+          <li><span class="say" data-w="Sensitivity">Sensitivity 🔊</span>: ability to detect <span class="say" data-w="stimuli">stimuli 🔊</span> in the internal/external environment &amp; make responses.</li>
+          <li><span class="say" data-w="Growth">Growth 🔊</span>: permanent increase in size or dry mass.</li>
+          <li><span class="say" data-w="Reproduction">Reproduction 🔊</span>: producing new offspring to preserve the species.</li>
+          <li><span class="say" data-w="Excretion">Excretion 🔊</span>: removal of waste products of <span class="say" data-w="metabolism">metabolism 🔊</span> and substances in excess.</li>
+          <li><span class="say" data-w="Nutrition">Nutrition 🔊</span>: taking in materials for energy, growth and development.</li>
+        </ul>
+        <div class="note">💡 <b>Respiration ≠ breathing!</b> It's the chemical release of energy from glucose. <b>Excretion ≠ egestion</b> — excretion removes metabolic waste (CO₂, urea).</div>
+        <div class="gfoot"><button class="pill sm readtick" data-s="1">📖 Tick as read 💖</button><button class="pill sm ghost sayall">🔊 Pronounce all keywords</button></div>
+      </article>
+
+      <!-- SESSION 3 -->
+      <article class="gcard wide" data-cat="class" data-s="2" data-key="animal kingdom vertebrates fish amphibians reptiles birds mammals glycogen scales lateral line gills moist skin eardrum feathers pinna mammary glands teeth warm blooded">
+        <h3><span class="n">3</span> 🐾 animal kingdom: vertebrates <span class="done hide">💖 read</span></h3>
+        <div class="fig" data-lb>
+          <svg viewBox="0 0 900 300" role="img" aria-label="The five vertebrate classes">
+            <rect width="900" height="300" fill="#fffafc"/>
+            <g transform="translate(28,40)">
+              <ellipse cx="80" cy="80" rx="72" ry="14" fill="#ffe9f4"/>
+              <path d="M28 78 q52 -34 100 0 q-52 34 -100 0z" fill="#ffb98a" stroke="#e8935c" stroke-width="4"/>
+              <path d="M128 78 l28 -16 v32z" fill="#ffd0a8" stroke="#e8935c" stroke-width="4"/>
+              <path d="M70 60 q14 -18 28 0z" fill="#ffd0a8" stroke="#e8935c" stroke-width="3.5"/>
+              <path d="M70 96 q14 16 28 0z" fill="#ffd0a8" stroke="#e8935c" stroke-width="3.5"/>
+              <circle cx="46" cy="72" r="5" fill="#5d3a54"/>
+              <path d="M60 66 q6 12 0 24" stroke="#e8935c" stroke-width="3.5" fill="none"/>
+              <g stroke="#e8935c" stroke-width="2.5" fill="none" opacity=".7"><path d="M84 68 q8 10 0 22"/><path d="M100 70 q8 8 0 18"/></g>
+              <path d="M30 78 h96" stroke="#e8935c" stroke-width="2.5" stroke-dasharray="5 5" opacity=".8"/>
+              <g class="hot" data-w="Fish"><rect x="18" y="140" width="124" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="80" y="163" text-anchor="middle" font-size="17" fill="#e14f93">🐟 Fish 🔊</text></g>
+            </g>
+            <g transform="translate(200,40)">
+              <ellipse cx="80" cy="86" rx="66" ry="12" fill="#ffe9f4"/>
+              <ellipse cx="80" cy="72" rx="46" ry="32" fill="#9fe8b6" stroke="#57c98a" stroke-width="4.5"/>
+              <circle cx="62" cy="46" r="13" fill="#c7f5d6" stroke="#57c98a" stroke-width="4"/><circle cx="98" cy="46" r="13" fill="#c7f5d6" stroke="#57c98a" stroke-width="4"/>
+              <circle cx="62" cy="46" r="5" fill="#5d3a54"/><circle cx="98" cy="46" r="5" fill="#5d3a54"/>
+              <path d="M62 84 q18 14 36 0" stroke="#3f8f63" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <path d="M40 96 q-14 12 -6 20 M120 96 q14 12 6 20" stroke="#57c98a" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <path d="M56 100 q-6 16 6 18 M104 100 q6 16 -6 18" stroke="#57c98a" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <g class="hot" data-w="Amphibians"><rect x="6" y="140" width="148" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="80" y="163" text-anchor="middle" font-size="17" fill="#e14f93">🐸 Amphibians 🔊</text></g>
+            </g>
+            <g transform="translate(378,40)">
+              <ellipse cx="80" cy="88" rx="66" ry="12" fill="#ffe9f4"/>
+              <path d="M30 76 q30 -22 62 -8 q22 10 40 -6 q-6 22 -30 24 q-30 4 -50 -2 q-14 -4 -22 -8z" fill="#c9ecd9" stroke="#7eddb8" stroke-width="4.5"/>
+              <circle cx="34" cy="70" r="14" fill="#dff7e8" stroke="#7eddb8" stroke-width="4.5"/>
+              <circle cx="30" cy="66" r="4" fill="#5d3a54"/>
+              <path d="M132 62 q26 6 26 16 q-14 2 -26 -6z" fill="#c9ecd9" stroke="#7eddb8" stroke-width="4"/>
+              <path d="M50 88 q-4 14 6 16 M74 90 q-4 14 6 16 M98 86 q-4 14 6 16" stroke="#7eddb8" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <g fill="#a6dcc0"><circle cx="66" cy="72" r="4"/><circle cx="88" cy="70" r="4"/><circle cx="108" cy="68" r="3.4"/></g>
+              <g class="hot" data-w="Reptiles"><rect x="18" y="140" width="124" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="80" y="163" text-anchor="middle" font-size="17" fill="#e14f93">🦎 Reptiles 🔊</text></g>
+            </g>
+            <g transform="translate(552,40)">
+              <ellipse cx="80" cy="90" rx="66" ry="12" fill="#ffe9f4"/>
+              <ellipse cx="76" cy="76" rx="38" ry="30" fill="#a8dcff" stroke="#6fb4e6" stroke-width="4.5"/>
+              <circle cx="100" cy="46" r="17" fill="#c6e6ff" stroke="#6fb4e6" stroke-width="4.5"/>
+              <circle cx="105" cy="42" r="4.5" fill="#5d3a54"/>
+              <path d="M116 48 l20 6 -20 8z" fill="#ffd98a" stroke="#f0b64b" stroke-width="3.5"/>
+              <path d="M62 66 q24 -6 34 14 q-20 10 -34 -14z" fill="#dff0ff" stroke="#6fb4e6" stroke-width="4"/>
+              <path d="M42 78 q-22 -4 -26 12 q18 4 30 -4z" fill="#c6e6ff" stroke="#6fb4e6" stroke-width="4"/>
+              <path d="M92 28 q6 -14 16 -8 M84 26 q2 -14 12 -12" stroke="#6fb4e6" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <path d="M68 104 v14 M86 104 v14" stroke="#f0b64b" stroke-width="5" stroke-linecap="round"/>
+              <g class="hot" data-w="Birds"><rect x="26" y="140" width="110" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="80" y="163" text-anchor="middle" font-size="17" fill="#e14f93">🦅 Birds 🔊</text></g>
+            </g>
+            <g transform="translate(726,40)">
+              <ellipse cx="80" cy="92" rx="66" ry="12" fill="#ffe9f4"/>
+              <ellipse cx="82" cy="80" rx="42" ry="26" fill="#f3e6ff" stroke="#c9a7ff" stroke-width="4.5"/>
+              <circle cx="52" cy="54" r="22" fill="#f8f0ff" stroke="#c9a7ff" stroke-width="4.5"/>
+              <path d="M36 38 l-6 -18 20 8z M68 38 l6 -18 -20 8z" fill="#e6d4ff" stroke="#c9a7ff" stroke-width="4"/>
+              <circle cx="45" cy="52" r="4.5" fill="#5d3a54"/><circle cx="60" cy="52" r="4.5" fill="#5d3a54"/>
+              <path d="M50 62 l4 5 4 -5z" fill="#ff9ecb"/>
+              <g stroke="#c9a7ff" stroke-width="3" stroke-linecap="round"><path d="M30 58 h-14 M30 64 h-13 M74 58 h14 M74 64 h13"/></g>
+              <path d="M120 84 q28 -6 22 -30 q14 12 4 32 q-8 12 -22 10z" fill="#e6d4ff" stroke="#c9a7ff" stroke-width="4"/>
+              <g class="hot" data-w="Mammals"><rect x="14" y="140" width="132" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="80" y="163" text-anchor="middle" font-size="17" fill="#e14f93">🐄 Mammals 🔊</text></g>
+            </g>
+          </svg>
+          <div class="figcap">🐾 the five vertebrate classes — tap a label to hear it 🔊</div>
+        </div>
+        <p>Animals are <span class="say" data-w="multicellular">multicellular 🔊</span>, have <b>NO cell wall</b> or <b>chloroplasts</b>, store carbohydrates as <span class="say" data-w="Glycogen">Glycogen 🔊</span>, move freely, and have nervous &amp; hormonal coordination.</p>
+        <div class="cellgrid">
+          <div class="cellcard"><b>🐟 Fish</b><p><span class="say" data-w="Streamlined">Streamlined 🔊</span> shape, covered with <span class="say" data-w="scales">scales 🔊</span>, a <span class="say" data-w="lateral line">lateral line 🔊</span> of sensation, <span class="say" data-w="gills">gills 🔊</span>, and a bone/cartilage skeleton.</p></div>
+          <div class="cellcard"><b>🐸 Amphibians</b><p><span class="say" data-w="Moist skin">Moist skin 🔊</span> for gas exchange, external ear drums. Soft jelly-like eggs laid in water. Tadpoles use external gills &amp; tails; adults use lungs.</p></div>
+          <div class="cellcard"><b>🦎 Reptiles</b><p><span class="say" data-w="Dry scaly skin">Dry scaly skin 🔊</span> reduces water loss. Eggs with waterproof shells. Ear drum inside the head. Short/weak or no limbs.</p></div>
+          <div class="cellcard"><b>🦅 Birds</b><p>Covered in <span class="say" data-w="feathers">feathers 🔊</span> (insulate, decrease density, waterproof). Forelimbs modified into wings. Hard-shelled eggs. Lungs &amp; modified beaks.</p></div>
+          <div class="cellcard"><b>🐄 Mammals</b><p>Hairy skin/fur, external ear <span class="say" data-w="pinna">pinna 🔊</span>, constant body temperature. <span class="say" data-w="Mammary glands">Mammary glands 🔊</span> secrete milk, different teeth types, some have whiskers!</p></div>
+        </div>
+        <div class="gfoot"><button class="pill sm readtick" data-s="2">📖 Tick as read 💖</button><button class="pill sm ghost sayall">🔊 Pronounce all keywords</button></div>
+      </article>
+
+      <!-- SESSION 4 -->
+      <article class="gcard wide" data-cat="class" data-s="3" data-key="invertebrates arthropods insects arachnids crustaceans myriapods exoskeleton chitin jointed legs segmented chelicerae antennae compound eyes gills calcified">
+        <h3><span class="n">4</span> 🦋 invertebrates: arthropods <span class="done hide">💖 read</span></h3>
+        <div class="fig" data-lb>
+          <svg viewBox="0 0 900 300" role="img" aria-label="The four arthropod groups">
+            <rect width="900" height="300" fill="#fffafc"/>
+            <g transform="translate(30,36)">
+              <ellipse cx="88" cy="96" rx="72" ry="12" fill="#ffe9f4"/>
+              <ellipse cx="88" cy="66" rx="10" ry="30" fill="#ffc4dd" stroke="#ff9ecb" stroke-width="4"/>
+              <ellipse cx="52" cy="46" rx="30" ry="22" fill="#ffd7e8" stroke="#ff9ecb" stroke-width="4" transform="rotate(-18 52 46)"/>
+              <ellipse cx="124" cy="46" rx="30" ry="22" fill="#ffd7e8" stroke="#ff9ecb" stroke-width="4" transform="rotate(18 124 46)"/>
+              <ellipse cx="56" cy="86" rx="24" ry="17" fill="#ffe6f2" stroke="#ff9ecb" stroke-width="4" transform="rotate(16 56 86)"/>
+              <ellipse cx="120" cy="86" rx="24" ry="17" fill="#ffe6f2" stroke="#ff9ecb" stroke-width="4" transform="rotate(-16 120 86)"/>
+              <g stroke="#e14f93" stroke-width="3.5" fill="none" stroke-linecap="round"><path d="M84 38 q-10 -16 -20 -18 M92 38 q10 -16 20 -18"/></g>
+              <circle cx="64" cy="20" r="4" fill="#e14f93"/><circle cx="112" cy="20" r="4" fill="#e14f93"/>
+              <g stroke="#e14f93" stroke-width="3.5" stroke-linecap="round"><path d="M80 88 h-16 M80 96 h-16 M96 88 h16 M96 96 h16"/><path d="M84 96 v14 M92 96 v14"/></g>
+              <g fill="#ff9ecb"><circle cx="46" cy="44" r="4"/><circle cx="130" cy="44" r="4"/></g>
+              <circle cx="84" cy="58" r="3.6" fill="#5d3a54"/><circle cx="93" cy="58" r="3.6" fill="#5d3a54"/>
+              <g class="hot" data-w="Insects"><rect x="18" y="132" width="140" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="88" y="155" text-anchor="middle" font-size="17" fill="#e14f93">🐝 Insects 🔊</text></g>
+              <text x="88" y="192" text-anchor="middle" font-size="13" fill="#9a7391">6 legs · 1 pair antennae</text>
+            </g>
+            <g transform="translate(250,36)">
+              <ellipse cx="88" cy="98" rx="72" ry="12" fill="#ffe9f4"/>
+              <circle cx="88" cy="52" r="17" fill="#e0d0ff" stroke="#c9a7ff" stroke-width="4.5"/>
+              <ellipse cx="88" cy="82" rx="26" ry="22" fill="#efe6ff" stroke="#c9a7ff" stroke-width="4.5"/>
+              <g stroke="#b48ce8" stroke-width="4" fill="none" stroke-linecap="round">
+                <path d="M74 48 q-24 -12 -34 6 q-6 12 4 16"/><path d="M74 56 q-26 0 -32 18 q-4 12 6 14"/>
+                <path d="M102 48 q24 -12 34 6 q6 12 -4 16"/><path d="M102 56 q26 0 32 18 q4 12 -6 14"/>
+              </g>
+              <g fill="#5d3a54"><circle cx="82" cy="48" r="3.4"/><circle cx="94" cy="48" r="3.4"/><circle cx="88" cy="56" r="3"/></g>
+              <path d="M80 40 l-6 -8 M96 40 l6 -8" stroke="#b48ce8" stroke-width="4" stroke-linecap="round"/>
+              <g class="hot" data-w="Arachnids"><rect x="14" y="132" width="148" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="88" y="155" text-anchor="middle" font-size="17" fill="#e14f93">🕷️ Arachnids 🔊</text></g>
+              <text x="88" y="192" text-anchor="middle" font-size="13" fill="#9a7391">8 legs · no antennae</text>
+            </g>
+            <g transform="translate(472,36)">
+              <ellipse cx="88" cy="100" rx="72" ry="12" fill="#ffe9f4"/>
+              <ellipse cx="88" cy="70" rx="38" ry="26" fill="#ffb9a1" stroke="#f2836a" stroke-width="4.5"/>
+              <path d="M50 62 q-26 -10 -30 8 q10 10 26 4z" fill="#ffc9b6" stroke="#f2836a" stroke-width="4"/>
+              <path d="M126 62 q26 -10 30 8 q-10 10 -26 4z" fill="#ffc9b6" stroke="#f2836a" stroke-width="4"/>
+              <path d="M22 60 l-12 -10 M20 74 l-14 -2" stroke="#f2836a" stroke-width="4" stroke-linecap="round"/>
+              <path d="M154 60 l12 -10 M156 74 l14 -2" stroke="#f2836a" stroke-width="4" stroke-linecap="round"/>
+              <g stroke="#f2836a" stroke-width="4" fill="none" stroke-linecap="round"><path d="M62 88 q-8 14 -18 14 M76 92 q-4 14 -12 18 M100 92 q4 14 12 18 M114 88 q8 14 18 14"/></g>
+              <path d="M76 46 v-14 M100 46 v-14" stroke="#f2836a" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="76" cy="28" r="7" fill="#fff" stroke="#f2836a" stroke-width="3.5"/><circle cx="100" cy="28" r="7" fill="#fff" stroke="#f2836a" stroke-width="3.5"/>
+              <circle cx="76" cy="28" r="3" fill="#5d3a54"/><circle cx="100" cy="28" r="3" fill="#5d3a54"/>
+              <g class="hot" data-w="Crustaceans"><rect x="6" y="132" width="164" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="88" y="155" text-anchor="middle" font-size="17" fill="#e14f93">🦀 Crustaceans 🔊</text></g>
+              <text x="88" y="192" text-anchor="middle" font-size="13" fill="#9a7391">2 pairs antennae · gills</text>
+            </g>
+            <g transform="translate(694,36)">
+              <ellipse cx="88" cy="100" rx="72" ry="12" fill="#ffe9f4"/>
+              <circle cx="26" cy="64" r="15" fill="#c7f5d6" stroke="#7eddb8" stroke-width="4.5"/>
+              <circle cx="21" cy="60" r="3.4" fill="#5d3a54"/>
+              <path d="M14 52 q-8 -10 -14 -8 M14 58 q-10 -4 -14 2" stroke="#7eddb8" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+              <g fill="#dff7e8" stroke="#7eddb8" stroke-width="4">
+                <circle cx="52" cy="64" r="13"/><circle cx="76" cy="64" r="12"/><circle cx="98" cy="64" r="11"/><circle cx="118" cy="64" r="10"/><circle cx="136" cy="64" r="9"/><circle cx="152" cy="64" r="8"/>
+              </g>
+              <g stroke="#7eddb8" stroke-width="3.5" stroke-linecap="round"><path d="M52 78 v14 M76 77 v14 M98 76 v14 M118 75 v14 M136 74 v13 M152 73 v12"/><path d="M52 50 v-10 M76 51 v-10 M98 52 v-9 M118 53 v-9 M136 54 v-8"/></g>
+              <g class="hot" data-w="Myriapods"><rect x="8" y="132" width="160" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="88" y="155" text-anchor="middle" font-size="17" fill="#e14f93">🐛 Myriapods 🔊</text></g>
+              <text x="88" y="192" text-anchor="middle" font-size="13" fill="#9a7391">many segments · 1 pair legs each</text>
+            </g>
+          </svg>
+          <div class="figcap">🦋 the four arthropod groups — tap a label to hear it 🔊</div>
+        </div>
+        <p><b>Common features:</b> <span class="say" data-w="segmented bodies">segmented bodies 🔊</span>, <span class="say" data-w="jointed legs">jointed legs 🔊</span>, and an <span class="say" data-w="exoskeleton">exoskeleton 🔊</span> made of <span class="say" data-w="chitin">chitin 🔊</span>.</p>
+        <table class="bio">
+          <tr><th>Group</th><th>Body</th><th>Legs</th><th>Antennae &amp; eyes</th><th>Extras</th></tr>
+          <tr><td>🐝 Insects</td><td>Head · thorax · abdomen</td><td>3 pairs jointed</td><td>1 pair antenna · compound eyes</td><td>Usually 1–2 pairs of wings</td></tr>
+          <tr><td>🕷️ Arachnids</td><td>Cephalothorax · abdomen</td><td>4 pairs (ending in claws)</td><td>Simple eyes · NO antenna</td><td><span class="say" data-w="chelicerae">Chelicerae 🔊</span> to hold prey</td></tr>
+          <tr><td>🦀 Crustaceans</td><td>Cephalothorax · abdomen</td><td>More than 4 pairs</td><td>2 pairs antenna · stalked compound eyes</td><td>Respire by gills · calcified exoskeleton</td></tr>
+          <tr><td>🐛 Myriapods</td><td>Head + identical abdominal segments</td><td>1 pair per segment (ventrally fused)</td><td>1 pair antenna</td><td>Grow by adding new segments</td></tr>
+        </table>
+        <div class="gfoot"><button class="pill sm readtick" data-s="3">📖 Tick as read 💖</button><button class="pill sm ghost sayall">🔊 Pronounce all keywords</button></div>
+      </article>
+
+      <!-- SESSION 5 -->
+      <article class="gcard wide" data-cat="cells" data-s="4" data-key="cell structure nucleus cytoplasm cell membrane mitochondria ribosomes rough er cell wall cellulose chloroplasts chlorophyll sap vacuole glycogen starch selectively permeable aerobic respiration protein synthesis animal plant">
+        <h3><span class="n">5</span> 🔬 cell structure <span class="done hide">💖 read</span></h3>
+        <div class="vs">
+          <div>
+            <div class="fig" data-lb>
+              <svg viewBox="0 0 560 430" role="img" aria-label="Animal cell diagram">
+                <rect width="560" height="430" fill="#fffafc"/>
+                <ellipse cx="280" cy="215" rx="215" ry="150" fill="#fff1f7" stroke="#ff9ecb" stroke-width="7"/>
+                <ellipse cx="280" cy="215" rx="203" ry="138" fill="none" stroke="#ffd0e4" stroke-width="4" stroke-dasharray="11 9"/>
+                <g fill="#ffe3ef" opacity=".8"><circle cx="150" cy="130" r="6"/><circle cx="420" cy="140" r="6"/><circle cx="180" cy="300" r="6"/><circle cx="400" cy="300" r="6"/></g>
+                <circle cx="280" cy="212" r="72" fill="#e8dcff" stroke="#c9a7ff" stroke-width="6"/>
+                <circle cx="280" cy="212" r="24" fill="#c9a7ff"/>
+                <circle cx="262" cy="200" r="5.5" fill="#5d3a54"/><circle cx="300" cy="200" r="5.5" fill="#5d3a54"/>
+                <path d="M262 232 q19 16 38 0" stroke="#5d3a54" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <g transform="translate(146,168) rotate(-16)"><ellipse rx="46" ry="24" fill="#ffe3c2" stroke="#ffb37a" stroke-width="5"/><path d="M-30 0 q9 -13 18 0 q9 13 18 0 q9 -13 18 0" fill="none" stroke="#ffb37a" stroke-width="4"/></g>
+                <g transform="translate(414,258) rotate(18)"><ellipse rx="42" ry="22" fill="#ffe3c2" stroke="#ffb37a" stroke-width="5"/><path d="M-27 0 q8 -12 16 0 q8 12 16 0 q8 -12 16 0" fill="none" stroke="#ffb37a" stroke-width="4"/></g>
+                <circle cx="392" cy="150" r="30" fill="#e6f6ff" stroke="#9fd4ff" stroke-width="5"/>
+                <g transform="translate(196,300)"><rect x="-17" y="-6" width="34" height="12" rx="4" fill="#c9ecd9" stroke="#7eddb8" stroke-width="4"/><rect x="-6" y="-17" width="12" height="34" rx="4" fill="#c9ecd9" stroke="#7eddb8" stroke-width="4"/></g>
+                <g fill="#ff9ecb"><circle cx="228" cy="120" r="6"/><circle cx="248" cy="132" r="6"/><circle cx="330" cy="300" r="6"/><circle cx="352" cy="292" r="6"/><circle cx="352" cy="140" r="6"/><circle cx="212" cy="248" r="6"/></g>
+                <g class="hot" data-w="Nucleus"><path d="M280 140 V86" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="204" y="52" width="152" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="280" y="75" text-anchor="middle" font-size="17" fill="#e14f93">Nucleus 🔊</text></g>
+                <g class="hot" data-w="Cell membrane"><path d="M470 150 L520 108" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="376" y="72" width="176" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="464" y="95" text-anchor="middle" font-size="16" fill="#e14f93">Cell membrane 🔊</text></g>
+                <g class="hot" data-w="Mitochondrion"><path d="M146 196 L96 240" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="6" y="240" width="176" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="94" y="263" text-anchor="middle" font-size="16" fill="#e14f93">Mitochondrion 🔊</text></g>
+                <g class="hot" data-w="Ribosomes"><path d="M228 124 L180 60" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="60" y="26" width="150" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="135" y="49" text-anchor="middle" font-size="16" fill="#e14f93">Ribosomes 🔊</text></g>
+                <g class="hot" data-w="Cytoplasm"><path d="M200 300 L150 356" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="52" y="356" width="168" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="136" y="379" text-anchor="middle" font-size="16" fill="#e14f93">Cytoplasm 🔊</text></g>
+                <g class="hot" data-w="Vacuole"><path d="M410 168 L470 200" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="404" y="186" width="146" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="477" y="209" text-anchor="middle" font-size="16" fill="#e14f93">Vacuole 🔊</text></g>
+                <g class="hot" data-w="Centriole"><path d="M210 310 L300 372" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="288" y="356" width="164" height="34" rx="17" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="370" y="379" text-anchor="middle" font-size="16" fill="#e14f93">Centriole 🔊</text></g>
+              </svg>
+              <div class="figcap">🐾 animal cell — tap a label to hear it 🔊</div>
+            </div>
+          </div>
+          <div>
+            <div class="fig" data-lb>
+              <svg viewBox="0 0 560 430" role="img" aria-label="Plant cell diagram">
+                <rect width="560" height="430" fill="#fffafc"/>
+                <rect x="42" y="58" width="476" height="322" rx="34" fill="#eafaf1" stroke="#7eddb8" stroke-width="12"/>
+                <rect x="60" y="76" width="440" height="286" rx="26" fill="#f4fff8" stroke="#ff9ecb" stroke-width="5" stroke-dasharray="10 8"/>
+                <ellipse cx="300" cy="230" rx="150" ry="96" fill="#e6f6ff" stroke="#9fd4ff" stroke-width="5" opacity=".85"/>
+                <circle cx="150" cy="150" r="48" fill="#e8dcff" stroke="#c9a7ff" stroke-width="6"/>
+                <circle cx="150" cy="150" r="17" fill="#c9a7ff"/>
+                <circle cx="139" cy="143" r="4.5" fill="#5d3a54"/><circle cx="163" cy="143" r="4.5" fill="#5d3a54"/>
+                <path d="M139 163 q11 10 22 0" stroke="#5d3a54" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <g fill="#9fe8b6" stroke="#57c98a" stroke-width="4">
+                  <ellipse cx="400" cy="140" rx="30" ry="17"/><ellipse cx="140" cy="300" rx="30" ry="17"/><ellipse cx="430" cy="300" rx="30" ry="17"/><ellipse cx="290" cy="118" rx="26" ry="15"/>
+                </g>
+                <g stroke="#57c98a" stroke-width="3" fill="none" opacity=".9"><path d="M384 140 q16 -8 32 0 M124 300 q16 -8 32 0 M414 300 q16 -8 32 0"/></g>
+                <g transform="translate(240,300) rotate(-10)"><ellipse rx="38" ry="19" fill="#ffe3c2" stroke="#ffb37a" stroke-width="5"/><path d="M-24 0 q8 -11 16 0 q8 11 16 0" fill="none" stroke="#ffb37a" stroke-width="4"/></g>
+                <g fill="#ff9ecb"><circle cx="330" cy="180" r="6"/><circle cx="352" cy="196" r="6"/><circle cx="200" cy="230" r="6"/><circle cx="366" cy="248" r="6"/></g>
+                <g class="hot" data-w="Cell wall"><path d="M280 60 V30" stroke="#bfe0cf" stroke-width="3" fill="none"/><rect x="196" y="6" width="168" height="32" rx="16" fill="#fff" stroke="#cdeedd" stroke-width="2.5"/><text x="280" y="28" text-anchor="middle" font-size="16" fill="#2f8b66">Cell wall 🔊</text></g>
+                <g class="hot" data-w="Chloroplast"><path d="M400 122 L452 92" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="386" y="58" width="168" height="32" rx="16" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="470" y="80" text-anchor="middle" font-size="16" fill="#e14f93">Chloroplast 🔊</text></g>
+                <g class="hot" data-w="Nucleus"><path d="M112 130 L70 100" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="6" y="84" width="140" height="32" rx="16" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="76" y="106" text-anchor="middle" font-size="16" fill="#e14f93">Nucleus 🔊</text></g>
+                <g class="hot" data-w="Sap vacuole"><path d="M300 300 L300 348" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="216" y="348" width="168" height="32" rx="16" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="300" y="370" text-anchor="middle" font-size="16" fill="#e14f93">Sap vacuole 🔊</text></g>
+                <g class="hot" data-w="Mitochondrion"><path d="M226 316 L170 356" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="14" y="342" width="172" height="32" rx="16" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="100" y="364" text-anchor="middle" font-size="15" fill="#e14f93">Mitochondrion 🔊</text></g>
+                <g class="hot" data-w="Cytoplasm"><path d="M360 236 L432 240" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="404" y="224" width="150" height="32" rx="16" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="479" y="246" text-anchor="middle" font-size="15" fill="#e14f93">Cytoplasm 🔊</text></g>
+                <g class="hot" data-w="Cell membrane"><path d="M520 300 L508 330" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="392" y="392" width="164" height="32" rx="16" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="474" y="414" text-anchor="middle" font-size="15" fill="#e14f93">Cell membrane 🔊</text></g>
+              </svg>
+              <div class="figcap">🌿 plant cell — tap a label to hear it 🔊</div>
+            </div>
+          </div>
+        </div>
+        <h4>organelle jobs</h4>
+        <ul>
+          <li><span class="say" data-w="Nucleus">Nucleus 🔊</span>: controls activities &amp; division. Contains <span class="say" data-w="chromosomes">chromosomes 🔊</span> (DNA).</li>
+          <li><span class="say" data-w="Cytoplasm">Cytoplasm 🔊</span>: jelly-like; the site of metabolic chemical reactions.</li>
+          <li><span class="say" data-w="Cell membrane">Cell membrane 🔊</span>: <span class="say" data-w="selectively permeable">selectively permeable 🔊</span> (proteins/lipids); controls entry &amp; exit.</li>
+          <li><span class="say" data-w="Mitochondria">Mitochondria 🔊</span>: site of <span class="say" data-w="aerobic respiration">aerobic respiration 🔊</span> &amp; energy release.</li>
+          <li><span class="say" data-w="Ribosomes">Ribosomes 🔊</span>: attached to <span class="say" data-w="rough endoplasmic reticulum">rough ER 🔊</span>; site of <span class="say" data-w="protein synthesis">protein synthesis 🔊</span>.</li>
+          <li><span class="say" data-w="Cell wall">Cell wall 🔊</span> (plants): made of <span class="say" data-w="cellulose">cellulose 🔊</span>. Rigid, fully freely permeable. Prevents bursting, maintains <span class="say" data-w="turgor">turgor 🔊</span>.</li>
+          <li><span class="say" data-w="Chloroplasts">Chloroplasts 🔊</span> (plants): contain <span class="say" data-w="chlorophyll">chlorophyll 🔊</span> to trap sunlight; store starch.</li>
+          <li><span class="say" data-w="Sap vacuole">Sap vacuole 🔊</span> (plants): large central space acting as a sugar/water store.</li>
+        </ul>
+        <div class="vs">
+          <div class="vsbox b"><h5>🐾 animal cells</h5><p>✓ store <b>glycogen</b></p><p>✗ NO cell wall</p><p>✗ NO chloroplasts</p><p>✓ small temporary vacuoles</p></div>
+          <div class="vsbox a"><h5>🌿 plant cells</h5><p>✓ store <b>starch</b></p><p>✓ HAVE a cellulose cell wall</p><p>✓ HAVE chloroplasts</p><p>✓ HAVE a large sap vacuole</p></div>
+        </div>
+        <div class="gfoot"><button class="pill sm readtick" data-s="4">📖 Tick as read 💖</button><button class="pill sm ghost sayall">🔊 Pronounce all keywords</button></div>
+      </article>
+
+      <!-- SESSION 6 -->
+      <article class="gcard wide" data-cat="micro" data-s="5" data-key="bacteria prokaryote unicellular plasmid capsule ribosomes dna nucleus organisation cell tissue organ organ system organism genetic engineering">
+        <h3><span class="n">6</span> 🦠 bacteria &amp; organisation <span class="done hide">💖 read</span></h3>
+        <div class="vs">
+          <div class="fig" data-lb>
+            <svg viewBox="0 0 560 380" role="img" aria-label="Bacterial cell diagram">
+              <rect width="560" height="380" fill="#fffafc"/>
+              <path d="M120 96 q-40 96 0 190 q140 34 300 0 q40 -94 0 -190 q-160 -34 -300 0z" fill="#f6efff" stroke="#c9a7ff" stroke-width="6" stroke-dasharray="12 9"/>
+              <path d="M140 116 q-32 78 0 152 q126 26 262 0 q32 -76 0 -152 q-136 -26 -262 0z" fill="#ffe9f4" stroke="#ff9ecb" stroke-width="7"/>
+              <path d="M190 190 q30 -50 70 -10 q40 40 80 -10 q34 -44 62 -6" stroke="#e14f93" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <path d="M210 230 q40 34 90 6 q40 -22 74 4" stroke="#e14f93" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <circle cx="220" cy="150" r="20" fill="#fff" stroke="#c9a7ff" stroke-width="5"/>
+              <circle cx="360" cy="238" r="16" fill="#fff" stroke="#c9a7ff" stroke-width="5"/>
+              <g fill="#ff9ecb"><circle cx="270" cy="150" r="6"/><circle cx="300" cy="176" r="6"/><circle cx="330" cy="150" r="6"/><circle cx="250" cy="220" r="6"/><circle cx="300" cy="240" r="6"/><circle cx="380" cy="180" r="6"/></g>
+              <path d="M470 190 q40 -20 26 -54 q-14 -34 20 -40 q-16 34 6 44 q30 14 4 44 q-20 24 -50 12" stroke="#7eddb8" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <g stroke="#c9a7ff" stroke-width="4" stroke-linecap="round"><path d="M150 130 l-18 -14 M140 176 l-22 -6 M140 226 l-22 6 M152 268 l-18 14 M420 130 l18 -14 M430 176 l22 -6 M430 226 l22 6 M418 268 l18 14"/></g>
+              <g class="hot" data-w="Capsule"><path d="M160 110 L100 62" stroke="#ddc8f0" stroke-width="3" fill="none"/><rect x="16" y="38" width="150" height="32" rx="16" fill="#fff" stroke="#e5d6ff" stroke-width="2.5"/><text x="91" y="60" text-anchor="middle" font-size="16" fill="#7a4fc0">Capsule 🔊</text></g>
+              <g class="hot" data-w="Cell wall"><path d="M172 160 L104 140" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="6" y="120" width="150" height="32" rx="16" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="81" y="142" text-anchor="middle" font-size="16" fill="#e14f93">Cell wall 🔊</text></g>
+              <g class="hot" data-w="DNA loop"><path d="M262 180 L262 96" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="186" y="66" width="152" height="32" rx="16" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="262" y="88" text-anchor="middle" font-size="16" fill="#e14f93">DNA loop 🔊</text></g>
+              <g class="hot" data-w="Plasmid"><path d="M222 132 L180 100" stroke="#ddc8f0" stroke-width="3" fill="none"/><rect x="96" y="196" width="140" height="32" rx="16" fill="#fff" stroke="#e5d6ff" stroke-width="2.5"/><text x="166" y="218" text-anchor="middle" font-size="16" fill="#7a4fc0">Plasmid 🔊</text><path d="M204 148 L180 196" stroke="#ddc8f0" stroke-width="3" fill="none"/></g>
+              <g class="hot" data-w="Ribosomes"><path d="M300 240 L300 300" stroke="#eec3d8" stroke-width="3" fill="none"/><rect x="222" y="300" width="156" height="32" rx="16" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="300" y="322" text-anchor="middle" font-size="16" fill="#e14f93">Ribosomes 🔊</text></g>
+              <g class="hot" data-w="Flagellum"><path d="M486 196 L520 250" stroke="#bfe0cf" stroke-width="3" fill="none"/><rect x="404" y="250" width="152" height="32" rx="16" fill="#fff" stroke="#cdeedd" stroke-width="2.5"/><text x="480" y="272" text-anchor="middle" font-size="16" fill="#2f8b66">Flagellum 🔊</text></g>
+              <g class="hot" data-w="Pili"><path d="M128 250 L80 280" stroke="#ddc8f0" stroke-width="3" fill="none"/><rect x="20" y="272" width="112" height="32" rx="16" fill="#fff" stroke="#e5d6ff" stroke-width="2.5"/><text x="76" y="294" text-anchor="middle" font-size="16" fill="#7a4fc0">Pili 🔊</text></g>
+            </svg>
+            <div class="figcap">🦠 a prokaryotic bacterial cell — tap a label 🔊</div>
+          </div>
+          <div class="fig" data-lb>
+            <svg viewBox="0 0 560 380" role="img" aria-label="Levels of organisation">
+              <rect width="560" height="380" fill="#fffafc"/>
+              <g fill="#ffe9f4" stroke="#ffd4e7" stroke-width="3">
+                <path d="M40 320 h96 v-40 h-96z"/><path d="M148 280 h96 v-40 h-96z"/><path d="M256 240 h96 v-40 h-96z"/><path d="M364 200 h96 v-40 h-96z"/><path d="M460 160 h60 v-40 h-60z"/>
+              </g>
+              <g transform="translate(64,258)"><circle r="16" fill="#ffd7e8" stroke="#ff9ecb" stroke-width="4"/><circle r="6" fill="#c9a7ff"/></g>
+              <g transform="translate(196,218)" fill="#ffd7e8" stroke="#ff9ecb" stroke-width="3.5"><circle cx="-14" cy="0" r="11"/><circle cx="10" cy="-6" r="11"/><circle cx="8" cy="12" r="11"/></g>
+              <g transform="translate(304,178)"><path d="M0 14 c-16 -14 -22 -24 -12 -32 c8 -6 14 0 12 8 c-2 -8 4 -14 12 -8 c10 8 4 18 -12 32z" fill="#ff9d9d" stroke="#f27272" stroke-width="3.5"/></g>
+              <g transform="translate(412,140)" stroke="#f27272" stroke-width="4" fill="none"><path d="M-18 0 q18 -14 36 0 q10 12 0 22 q-18 12 -36 0 q-10 -12 0 -22z" fill="#ffd7e8"/><path d="M-26 26 h52 M-14 34 h28"/></g>
+              <g transform="translate(492,102)"><circle cy="-14" r="11" fill="#ffd7e8" stroke="#ff9ecb" stroke-width="4"/><path d="M0 -3 v22 M0 4 l-14 8 M0 4 l14 8 M0 19 l-11 16 M0 19 l11 16" stroke="#ff9ecb" stroke-width="5" fill="none" stroke-linecap="round"/></g>
+              <g class="hot" data-w="Cell"><rect x="16" y="330" width="104" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="68" y="350" text-anchor="middle" font-size="15" fill="#e14f93">Cell 🔊</text></g>
+              <g class="hot" data-w="Tissue"><rect x="132" y="300" width="112" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="188" y="320" text-anchor="middle" font-size="15" fill="#e14f93">Tissue 🔊</text></g>
+              <g class="hot" data-w="Organ"><rect x="252" y="262" width="112" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="308" y="282" text-anchor="middle" font-size="15" fill="#e14f93">Organ 🔊</text></g>
+              <g class="hot" data-w="Organ system"><rect x="332" y="212" width="164" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="414" y="232" text-anchor="middle" font-size="15" fill="#e14f93">Organ system 🔊</text></g>
+              <g class="hot" data-w="Organism"><rect x="438" y="126" width="118" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="497" y="146" text-anchor="middle" font-size="15" fill="#e14f93">Organism 🔊</text></g>
+              <text x="280" y="46" text-anchor="middle" font-size="19" fill="#9a7391">🏢 levels of organisation — smallest to biggest</text>
+            </svg>
+            <div class="figcap">🏢 cell ➔ tissue ➔ organ ➔ system ➔ organism 🔊</div>
+          </div>
+        </div>
+        <h4>prokaryotes (bacteria)</h4>
+        <p><span class="say" data-w="Prokaryotes">Prokaryotes 🔊</span> (bacteria): <span class="say" data-w="unicellular">unicellular 🔊</span> and very small (<b>1–2 µm</b>). They have <b>NO true nucleus</b>; DNA is loose in the cytoplasm. <b>NO mitochondria or chloroplasts.</b></p>
+        <ul>
+          <li><span class="say" data-w="Plasmids">Plasmids 🔊</span>: small circular rings of DNA — crucial for <span class="say" data-w="genetic engineering">genetic engineering 🔊</span>! 🧬</li>
+          <li><span class="say" data-w="Capsule">Capsule 🔊</span>: extra outer layer for protection against antibiotics 🛡️</li>
+          <li><span class="say" data-w="Ribosomes">Ribosomes 🔊</span>: present, for protein synthesis.</li>
+        </ul>
+        <h4>definitions to memorise</h4>
+        <ul>
+          <li><span class="say" data-w="Cell">Cell 🔊</span>: the smallest building unit of life.</li>
+          <li><span class="say" data-w="Tissue">Tissue 🔊</span>: a group of <b>similar cells</b> working together.</li>
+          <li><span class="say" data-w="Organ">Organ 🔊</span>: a group of <b>different tissues</b> arranged for a certain function.</li>
+          <li><span class="say" data-w="Organ system">Organ system 🔊</span>: a group of organs with related functions.</li>
+        </ul>
+        <div class="gfoot"><button class="pill sm readtick" data-s="5">📖 Tick as read 💖</button><button class="pill sm ghost sayall">🔊 Pronounce all keywords</button></div>
+      </article>
+
+      <!-- SESSION 7 -->
+      <article class="gcard wide" data-cat="cells" data-s="6" data-key="specialised cells red blood cell haemoglobin biconcave sperm egg nerve ciliated root hair xylem lignin phloem palisade guard cell stomata">
+        <h3><span class="n">7</span> 🩸 specialised cells <span class="done hide">💖 read</span></h3>
+        <div class="vs">
+          <div class="fig" data-lb>
+            <svg viewBox="0 0 560 400" role="img" aria-label="Specialised animal cells">
+              <rect width="560" height="400" fill="#fffafc"/>
+              <g transform="translate(40,30)">
+                <circle cx="90" cy="70" r="54" fill="#ff9d9d" stroke="#f27272" stroke-width="6"/>
+                <ellipse cx="90" cy="70" rx="26" ry="24" fill="#ffc9c9"/>
+                <circle cx="78" cy="62" r="4.5" fill="#5d3a54"/><circle cx="102" cy="62" r="4.5" fill="#5d3a54"/>
+                <path d="M78 82 q12 10 24 0" stroke="#5d3a54" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <g class="hot" data-w="Red blood cell"><rect x="6" y="136" width="168" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="90" y="156" text-anchor="middle" font-size="15" fill="#e14f93">🩸 Red blood cell 🔊</text></g>
+              </g>
+              <g transform="translate(300,30)">
+                <circle cx="52" cy="60" r="30" fill="#c6e6ff" stroke="#6fb4e6" stroke-width="6"/>
+                <circle cx="52" cy="60" r="14" fill="#e6f2ff"/>
+                <ellipse cx="88" cy="62" rx="16" ry="12" fill="#ffe3c2" stroke="#ffb37a" stroke-width="4"/>
+                <path d="M104 62 q22 -18 40 0 q20 18 42 0 q18 -14 34 -2" stroke="#6fb4e6" stroke-width="6" fill="none" stroke-linecap="round"/>
+                <path d="M40 34 q-10 -14 -22 -12" stroke="#6fb4e6" stroke-width="5" fill="none" stroke-linecap="round"/>
+                <circle cx="44" cy="54" r="4" fill="#5d3a54"/><circle cx="60" cy="54" r="4" fill="#5d3a54"/>
+                <path d="M44 72 q8 8 16 0" stroke="#5d3a54" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <g class="hot" data-w="Sperm cell"><rect x="30" y="136" width="150" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="105" y="156" text-anchor="middle" font-size="15" fill="#e14f93">🏊 Sperm cell 🔊</text></g>
+              </g>
+              <g transform="translate(40,210)">
+                <circle cx="60" cy="66" r="30" fill="#e8dcff" stroke="#c9a7ff" stroke-width="6"/>
+                <circle cx="60" cy="66" r="12" fill="#c9a7ff"/>
+                <g stroke="#c9a7ff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M40 46 q-16 -12 -26 -6 M38 60 q-20 -4 -28 6 M42 86 q-18 8 -24 20 M80 46 q14 -10 24 -6"/></g>
+                <path d="M88 70 h120" stroke="#c9a7ff" stroke-width="9" stroke-linecap="round"/>
+                <path d="M96 62 h104 v16 h-104z" fill="#f3ecff" stroke="#c9a7ff" stroke-width="3"/>
+                <g stroke="#c9a7ff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M208 70 q16 -14 30 -8 M208 70 q18 4 26 18 M208 70 h30"/></g>
+                <g class="hot" data-w="Nerve cell"><rect x="0" y="120" width="146" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="73" y="140" text-anchor="middle" font-size="15" fill="#e14f93">⚡ Nerve cell 🔊</text></g>
+              </g>
+              <g transform="translate(330,210)">
+                <path d="M20 100 v-56 q0 -18 24 -18 h56 q24 0 24 18 v56z" fill="#ffd7e8" stroke="#ff9ecb" stroke-width="6"/>
+                <g stroke="#ff9ecb" stroke-width="4" stroke-linecap="round"><path d="M34 26 v-16 M50 24 v-18 M66 24 v-18 M82 24 v-18 M98 26 v-16"/></g>
+                <circle cx="62" cy="62" r="16" fill="#fff" stroke="#ff9ecb" stroke-width="4"/>
+                <circle cx="57" cy="58" r="3" fill="#5d3a54"/><circle cx="68" cy="58" r="3" fill="#5d3a54"/>
+                <path d="M56 70 q6 6 12 0" stroke="#5d3a54" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M124 40 q26 20 0 44" stroke="#9fd4ff" stroke-width="6" fill="none" stroke-linecap="round" opacity=".8"/>
+                <g class="hot" data-w="Ciliated cell"><rect x="-6" y="120" width="150" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="69" y="140" text-anchor="middle" font-size="15" fill="#e14f93">🌬️ Ciliated cell 🔊</text></g>
+              </g>
+            </svg>
+            <div class="figcap">🐾 animal specialists — tap a label 🔊</div>
+          </div>
+          <div class="fig" data-lb>
+            <svg viewBox="0 0 560 400" role="img" aria-label="Specialised plant cells">
+              <rect width="560" height="400" fill="#fffafc"/>
+              <g transform="translate(30,26)">
+                <rect x="40" y="30" width="86" height="66" rx="16" fill="#dff7e8" stroke="#7eddb8" stroke-width="6"/>
+                <path d="M126 62 h74" stroke="#7eddb8" stroke-width="10" stroke-linecap="round"/>
+                <circle cx="70" cy="56" r="4" fill="#5d3a54"/><circle cx="86" cy="56" r="4" fill="#5d3a54"/>
+                <path d="M70 72 q8 8 16 0" stroke="#3f8f63" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                <g stroke="#9fd4ff" stroke-width="4" stroke-linecap="round"><path d="M214 40 l-14 12 M220 62 h-18 M214 84 l-14 -12"/></g>
+                <g class="hot" data-w="Root hair cell"><rect x="6" y="112" width="180" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="96" y="132" text-anchor="middle" font-size="15" fill="#e14f93">🌱 Root hair cell 🔊</text></g>
+              </g>
+              <g transform="translate(300,26)">
+                <rect x="40" y="16" width="66" height="102" rx="14" fill="#fff6e6" stroke="#d9a86c" stroke-width="6"/>
+                <g stroke="#d9a86c" stroke-width="5"><path d="M40 40 h66 M40 66 h66 M40 92 h66"/></g>
+                <g stroke="#9fd4ff" stroke-width="4" stroke-linecap="round" opacity=".9"><path d="M73 118 v-24 M73 60 l0 -14 M60 100 l-8 -14 M86 100 l8 -14"/></g>
+                <g class="hot" data-w="Xylem vessel"><rect x="10" y="126" width="150" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="85" y="146" text-anchor="middle" font-size="15" fill="#e14f93">🪵 Xylem vessel 🔊</text></g>
+              </g>
+              <g transform="translate(30,220)">
+                <rect x="46" y="10" width="70" height="106" rx="16" fill="#eafaf1" stroke="#7eddb8" stroke-width="6"/>
+                <g fill="#9fe8b6" stroke="#57c98a" stroke-width="3.5">
+                  <ellipse cx="70" cy="30" rx="15" ry="9"/><ellipse cx="94" cy="46" rx="15" ry="9"/><ellipse cx="68" cy="62" rx="15" ry="9"/><ellipse cx="94" cy="78" rx="15" ry="9"/><ellipse cx="70" cy="96" rx="15" ry="9"/>
+                </g>
+                <g class="hot" data-w="Palisade cell"><rect x="8" y="128" width="152" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="84" y="148" text-anchor="middle" font-size="15" fill="#e14f93">🍃 Palisade cell 🔊</text></g>
+              </g>
+              <g transform="translate(300,220)">
+                <path d="M60 14 q-30 44 0 96 q22 -46 0 -96z" fill="#dff7e8" stroke="#7eddb8" stroke-width="6"/>
+                <path d="M122 14 q30 44 0 96 q-22 -46 0 -96z" fill="#dff7e8" stroke="#7eddb8" stroke-width="6"/>
+                <ellipse cx="91" cy="62" rx="17" ry="30" fill="#fffafc" stroke="#ffd4e7" stroke-width="4" stroke-dasharray="6 5"/>
+                <g class="hot" data-w="Guard cells and stoma"><rect x="6" y="128" width="176" height="30" rx="15" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="94" y="148" text-anchor="middle" font-size="15" fill="#e14f93">🚪 Guard cells 🔊</text></g>
+              </g>
+            </svg>
+            <div class="figcap">🌿 plant specialists — tap a label 🔊</div>
+          </div>
+        </div>
+        <div class="cellgrid">
+          <div class="cellcard"><b>🩸 RBCs</b><p>Contain <span class="say" data-w="haemoglobin">haemoglobin 🔊</span> to carry O₂. <span class="say" data-w="Biconcave">Biconcave 🔊</span> shape increases surface area for gas diffusion.</p></div>
+          <div class="cellcard"><b>🏊 Sperm cells</b><p>Tail for swimming, mitochondria for energy, and secrete digestive enzymes to penetrate the egg.</p></div>
+          <div class="cellcard"><b>🥚 Egg cells</b><p>Large, contain lots of food stores, surrounded by a special membrane.</p></div>
+          <div class="cellcard"><b>⚡ Nerve cells</b><p>Long and interconnected to transmit <span class="say" data-w="nerve impulses">nerve impulses 🔊</span>.</p></div>
+          <div class="cellcard"><b>🌬️ Ciliated cells</b><p>Line the trachea. <span class="say" data-w="Cilia">Cilia 🔊</span> beat upwards to sweep dust/mucus/bacteria out!</p></div>
+          <div class="cellcard"><b>🌱 Root hair cells</b><p>Long extension increases surface area for water &amp; mineral absorption.</p></div>
+          <div class="cellcard"><b>🪵 Xylem vessels</b><p>Hollow tubes conducting water/salts, strengthened by <span class="say" data-w="lignin">lignin 🔊</span>.</p></div>
+          <div class="cellcard"><b>🍃 Palisade cells</b><p>Main <span class="say" data-w="photosynthesising">photosynthesising 🔊</span> cells — the greatest number of chloroplasts.</p></div>
+        </div>
+        <div class="gfoot"><button class="pill sm readtick" data-s="6">📖 Tick as read 💖</button><button class="pill sm ghost sayall">🔊 Pronounce all keywords</button></div>
+      </article>
+
+      <!-- SESSION 8 -->
+      <article class="gcard wide" data-cat="move" data-s="7" data-key="movement of molecules diffusion active transport concentration gradient atp carrier proteins passive kinetic energy villi kidney tubules root hairs selective">
+        <h3><span class="n">8</span> ⚡ movement of molecules <span class="done hide">💖 read</span></h3>
+        <div class="fig" data-lb>
+          <svg viewBox="0 0 900 330" role="img" aria-label="Diffusion compared with active transport">
+            <rect width="900" height="330" fill="#fffafc"/>
+            <g>
+              <rect x="30" y="60" width="380" height="210" rx="24" fill="#f4fbf8" stroke="#bfe9d6" stroke-width="4"/>
+              <path d="M220 60 v210" stroke="#7eddb8" stroke-width="6" stroke-dasharray="12 10"/>
+              <g fill="#ff9ecb" stroke="#e14f93" stroke-width="3">
+                <circle cx="70" cy="110" r="11"/><circle cx="104" cy="150" r="11"/><circle cx="72" cy="190" r="11"/><circle cx="112" cy="228" r="11"/><circle cx="150" cy="118" r="11"/><circle cx="158" cy="200" r="11"/>
+              </g>
+              <g fill="#c9a7ff" stroke="#9d76e0" stroke-width="3">
+                <circle cx="270" cy="130" r="11"/><circle cx="320" cy="180" r="11"/><circle cx="370" cy="120" r="11"/>
+              </g>
+              <path d="M150 250 q60 22 130 0" stroke="#e14f93" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <path d="M272 244 l14 6 -14 8z" fill="#e14f93"/>
+              <g class="hot" data-w="Diffusion"><rect x="120" y="14" width="200" height="34" rx="17" fill="#fff" stroke="#cdeedd" stroke-width="2.5"/><text x="220" y="37" text-anchor="middle" font-size="17" fill="#2f8b66">💨 Diffusion 🔊</text></g>
+              <text x="220" y="300" text-anchor="middle" font-size="14" fill="#31705a">high ➔ low · passive · no ATP</text>
+            </g>
+            <g>
+              <rect x="490" y="60" width="380" height="210" rx="24" fill="#fff7f2" stroke="#ffd9c9" stroke-width="4"/>
+              <path d="M680 60 v210" stroke="#ffb37a" stroke-width="6"/>
+              <rect x="650" y="130" width="60" height="70" rx="18" fill="#ffe3c2" stroke="#ffb37a" stroke-width="5"/>
+              <circle cx="680" cy="165" r="13" fill="#ff9ecb" stroke="#e14f93" stroke-width="3"/>
+              <g fill="#c9a7ff" stroke="#9d76e0" stroke-width="3"><circle cx="560" cy="230" r="11"/><circle cx="600" cy="248" r="11"/><circle cx="790" cy="100" r="11"/><circle cx="826" cy="130" r="11"/></g>
+              <path d="M700 210 q40 -60 90 -96" stroke="#e14f93" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <path d="M786 108 l14 -6 -4 15z" fill="#e14f93"/>
+              <g transform="translate(520,96)"><path d="M14 0 l-14 22 h12 l-6 18 20 -24 h-12z" fill="#ffd98a" stroke="#f0b64b" stroke-width="3"/></g>
+              <g transform="translate(556,92)"><rect x="0" y="6" width="34" height="20" rx="6" fill="#ffe3c2" stroke="#f0b64b" stroke-width="3.5"/><rect x="34" y="12" width="6" height="8" rx="2" fill="#f0b64b"/><path d="M12 12 l6 8 -6 0 6 0" stroke="#f0b64b" stroke-width="3" fill="none"/></g>
+              <g class="hot" data-w="Active transport"><rect x="560" y="14" width="240" height="34" rx="17" fill="#fff" stroke="#ffd9c9" stroke-width="2.5"/><text x="680" y="37" text-anchor="middle" font-size="17" fill="#c05a3d">🧗‍♀️ Active transport 🔊</text></g>
+              <g class="hot" data-w="Carrier protein"><rect x="726" y="196" width="142" height="30" rx="15" fill="#fff" stroke="#ffd9c9" stroke-width="2.5"/><text x="797" y="216" text-anchor="middle" font-size="14" fill="#c05a3d">Carrier protein 🔊</text></g>
+              <text x="680" y="300" text-anchor="middle" font-size="14" fill="#c05a3d">low ➔ high · active · needs ATP</text>
+            </g>
+          </svg>
+          <div class="figcap">⚡ passive diffusion vs active transport — tap the labels 🔊</div>
+        </div>
+        <div class="vs">
+          <div class="vsbox a">
+            <h5>💨 <span class="say" data-w="Diffusion">Diffusion 🔊</span></h5>
+            <p>Net movement from <b>higher ➔ lower</b> concentration down a <span class="say" data-w="concentration gradient">concentration gradient 🔊</span>.</p>
+            <p><b>Passive</b> physical process — NO energy needed; relies on the <span class="say" data-w="kinetic energy">kinetic energy 🔊</span> of random movement.</p>
+            <p><b>Non-selective</b>; a living membrane is <b>not</b> essential.</p>
+            <p>Ex: gas exchange in leaves during photosynthesis, gas exchange in respiration, absorption in the small intestine.</p>
+          </div>
+          <div class="vsbox b">
+            <h5>🧗‍♀️ <span class="say" data-w="Active transport">Active transport 🔊</span></h5>
+            <p>Movement from <b>lower ➔ higher</b> concentration — <b>AGAINST</b> the gradient!</p>
+            <p><b>Biological active process</b>; requires <span class="say" data-w="ATP">ATP 🔊</span> energy from mitochondria.</p>
+            <p><b>Selective</b>; needs a living membrane &amp; <span class="say" data-w="carrier proteins">carrier proteins 🔊</span>. Prevented by lack of glucose/O₂.</p>
+            <p>Ex: glucose uptake in villi, ion uptake in root hairs, kidney tubules.</p>
+          </div>
+        </div>
+        <div class="tipbox">🧠 exam trick: if a question mentions <b>energy, ATP, against the gradient, carrier proteins</b> or <b>poison/lack of oxygen</b> → it's active transport. If it mentions <b>spreading out, high to low, no energy</b> → diffusion.</div>
+        <div class="gfoot"><button class="pill sm readtick" data-s="7">📖 Tick as read 💖</button><button class="pill sm ghost sayall">🔊 Pronounce all keywords</button></div>
+      </article>
+
+      <!-- SESSION 9 -->
+      <article class="gcard wide" data-cat="move cells" data-s="8" data-key="osmosis water potential partially permeable membrane turgid flaccid plasmolysed turgor pressure importance of water solvent transport plasma sweat photosynthesis germination">
+        <h3><span class="n">9</span> 💧 osmosis &amp; water <span class="done hide">💖 read</span></h3>
+        <div class="fig" data-lb>
+          <svg viewBox="0 0 900 330" role="img" aria-label="Osmosis in plant cells: turgid, flaccid and plasmolysed">
+            <rect width="900" height="330" fill="#fffafc"/>
+            <g transform="translate(30,50)">
+              <rect x="0" y="0" width="240" height="170" rx="26" fill="#dff7e8" stroke="#7eddb8" stroke-width="9"/>
+              <ellipse cx="120" cy="86" rx="92" ry="58" fill="#e6f6ff" stroke="#9fd4ff" stroke-width="5"/>
+              <circle cx="120" cy="78" r="26" fill="#ffd7e8" stroke="#ff9ecb" stroke-width="4"/>
+              <circle cx="112" cy="72" r="4" fill="#5d3a54"/><circle cx="129" cy="72" r="4" fill="#5d3a54"/>
+              <path d="M110 88 q11 10 22 0" stroke="#5d3a54" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <g stroke="#9fd4ff" stroke-width="5" stroke-linecap="round" fill="none"><path d="M-40 40 q22 12 34 30 M-46 90 h34 M-40 140 q22 -12 34 -28"/></g>
+              <path d="M-8 68 l10 6 -10 6z" fill="#9fd4ff"/><path d="M-14 90 h12" stroke="#9fd4ff" stroke-width="5"/><path d="M-8 112 l10 -6 -10 -6z" fill="#9fd4ff"/>
+              <g class="hot" data-w="Turgid"><rect x="42" y="196" width="156" height="32" rx="16" fill="#fff" stroke="#cdeedd" stroke-width="2.5"/><text x="120" y="218" text-anchor="middle" font-size="16" fill="#2f8b66">💧 Turgid 🔊</text></g>
+            </g>
+            <g transform="translate(330,50)">
+              <rect x="0" y="0" width="240" height="170" rx="26" fill="#f1fbf5" stroke="#a9e8c8" stroke-width="9"/>
+              <path d="M30 40 q90 -18 180 6 q-14 74 -90 84 q-78 8 -96 -50z" fill="#eaf7ff" stroke="#bfe3f7" stroke-width="5"/>
+              <circle cx="120" cy="86" r="22" fill="#ffe6f1" stroke="#ffc4dd" stroke-width="4"/>
+              <circle cx="113" cy="80" r="3.6" fill="#5d3a54"/><circle cx="128" cy="80" r="3.6" fill="#5d3a54"/>
+              <path d="M112 96 q8 6 16 0" stroke="#5d3a54" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+              <g class="hot" data-w="Flaccid"><rect x="42" y="196" width="156" height="32" rx="16" fill="#fff" stroke="#ffd4e7" stroke-width="2.5"/><text x="120" y="218" text-anchor="middle" font-size="16" fill="#e14f93">🧂 Flaccid 🔊</text></g>
+            </g>
+            <g transform="translate(630,50)">
+              <rect x="0" y="0" width="240" height="170" rx="26" fill="#f7fbf8" stroke="#cfe8d8" stroke-width="9"/>
+              <path d="M74 62 q46 -22 92 4 q10 34 -34 48 q-52 14 -72 -18 q-8 -20 14 -34z" fill="#eaf4ff" stroke="#cfe0f0" stroke-width="5"/>
+              <circle cx="126" cy="86" r="16" fill="#ffe6f1" stroke="#ffc4dd" stroke-width="4"/>
+              <circle cx="121" cy="82" r="3" fill="#5d3a54"/><circle cx="132" cy="82" r="3" fill="#5d3a54"/>
+              <path d="M120 94 q6 -5 12 0" stroke="#5d3a54" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <g stroke="#9fd4ff" stroke-width="5" stroke-linecap="round" fill="none"><path d="M250 46 q-24 10 -34 26 M256 96 h-32 M250 146 q-24 -10 -34 -26"/></g>
+              <path d="M232 70 l-12 6 12 6z" fill="#9fd4ff"/><path d="M228 116 l12 -6 -12 -6z" fill="#9fd4ff"/>
+              <g class="hot" data-w="Plasmolysed"><rect x="30" y="196" width="180" height="32" rx="16" fill="#fff" stroke="#ffd3c9" stroke-width="2.5"/><text x="120" y="218" text-anchor="middle" font-size="16" fill="#c0553d">🥀 Plasmolysed 🔊</text></g>
+            </g>
+            <text x="450" y="34" text-anchor="middle" font-size="18" fill="#9a7391">💧 water always moves: higher ➔ lower water potential</text>
+          </svg>
+          <div class="figcap">🌿 turgid · flaccid · plasmolysed — tap a label 🔊</div>
+        </div>
+        <h4>importance of water 💦</h4>
+        <ol>
+          <li><span class="say" data-w="Solvent">Solvent 🔊</span> for metabolic reactions.</li>
+          <li>Transport medium (blood <span class="say" data-w="plasma">plasma 🔊</span>).</li>
+          <li>Dissolves enzymes &amp; nutrients for digestion.</li>
+          <li>Dissolves waste for excretion (urine).</li>
+          <li><span class="say" data-w="Sweat">Sweat 🔊</span> evaporates for cooling.</li>
+          <li>Reactant in <span class="say" data-w="photosynthesis">photosynthesis 🔊</span> &amp; maintains cell <span class="say" data-w="turgidity">turgidity 🔊</span>.</li>
+          <li>Needed for seed <span class="say" data-w="germination">germination 🔊</span>.</li>
+        </ol>
+        <h4>the definition to memorise</h4>
+        <div class="tipbox"><span class="say" data-w="Osmosis">Osmosis 🔊</span> is the net movement of water molecules from a region of <b>higher water potential</b> (dilute) to a region of <b>lower water potential</b> (concentrated) through a <span class="say" data-w="partially permeable membrane">partially permeable membrane 🔊</span>.</div>
+        <h4>effect on plant cells 🌿</h4>
+        <div class="cellgrid">
+          <div class="cellcard"><b>💧 Pure water (dilute)</b><p>Water enters. Vacuole swells, cytoplasm pushes against the cell wall. The wall resists expansion → cell becomes <span class="say" data-w="turgid">turgid 🔊</span>. Supports the plant (firm leaves, upright stem)!</p></div>
+          <div class="cellcard"><b>🧂 Concentrated solution</b><p>Water diffuses OUT. Cytoplasm and vacuole shrink → cell becomes <span class="say" data-w="flaccid">flaccid 🔊</span> and the plant wilts.</p></div>
+          <div class="cellcard"><b>🥀 Extreme shrinking</b><p>Cytoplasm tears away from the stiff cell wall → the cell is <span class="say" data-w="plasmolysed">plasmolysed 🔊</span>.</p></div>
+          <div class="cellcard"><b>🩸 Animal cells</b><p>No cell wall! In pure water they swell &amp; burst; in concentrated solution they shrink.</p></div>
+        </div>
+        <div class="gfoot"><button class="pill sm readtick" data-s="8">📖 Tick as read 💖</button><button class="pill sm ghost sayall">🔊 Pronounce all keywords</button></div>
+      </article>
+    </div>
+
+    <div class="empty" id="gEmpty"><b>nothing matches that search 🥺</b>try another word, cutie! 💗</div>
+    <div style="text-align:center;margin-top:1rem">
+      <button class="pill ghost" data-scroll="#hero">🎀 Back to menu</button>
+      <button class="pill" data-scroll="#levels">🚀 Start quizzing</button>
+    </div>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section id="acts" class="reveal">
+    <div class="sec-head"><span class="em">🎨</span><div><h2>activities</h2><p>warm up before the quizzes, queen 💅</p></div></div>
+    <div class="rule">✦ ─ ─ ─ ✦ ─ ─ ─ ✦</div>
+    <div class="acts" id="actGrid"></div>
+  </section>
+
+  <!-- LEVELS -->
+  <section id="levels" class="reveal">
+    <div class="sec-head"><span class="em">🎯</span><div><h2>choose your mission 🚀</h2><p>10 levels · 10 questions each · tick them all 💖</p></div></div>
+    <div class="rule">✦ ─ ─ ─ ✦ ─ ─ ─ ✦</div>
+    <div class="levels" id="levelGrid"></div>
+    <div style="text-align:center;margin-top:1.1rem">
+      <button class="pill ghost" data-scroll="#guide">📖 Re-read the guide</button>
+      <button class="pill ghost" data-scroll="#hero">🎀 Back to menu</button>
+    </div>
+  </section>
+</main>
+
+<div class="overlay hidden" id="quizOverlay" role="dialog" aria-modal="true" aria-label="quiz">
+  <div class="quiz">
+    <div class="q-top">
+      <span class="ttl" id="qTitle">🌱 Level 1</span>
+      <span class="sp"><span class="chip">✨ <b id="qScore">0</b></span><span class="chip xp">Q <b id="qNum">1</b>/10</span></span>
+    </div>
+    <div class="dots" id="qDots"></div>
+    <div class="qcard">
+      <p class="qtext" id="qText">Question goes here?</p>
+      <div class="opts" id="qOpts"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+    </div>
+    <div class="q-foot">
+      <button class="pill ghost sm" id="quitBtn">🚪 Quit level</button>
+      <button class="pill sm" id="nextBtn" style="display:none">Next ➔</button>
+      <span class="hint" id="qHint">tap an answer, babe 💗</span>
+    </div>
+  </div>
+</div>
+
+<div class="overlay hidden" id="resOverlay" role="dialog" aria-modal="true" aria-label="result">
+  <div class="modal">
+    <span class="big" id="rEmoji">👑</span>
+    <h3 id="rTitle">level complete, queen!</h3>
+    <p id="rMsg">Feedback message here!</p>
+    <div class="score-ring" id="rRing" style="--p:0"><div><b id="rScore">0/10</b><small>your level score</small></div></div>
+    <div class="xpline" id="rXp"></div>
+    <div class="mrow"><button class="pill" id="moreBtn">🚀 More levels</button><button class="pill ghost" id="replayBtn">💅 Replay level</button></div>
+  </div>
+</div>
+
+<div class="overlay hidden" id="actOverlay" role="dialog" aria-modal="true" aria-label="activity">
+  <div class="actbox">
+    <div class="ttl"><span id="actTitle">🎨 activity</span><span class="sp"><span class="chip" id="actProg">0/0</span></span></div>
+    <div class="bar" style="margin-bottom:.7rem"><div id="actBar"></div></div>
+    <div id="actBody"></div>
+    <div class="q-foot"><button class="pill ghost sm" id="actClose">🚪 Close</button><span class="hint" id="actHint">have fun, cutie ✨</span></div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+<div class="norman" id="norman">
+  <div class="nbubble" id="nbubble"><em>hi! I'm Norman the notebook 📔</em>tap me for a revision tip ✨</div>
+  <div class="nface" id="nface" title="Norman the notebook">📔</div>
+</div>
+
+<footer>
+  <div class="fl"><a href="#hero">hub 🏠</a><a href="#dash">dashboard 📊</a><a href="#guide">study guide 📖</a><a href="#acts">activities 🎨</a><a href="#levels">quiz levels 🎯</a><a href="#badges">badges 🏅</a></div>
+  <div class="hand">one tick at a time — see you at the finish line, Bio Legend! 🤍</div>
+  <small>Glam Bio Quest · edexcel biology · the bio frame · sessions · activities · quizzes ♡ be brilliant!</small>
+</footer>
+
+<script>
+/* ================= HELPERS ================= */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;};
+
+/* ================= SVG PIECES BUILT AT RUNTIME ================= */
+(function buildClassification(){
+  const ranks=['Kingdom','Phylum','Class','Order','Family','Genus','Species'];
+  const cols=['#ffe3ef','#f3e6ff','#e6f2ff','#e2fbf1','#fff3d9','#ffe9e2','#f0e6ff'];
+  let h='';
+  ranks.forEach((r,i)=>{
+    const w=760-i*72,x=(860-w)/2,y=58+i*38;
+    h+=`<g class="hot" data-w="${r}"><rect x="${x}" y="${y}" width="${w}" height="30" rx="15" fill="${cols[i]}" stroke="#fff" stroke-width="3"/><text x="430" y="${y+21}" text-anchor="middle" font-size="17" fill="#5d3a54">${r} 🔊</text></g>`;
+  });
+  $('#clsBars').innerHTML=h;
+})();
+(function buildMrs(){
+  const items=[['M','Movement','🏃'],['R','Respiration','⚡'],['S','Sensitivity','👀'],['G','Growth','🌱'],['R','Reproduction','👶'],['E','Excretion','🗑️'],['N','Nutrition','🍎']];
+  let h='';
+  items.forEach((it,i)=>{
+    const cx=70+i*112;
+    h+=`<g class="hot" data-w="${it[1]}"><circle cx="${cx}" cy="86" r="46" fill="#fff" stroke="#ffd4e7" stroke-width="4"/><text x="${cx}" y="70" text-anchor="middle" font-size="26">${it[2]}</text><text x="${cx}" y="100" text-anchor="middle" font-size="26" fill="#e14f93">${it[0]}</text><rect x="${cx-58}" y="146" width="116" height="30" rx="15" fill="#fff6fa" stroke="#ffd4e7" stroke-width="2.5"/><text x="${cx}" y="166" text-anchor="middle" font-size="13.5" fill="#9a7391">${it[1]} 🔊</text></g>`;
+  });
+  $('#mrsRow').innerHTML=h;
+})();
+
+/* ================= QUIZ DATA ================= */
+const LEVELS=[
+{em:'🌱',t:'The Basics',s:'MRS GREN & naming',tint:'#e6f9f0',qs:[
+ {q:"What does the 'G' in MRS GREN stand for?",a:["Growth","Germination","Genetics","Glucose"],c:0,why:"MRS GREN = Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition."},
+ {q:"Which of these is NOT considered a living organism?",a:["A virus","A fungus","A bacterium","A protist"],c:0,why:"Viruses have no cells and can only reproduce inside a living host cell."},
+ {q:"Pick the correct order of classification:",a:["Kingdom ➔ Phylum ➔ Class ➔ Order ➔ Family ➔ Genus ➔ Species","Kingdom ➔ Class ➔ Phylum ➔ Order ➔ Genus ➔ Family ➔ Species","Phylum ➔ Kingdom ➔ Order ➔ Class ➔ Family ➔ Species ➔ Genus","Kingdom ➔ Phylum ➔ Order ➔ Class ➔ Family ➔ Species ➔ Genus"],c:0,why:"King Philip Came Over From Great Spain 🎀 (KPCOFGS)."},
+ {q:"A species is a group of organisms that…",a:["can reproduce to give fertile offspring","look exactly identical","live in the same habitat","belong to different genera"],c:0,why:"Species = able to interbreed AND produce fertile offspring."},
+ {q:"How should the binomial name for humans be written?",a:["Homo sapiens, italicised or underlined","homo Sapiens in bold","HOMO SAPIENS","Sapiens homo"],c:0,why:"Genus capitalised, species lowercase, italicised or underlined."},
+ {q:"A genus is…",a:["a group of similar species","a group of similar families","another word for a species","a group of similar orders"],c:0,why:"Genus sits just above species in the hierarchy."},
+ {q:"Which of these is an importance of the binomial system?",a:["It facilitates identification and study","It makes organisms prettier","It groups organisms by colour","It shows how fast organisms move"],c:0,why:"Universal Latin names let scientists everywhere identify and study the same organism."},
+ {q:"'Excretion' means…",a:["removal of waste products of metabolism and substances in excess","removal of undigested food only","taking in nutrients","a permanent increase in dry mass"],c:0,why:"Excretion removes metabolic waste (CO₂, urea) and excess substances."},
+ {q:"'Respiration' means…",a:["chemical reactions that break down nutrient molecules and release energy","breathing in and out","making food from sunlight","removing waste"],c:0,why:"Respiration is chemical energy release — not breathing!"},
+ {q:"In Felis catus, which word is the genus?",a:["Felis","catus","Felis catus","Neither"],c:0,why:"The first name is always the genus, and it is capitalised."}
+]},
+{em:'🐾',t:'Bone Squad',s:'Vertebrate classes',tint:'#eef3ff',qs:[
+ {q:"Which vertebrate class has fur/hair and mammary glands that secrete milk?",a:["Mammals","Birds","Reptiles","Amphibians"],c:0,why:"Mammals: hairy skin, mammary glands, constant body temperature, external ear pinna."},
+ {q:"Fish have a … used for sensation.",a:["lateral line","pinna","diaphragm","spiracle"],c:0,why:"The lateral line detects vibrations and movement in water."},
+ {q:"Reptiles lay eggs with…",a:["waterproof shells","soft jelly coats","no shell at all","hard calcified shells like birds only"],c:0,why:"Waterproof shells let reptile eggs survive on land."},
+ {q:"Feathers help birds by…",a:["insulating, decreasing density and waterproofing","making them heavier","absorbing water","digesting food"],c:0,why:"Feathers insulate, reduce density for flight and waterproof the body."},
+ {q:"A frog is an amphibian because it has…",a:["moist skin for gas exchange and a tadpole stage","dry scaly skin","feathers","a waterproof shell egg"],c:0,why:"Amphibians: moist permeable skin, jelly eggs in water, tadpoles with external gills."},
+ {q:"Animals store carbohydrate as…",a:["Glycogen","Starch","Cellulose","Sucrose"],c:0,why:"Animals store glycogen; plants store starch."},
+ {q:"Which groups are cold-blooded?",a:["Fish, amphibians and reptiles","Birds and mammals","Mammals and reptiles","Only fish"],c:0,why:"Birds and mammals maintain a constant body temperature."},
+ {q:"A whale is classified as a…",a:["Mammal","Fish","Amphibian","Reptile"],c:0,why:"Lungs, warm-blooded, milk-feeding = mammal."},
+ {q:"Which of these is a vertebrate?",a:["Snake","Earthworm","Jellyfish","Spider"],c:0,why:"A snake is a reptile with a backbone."},
+ {q:"Mammals have an external ear …",a:["pinna","tympanum inside the head","lateral line","spiracle"],c:0,why:"The pinna is the visible external ear flap; reptiles have the eardrum inside the head."}
+]},
+{em:'🦋',t:'Bugging Out',s:'Awesome arthropods',tint:'#fff2e6',qs:[
+ {q:"How many pairs of jointed legs does an insect have?",a:["3 pairs","4 pairs","5 pairs","2 pairs"],c:0,why:"Insects: 3 pairs = 6 legs, head/thorax/abdomen, 1 pair antennae."},
+ {q:"An arachnid's body is divided into…",a:["cephalothorax and abdomen","head, thorax and abdomen","head and many segments","one single region"],c:0,why:"Arachnids have 2 body regions, 8 legs, simple eyes and NO antennae."},
+ {q:"How many pairs of antennae do crustaceans have?",a:["2 pairs","1 pair","None","3 pairs"],c:0,why:"Crustaceans: 2 pairs of antennae + stalked compound eyes, gills, calcified exoskeleton."},
+ {q:"Myriapods have…",a:["1 pair of legs per body segment","3 pairs of legs","8 legs in total","no legs"],c:0,why:"Head + identical abdominal segments, 1 pair of legs per segment, 1 pair antennae."},
+ {q:"The arthropod exoskeleton is made of…",a:["Chitin","Cellulose","Bone","Starch"],c:0,why:"Chitin — calcified in crustaceans."},
+ {q:"Arachnids use … to hold prey.",a:["chelicerae","antennae","wings","gills"],c:0,why:"Chelicerae are the mouthparts/fangs used to grip prey."},
+ {q:"Which of these is an arachnid?",a:["Scorpion","Centipede","Beetle","Prawn"],c:0,why:"Scorpions: 8 legs, 2 body regions, no antennae."},
+ {q:"Insects usually have … eyes.",a:["Compound eyes","Simple eyes only","No eyes","Stalked eyes"],c:0,why:"Compound eyes; arachnids have simple eyes."},
+ {q:"Crustaceans respire using…",a:["Gills","Lungs","Tracheae","Skin only"],c:0,why:"Crabs and prawns use gills, even on land."},
+ {q:"A centipede belongs to which group?",a:["Myriapods","Insects","Arachnids","Crustaceans"],c:0,why:"Many segments, many legs, 1 pair antennae = myriapod. 🐛"}
+]},
+{em:'🔬',t:'Tiny Power',s:'Cell structure & organelles',tint:'#f3eaff',qs:[
+ {q:"Which organelle is the site of aerobic respiration?",a:["Mitochondrion","Ribosome","Vacuole","Nucleus"],c:0,why:"Mitochondria release energy from glucose."},
+ {q:"Ribosomes are attached to the … and make proteins.",a:["rough endoplasmic reticulum","smooth ER","cell wall","nucleolus only"],c:0,why:"Ribosomes on rough ER = the site of protein synthesis."},
+ {q:"The cell membrane is described as…",a:["selectively permeable","fully freely permeable","impermeable","rigid and cellulose"],c:0,why:"Made of proteins and lipids, it controls entry and exit."},
+ {q:"Which structure contains chromosomes and controls cell division?",a:["Nucleus","Ribosome","Cytoplasm","Vacuole"],c:0,why:"The nucleus holds DNA and controls activities/division."},
+ {q:"The jelly-like site of metabolic chemical reactions is the…",a:["Cytoplasm","Nucleolus","Cell sap","Cell wall"],c:0,why:"Cytoplasm contains enzymes where reactions happen."},
+ {q:"The plant cell wall is made of … and is…",a:["cellulose; fully freely permeable","chitin; selectively permeable","protein; impermeable","starch; selectively permeable"],c:0,why:"Rigid cellulose wall, freely permeable, prevents bursting and maintains turgor."},
+ {q:"Chloroplasts contain … to trap sunlight.",a:["chlorophyll","haemoglobin","lignin","glycogen"],c:0,why:"Chlorophyll absorbs light; chloroplasts also store starch."},
+ {q:"The sap vacuole acts as a store for…",a:["sugars and water","DNA only","protein only","air"],c:0,why:"A large central space storing cell sap."},
+ {q:"Which human cell has no nucleus?",a:["Red blood cell","Nerve cell","Sperm cell","Muscle cell"],c:0,why:"Mature RBCs lose the nucleus to pack in more haemoglobin."},
+ {q:"Which structure is NOT found in an animal cell?",a:["Cell wall","Mitochondrion","Ribosome","Cell membrane"],c:0,why:"Animal cells: no cell wall, no chloroplasts, store glycogen."}
+]},
+{em:'🌿',t:'Plant vs Animal',s:'Cell differences',tint:'#eafaf0',qs:[
+ {q:"Which structure is found in BOTH plant and animal cells?",a:["Mitochondria","Cell wall","Chloroplast","Large sap vacuole"],c:0,why:"Both respire, so both have mitochondria."},
+ {q:"Plant cells store carbohydrate as…",a:["Starch","Glycogen","Cellulose in the vacuole","Glucose only"],c:0,why:"Plants store starch; animals store glycogen."},
+ {q:"What gives a plant cell its fixed, regular shape?",a:["The cellulose cell wall","The cell membrane","The vacuole","The chloroplast"],c:0,why:"The rigid wall holds the shape; animal cells are irregular."},
+ {q:"Which cell contains the greatest number of chloroplasts?",a:["Palisade cell","Root hair cell","Red blood cell","Xylem vessel"],c:0,why:"Palisade cells are the main photosynthesising cells."},
+ {q:"Why do root hair cells have NO chloroplasts?",a:["They are underground with no light","They are too small","Chloroplasts block water uptake","Roots don't need energy"],c:0,why:"No light = no photosynthesis, so chloroplasts are useless there."},
+ {q:"A cell has a cell wall, chloroplasts and a large sap vacuole. It is…",a:["A plant cell","An animal cell","A bacterium","A virus"],c:0,why:"All three are plant-only features."},
+ {q:"The cell wall is … permeable.",a:["fully freely","selectively","not at all","sometimes"],c:0,why:"Unlike the membrane, the wall lets everything through."},
+ {q:"Animal cell vacuoles are…",a:["small and temporary","large and permanent","filled with chlorophyll","absent in every animal cell"],c:0,why:"Only plant cells have one large permanent sap vacuole."},
+ {q:"Which organelle releases energy in a plant cell at night?",a:["Mitochondrion","Chloroplast","Vacuole","Cell wall"],c:0,why:"Plants respire continuously — mitochondria work day and night."},
+ {q:"Animal cells are usually … in shape.",a:["irregular / rounded","rectangular","hexagonal","triangular"],c:0,why:"No cell wall means a flexible, irregular outline."}
+]},
+{em:'🦠',t:'Micro Queens',s:'Bacteria & organisation',tint:'#ffeef6',qs:[
+ {q:"Bacteria are described as…",a:["prokaryotes","eukaryotes","viruses","multicellular"],c:0,why:"No true nucleus, no mitochondria, no chloroplasts."},
+ {q:"What is the typical size of a bacterium?",a:["1–2 µm","1–2 mm","10–20 µm","100 µm"],c:0,why:"Bacteria are tiny: about 1–2 micrometres."},
+ {q:"Plasmids are…",a:["small circular rings of DNA","protein coats","extra ribosomes","pieces of cell wall"],c:0,why:"They are crucial for genetic engineering. 🧬"},
+ {q:"What is the capsule for?",a:["Protection against antibiotics","Photosynthesis","Movement","Reproduction"],c:0,why:"An extra outer protective layer. 🛡️"},
+ {q:"Where is bacterial DNA found?",a:["Loose in the cytoplasm","Inside a nucleus","Inside mitochondria","In the capsule"],c:0,why:"Prokaryotes have no nucleus — the DNA loop floats free."},
+ {q:"Choose the correct order of organisation:",a:["Cell ➔ tissue ➔ organ ➔ organ system ➔ organism","Organ ➔ cell ➔ tissue ➔ organism ➔ system","Tissue ➔ cell ➔ organ system ➔ organ ➔ organism","Cell ➔ organ ➔ tissue ➔ organism ➔ system"],c:0,why:"Smallest building unit up to the whole organism."},
+ {q:"A tissue is…",a:["a group of similar cells working together","a group of different organs","one specialised cell","a group of organ systems"],c:0,why:"Similar cells + same job = tissue."},
+ {q:"An organ is…",a:["a group of different tissues arranged for a certain function","a group of similar cells","an organ system","a single tissue type"],c:0,why:"e.g. the heart = muscle, nerve, blood and connective tissues."},
+ {q:"An organ system is…",a:["a group of organs with related functions","a group of tissues","one large organ","a group of cells"],c:0,why:"e.g. the digestive system = stomach, intestines, liver…"},
+ {q:"Which structure IS found in a bacterial cell?",a:["Ribosomes","Nucleus","Mitochondria","Chloroplast"],c:0,why:"Bacteria have ribosomes for protein synthesis only."}
+]},
+{em:'🩸',t:'Animal Specialists',s:'Specialised animal cells',tint:'#ffecec',qs:[
+ {q:"The biconcave shape of a red blood cell…",a:["increases surface area for gas diffusion","makes it heavier","stores more nucleus","helps it swim"],c:0,why:"More surface area = oxygen diffuses in and out faster."},
+ {q:"Haemoglobin carries…",a:["Oxygen","Carbon dioxide only","Glucose","Water"],c:0,why:"It binds oxygen to form oxyhaemoglobin."},
+ {q:"Why do red blood cells have no nucleus?",a:["More room for haemoglobin","To swim faster","So they can divide","To save energy"],c:0,why:"No nucleus = extra space to carry oxygen."},
+ {q:"The sperm cell's tail is for…",a:["swimming to the egg","absorbing nutrients","protecting DNA","attaching to the uterus"],c:0,why:"The flagellum whips to propel the sperm."},
+ {q:"Sperm cells have many mitochondria to…",a:["release energy for swimming","store DNA","digest glucose","build the tail"],c:0,why:"Swimming needs lots of ATP."},
+ {q:"The enzymes secreted by a sperm cell are used to…",a:["penetrate the egg","break down glucose","copy DNA","make the tail"],c:0,why:"Digestive enzymes dissolve a path through the egg's membranes."},
+ {q:"Egg cells are adapted by being…",a:["large with food stores and a special membrane","small with a tail","biconcave","full of chloroplasts"],c:0,why:"Food stores nourish the early embryo; the membrane blocks other sperm."},
+ {q:"Nerve cells are long so they can…",a:["transmit impulses across the body","store oxygen","divide quickly","absorb light"],c:0,why:"A long axon carries impulses over long distances."},
+ {q:"Ciliated cells line the trachea and…",a:["beat upwards to sweep dust, mucus and bacteria out","absorb oxygen","make haemoglobin","produce enzymes"],c:0,why:"Cilia waft mucus with trapped pathogens up to the throat. 🌬️"},
+ {q:"Which of these is an ANIMAL specialised cell?",a:["Sperm cell","Root hair cell","Guard cell","Palisade cell"],c:0,why:"The other three are all plant cells."}
+]},
+{em:'🪴',t:'Plant Power',s:'Plant cells & tissues',tint:'#f0fbf4',qs:[
+ {q:"The long extension of a root hair cell…",a:["increases surface area for water and mineral absorption","helps photosynthesis","stores starch","attracts pollinators"],c:0,why:"Bigger surface area = faster uptake. 🌱"},
+ {q:"Xylem vessels are strengthened by…",a:["lignin","cellulose only","chitin","starch"],c:0,why:"Lignin makes the hollow tubes strong and waterproof. 🪵"},
+ {q:"Xylem conducts…",a:["water and salts","sugars only","proteins","oxygen only"],c:0,why:"Xylem = water up; phloem = food around."},
+ {q:"Phloem transports…",a:["dissolved sugars","water from the roots","mineral ions only","nothing — it is dead"],c:0,why:"Phloem is living and carries sucrose and amino acids."},
+ {q:"The main photosynthesising cells of a leaf are the…",a:["palisade cells","spongy mesophyll","upper epidermis","xylem"],c:0,why:"They contain the greatest number of chloroplasts."},
+ {q:"Guard cells control…",a:["the opening and closing of stomata","water flow in xylem","sugar transport","leaf colour"],c:0,why:"Turgid guard cells open the stoma; flaccid ones close it. 🚪"},
+ {q:"Stomata allow…",a:["gas exchange","only water to leave","light to enter","sugars to leave"],c:0,why:"CO₂ in, O₂ and water vapour out."},
+ {q:"Spongy mesophyll has air spaces so that…",a:["gases can diffuse easily","the leaf is heavier","water is stored","light is blocked"],c:0,why:"Air spaces increase internal gas diffusion."},
+ {q:"Xylem cells are dead and hollow because…",a:["water flows through without obstruction","they need to photosynthesise","they transport sugars","they are living tubes"],c:0,why:"Empty tubes = an unobstructed water column."},
+ {q:"Root hair cells absorb mineral ions by…",a:["active transport","osmosis","diffusion only","evaporation"],c:0,why:"Soil ions are more dilute than the root, so ions move against the gradient — needs ATP. ⚡"}
+]},
+{em:'⚡',t:'Moving On Up',s:'Diffusion & active transport',tint:'#fff8e6',qs:[
+ {q:"Diffusion is the net movement of particles from…",a:["higher to lower concentration","lower to higher concentration","wherever they like","high to low water potential only"],c:0,why:"Down the concentration gradient. 💨"},
+ {q:"Diffusion is a … process.",a:["passive — no energy needed","active — needs ATP","energy-hungry","selective"],c:0,why:"It relies on the kinetic energy of random movement."},
+ {q:"The energy for diffusion comes from…",a:["the kinetic energy of random particle movement","ATP from mitochondria","the sun","carrier proteins"],c:0,why:"Particles naturally jiggle and spread out."},
+ {q:"Active transport moves substances…",a:["against the concentration gradient","down the concentration gradient","only in plants","by osmosis"],c:0,why:"Lower ➔ higher, which needs energy. 🧗‍♀️"},
+ {q:"Active transport requires…",a:["ATP, a living membrane and carrier proteins","only a concentration gradient","chlorophyll","nothing at all"],c:0,why:"It is a selective biological active process."},
+ {q:"Which is an example of active transport?",a:["Glucose uptake in the intestinal villi","Oxygen entering a cell","Water entering a root hair","Perfume spreading in a room"],c:0,why:"Also ion uptake in root hairs and reabsorption in kidney tubules."},
+ {q:"Which is an example of diffusion?",a:["Gas exchange in leaves during photosynthesis","Ion uptake in root hairs","Glucose uptake in villi","Water uptake by osmosis"],c:0,why:"CO₂ diffuses into the leaf down its concentration gradient."},
+ {q:"Which is true of diffusion but NOT of active transport?",a:["It is non-selective and doesn't need a living membrane","It needs ATP","It needs carrier proteins","It moves against the gradient"],c:0,why:"Diffusion is a physical, non-selective, passive process."},
+ {q:"Active transport is prevented by…",a:["a lack of glucose or oxygen","a steep concentration gradient","a large surface area","a high temperature"],c:0,why:"No respiration ➔ no ATP ➔ no active transport."},
+ {q:"Which change increases the rate of diffusion?",a:["A steeper concentration gradient","A smaller surface area","A longer diffusion distance","A lower temperature"],c:0,why:"Steeper gradient, bigger surface area, shorter distance, warmer = faster. ✨"}
+]},
+{em:'💧',t:'Stay Hydrated',s:'Osmosis & water potential',tint:'#e9f5ff',qs:[
+ {q:"Osmosis is the net movement of water from a region of…",a:["higher to lower water potential through a partially permeable membrane","lower to higher water potential","higher to lower concentration of solute only","equal potentials in any direction"],c:0,why:"Dilute ➔ concentrated, via a partially permeable membrane. 💧"},
+ {q:"A partially permeable membrane…",a:["lets water through but not all solutes","lets everything through","lets nothing through","only lets solids through"],c:0,why:"Tiny gaps: water fits, big solute molecules don't."},
+ {q:"A plant cell placed in pure (dilute) water becomes…",a:["turgid","flaccid","plasmolysed","burst"],c:0,why:"Water enters, the vacuole swells and presses on the wall."},
+ {q:"Turgor pressure is important because it…",a:["supports the plant, keeping leaves firm and the stem upright","makes photosynthesis happen","stores starch","attracts pollinators"],c:0,why:"Turgid cells act like tiny water balloons holding the plant up."},
+ {q:"A plant cell doesn't burst in pure water because…",a:["the cell wall resists expansion","its vacuole is small","it has no membrane","water can't enter"],c:0,why:"The stiff cellulose wall withstands the pressure."},
+ {q:"In a concentrated solution, a plant cell becomes…",a:["flaccid as water diffuses out","turgid","plasmolysed in every case","larger"],c:0,why:"Water leaves; the plant wilts. 🧂"},
+ {q:"'Plasmolysed' means…",a:["the cytoplasm tears away from the stiff cell wall","the cell has burst","the cell is turgid","the nucleus has divided"],c:0,why:"Extreme water loss shrinks the contents away from the wall. 🥀"},
+ {q:"What happens to a red blood cell in pure water?",a:["It swells and bursts — it has no cell wall","It becomes turgid","Nothing happens","It plasmolyses"],c:0,why:"Animal cells have no wall to resist the pressure."},
+ {q:"Which of these is NOT a role of water in living organisms?",a:["Providing energy for respiration","Acting as a solvent for metabolic reactions","Transport in blood plasma","Cooling by sweat evaporation"],c:0,why:"Water is never an energy source — it's a solvent, transport medium, reactant and coolant."},
+ {q:"Water is a reactant in … and is needed for seed …",a:["photosynthesis; germination","respiration only; digestion","transpiration; pollination","digestion; excretion"],c:0,why:"Water + CO₂ ➔ glucose + O₂, and seeds need water to germinate. 🌱"}
+]}
+];
+
+const ACTS=[
+ {id:'sort',em:'🧺',t:'Sort the Squad',d:'insect, arachnid, crustacean or myriapod? you decide 💅',term:1},
+ {id:'karaoke',em:'🎤',t:'Keyword Karaoke',d:'hear it, say it out loud, slay it 🔊',term:2},
+ {id:'flash',em:'🃏',t:'Flashcard Flip',d:'specialised cells & their adaptations',term:2}
+];
+const SORT_ITEMS=[
+ {n:'🦋 Butterfly',g:'Insects'},{n:'🕷️ Spider',g:'Arachnids'},{n:'🦀 Crab',g:'Crustaceans'},{n:'🐛 Centipede',g:'Myriapods'},
+ {n:'🦂 Scorpion',g:'Arachnids'},{n:'🦐 Prawn',g:'Crustaceans'},{n:'🐝 Bee',g:'Insects'},{n:'🪳 Millipede',g:'Myriapods'}
+];
+const KARAOKE=[
+ ['haemoglobin','the protein in red blood cells that carries oxygen'],['mitochondria','the site of aerobic respiration'],
+ ['plasmid','a small circular ring of DNA in bacteria'],['osmosis','movement of water down a water potential gradient'],
+ ['lignin','the substance that strengthens xylem walls'],['chelicerae','the mouthparts arachnids use to hold prey'],
+ ['pinna','the external ear flap of a mammal'],['glycogen','the carbohydrate animals store'],
+ ['plasmolysed','when the cytoplasm pulls away from the cell wall'],['turgid','a plant cell swollen with water'],
+ ['binomial','the two-part Latin naming system'],['exoskeleton','the chitin outer skeleton of arthropods']
+];
+const FLASH=[
+ ['🩸','red blood cell','Biconcave + no nucleus = huge surface area for gas diffusion; haemoglobin carries O₂.'],
+ ['🏊','sperm cell','Tail to swim, mitochondria for energy, enzymes to penetrate the egg.'],
+ ['🥚','egg cell','Large with food stores and a special membrane after fertilisation.'],
+ ['⚡','nerve cell','Long axon + branched endings to transmit impulses across the body.'],
+ ['🌬️','ciliated cell','Cilia beat upwards to sweep dust, mucus and bacteria out of the trachea.'],
+ ['🌱','root hair cell','Long extension = big surface area for water and mineral ion absorption.'],
+ ['🪵','xylem vessel','Hollow dead tubes strengthened by lignin; conduct water and salts.'],
+ ['🍃','palisade cell','Packed with chloroplasts — the main photosynthesising cell.']
+];
+
+const BADGES=[
+ {id:'l1',e:'🌱',n:'Naming Nerd',d:'level 1 ticked'},{id:'l2',e:'🐾',n:'Bone Squad',d:'level 2 ticked'},
+ {id:'l3',e:'🦋',n:'Bug Boss',d:'level 3 ticked'},{id:'l4',e:'🔬',n:'Cell Detective',d:'level 4 ticked'},
+ {id:'l5',e:'🌿',n:'Plant vs Pro',d:'level 5 ticked'},{id:'l6',e:'🦠',n:'Micro Queen',d:'level 6 ticked'},
+ {id:'l7',e:'🩸',n:'Specialist Star',d:'level 7 ticked'},{id:'l8',e:'🪴',n:'Plant Power',d:'level 8 ticked'},
+ {id:'l9',e:'⚡',n:'Mover & Shaker',d:'level 9 ticked'},{id:'l10',e:'💧',n:'Osmosis Royalty',d:'level 10 ticked'},
+ {id:'reader',e:'📖',n:'Bookworm Babe',d:'all 9 sessions read'},{id:'player',e:'🎨',n:'Activity Ace',d:'all 3 activities done'},
+ {id:'spark',e:'✨',n:'Daily Sparkle',d:'claimed a sparkle'},{id:'perfect',e:'👑',n:'Perfect Queen',d:'10/10 on any level'},
+ {id:'half',e:'🎀',n:'Halfway Hero',d:'11+ ticks'},{id:'legend',e:'🏆',n:'Bio Legend',d:'all 22 ticks'}
+];
+const RANKS=[
+ {xp:0,n:'Cell Rookie',e:'📔'},{xp:60,n:'Tissue Trainee',e:'🧫'},{xp:160,n:'Organ Overachiever',e:'🫀'},
+ {xp:320,n:'System Slay',e:'⚡'},{xp:550,n:'Organism Queen',e:'👑'},{xp:900,n:'Bio Legend',e:'🏆'}
+];
+const TERMS=[
+ {em:'🍂',n:'Term 1 · Living things',d:'classification, vertebrates & arthropods — biology season! 🌿',ids:['s0','s1','s2','s3','a_sort','q0','q1','q2']},
+ {em:'❄️',n:'Term 2 · Cells & Micro',d:'cell structure, bacteria & specialised cells 🧫',ids:['s4','s5','s6','a_karaoke','a_flash','q3','q4','q5','q6','q7']},
+ {em:'☀️',n:'Term 3 · On the Move',d:'diffusion, active transport & osmosis 💧',ids:['s7','s8','q8','q9']}
+];
+const ALL_IDS=TERMS.flatMap(t=>t.ids);
+
+/* ================= STATE ================= */
+const SKEY='gbq_frame_v3';
+const DEF={xp:0,streak:0,lastSpark:null,ticked:{},sess:{},act:{},best:{},xpQ:{},badges:{},sound:true,rate:0.86,voice:'',autoSync:true,cloudId:null,synced:null,rev:0};
+let S=loadLocal();
+function loadLocal(){try{const r=localStorage.getItem(SKEY);if(!r)return JSON.parse(JSON.stringify(DEF));return Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(r));}catch(e){return JSON.parse(JSON.stringify(DEF));}}
+let saveT=null,cloudT=null;
+function save(){
+  S.rev=Date.now();
+  try{localStorage.setItem(SKEY,JSON.stringify(S));}catch(e){}
+  clearTimeout(saveT);saveT=setTimeout(render,60);
+  if(S.autoSync&&S.cloudId){clearTimeout(cloudT);cloudT=setTimeout(cloudPush,1500);}
+}
+function isDone(id){
+  if(id[0]==='s')return !!S.sess[id.slice(1)];
+  if(id[0]==='a')return !!S.act[id.slice(2)];
+  return !!S.ticked[id.slice(1)];
+}
+function totalTicks(){return ALL_IDS.filter(isDone).length;}
+
+/* ================= CLOUD (kvdb.io key-value store) ================= */
+const KV='https://kvdb.io/';
+async function kvReq(path,opts={},ms=9000){
+  const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);
+  try{return await fetch(KV+path,Object.assign({signal:c.signal,cache:'no-store'},opts));}
+  finally{clearTimeout(t);}
+}
+function cloudStatus(txt,cls){
+  const c=$('#cloudChip');c.className='chip cloud'+(cls?' '+cls:'');c.textContent=txt;
+  $('#cloudStatus').textContent=txt.replace(/^☁️\s*/,'')+(S.cloudId?` · ID ${S.cloudId}`:'');
+}
+async function cloudEnsure(){
+  if(S.cloudId)return S.cloudId;
+  cloudStatus('☁️ creating save slot…','busy');
+  try{
+    const r=await kvReq('',{method:'POST'});
+    if(!r.ok)throw 0;
+    const id=(await r.text()).trim();
+    if(!id||id.length<6)throw 0;
+    S.cloudId=id;save();
+    $('#myCloudId').value=id;
+    cloudStatus('☁️ cloud save ready');
+    toast('☁️','cloud save created — your Cloud ID is stored on your device 💗');
+    return id;
+  }catch(e){
+    cloudStatus('☁️ offline · saved on device','off');
+    return null;
+  }
+}
+async function cloudPush(){
+  const id=await cloudEnsure();if(!id)return;
+  cloudStatus('☁️ saving…','busy');
+  try{
+    const r=await kvReq(id+'/gbq',{method:'PUT',headers:{'Content-Type':'text/plain'},body:JSON.stringify(S)});
+    if(!r.ok)throw 0;
+    S.synced=Date.now();
+    try{localStorage.setItem(SKEY,JSON.stringify(S));}catch(e){}
+    cloudStatus('☁️ synced '+new Date(S.synced).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}));
+  }catch(e){cloudStatus('☁️ offline · saved on device','off');}
+}
+async function cloudPull(silent){
+  if(!S.cloudId)return null;
+  try{
+    const r=await kvReq(S.cloudId+'/gbq');
+    if(r.status===404)return null;
+    if(!r.ok)throw 0;
+    const txt=await r.text();
+    if(!txt||txt.length<3)return null;
+    return JSON.parse(txt);
+  }catch(e){if(!silent)cloudStatus('☁️ offline · saved on device','off');return null;}
+}
+async function cloudStart(){
+  $('#myCloudId').value=S.cloudId||'not connected yet';
+  $('#autoSync').checked=!!S.autoSync;
+  if(!S.cloudId){cloudStatus('☁️ not connected — tap sync','off');return;}
+  cloudStatus('☁️ checking cloud…','busy');
+  const rem=await cloudPull(true);
+  if(rem&&rem.rev&&rem.rev>S.rev){
+    applyRemote(rem,true);
+    cloudStatus('☁️ restored from cloud '+new Date(rem.synced||rem.rev).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}));
+    toast('☁️','cloud progress restored — welcome back, queen! 👑');
+  }else if(rem){
+    cloudStatus('☁️ synced'+(S.synced?' '+new Date(S.synced).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):''));
+  }else{
+    cloudStatus('☁️ offline · saved on device','off');
+  }
+}
+function applyRemote(obj,keepId){
+  const id=keepId?S.cloudId:(obj.cloudId||S.cloudId);
+  S=Object.assign(JSON.parse(JSON.stringify(DEF)),obj);
+  S.cloudId=id;S.autoSync=$('#autoSync').checked;
+  try{localStorage.setItem(SKEY,JSON.stringify(S));}catch(e){}
+  render();syncGuideTicks();
+}
+$('#syncNow').onclick=$('#syncNow2').onclick=async()=>{await cloudPush();render();};
+$('#autoSync').onchange=e=>{S.autoSync=e.target.checked;save();toast('☁️',S.autoSync?'auto-sync on':'auto-sync off — progress stays on this device');};
+$('#copyId').onclick=async()=>{
+  const id=await cloudEnsure();
+  if(!id){toast('🥺','cloud unreachable right now — use a sync code instead');return;}
+  try{await navigator.clipboard.writeText(id);toast('📋','Cloud ID copied!');}catch(e){$('#myCloudId').select();toast('📋','press Ctrl/Cmd+C to copy your Cloud ID');}
+};
+$('#exportCode').onclick=()=>{
+  const code=btoa(unescape(encodeURIComponent(JSON.stringify(S))));
+  openModal('🎁','your sync code','Copy this code to move your progress to any device — even without the cloud. 💗',[
+    {t:'📋 Copy code',cls:'mint',f:async()=>{try{await navigator.clipboard.writeText(code);toast('📋','sync code copied!');}catch(e){$('#codeBox').select();}}},
+    {t:'🎀 Close',cls:'ghost',f:closeModal}
+  ],`<input class="inp" id="codeBox" readonly value="${code}" style="margin-bottom:.7rem;font-size:.68rem">`);
+};
+$('#restoreBtn').onclick=async()=>{
+  const v=$('#restoreId').value.trim();
+  if(!v){toast('🥺','paste a Cloud ID or sync code first, babe');return;}
+  let obj=null;
+  if(v.length>60){ // sync code
+    try{obj=JSON.parse(decodeURIComponent(escape(atob(v))));}catch(e){obj=null;}
+  }else{
+    cloudStatus('☁️ fetching…','busy');
+    try{
+      const r=await kvReq(v+'/gbq');
+      if(r.ok){const t=await r.text();if(t)obj=JSON.parse(t);}
+    }catch(e){}
+  }
+  if(!obj||typeof obj!=='object'||obj.xp===undefined){toast('🥺','that code didn’t work — check it and try again');cloudStatus('☁️ offline · saved on device','off');return;}
+  openModal('⬇️','restore this progress?','This will replace the progress currently on this device. 💗',[
+    {t:'🤍 Cancel',cls:'ghost',f:closeModal},
+    {t:'⬇️ Restore it',cls:'',f:()=>{applyRemote(obj,false);closeModal();toast('💖','progress restored — slay!');cloudStatus('☁️ synced from cloud');}}
+  ]);
+};
+$('#dlBackup').onclick=()=>{
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='glam-bio-quest-backup.json';a.click();
+  toast('💾','backup downloaded 🤍');
+};
+$('#upBackup').onclick=()=>$('#fileIn').click();
+$('#fileIn').onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  const rd=new FileReader();
+  rd.onload=()=>{try{const o=JSON.parse(rd.result);if(o.xp===undefined)throw 0;applyRemote(o,true);toast('📂','backup imported 💖');}catch(err){toast('🥺','that file isn’t a valid backup');}};
+  rd.readAsText(f);e.target.value='';
+};
+$('#cloudChip').onclick=()=>$('#dash').scrollIntoView({behavior:'smooth'});
+$('#cloudPanel').onclick=()=>$('#dash').scrollIntoView({behavior:'smooth'});
+
+/* ================= SPEECH (clear pronunciation) ================= */
+let VOICES=[],speakingAll=null;
+function loadVoices(){
+  if(!('speechSynthesis'in window))return;
+  VOICES=speechSynthesis.getVoices()||[];
+  const en=VOICES.filter(v=>/^en/i.test(v.lang));
+  const list=en.length?en:VOICES;
+  const sel=$('#voiceSel');if(!sel)return;
+  const cur=S.voice;
+  sel.innerHTML=list.map(v=>`<option value="${v.name.replace(/"/g,'&quot;')}" ${v.name===cur?'selected':''}>${v.name} (${v.lang})</option>`).join('');
+  if(!S.voice){const b=bestVoice();if(b){S.voice=b.name;sel.value=b.name;}}
+}
+function bestVoice(){
+  const en=VOICES.filter(v=>/^en/i.test(v.lang));
+  const pref=['Google UK English Female','Microsoft Sonia','Microsoft Libby','Samantha','Kate','Serena','Google US English','Microsoft Zira','Karen','Daniel','Alex'];
+  for(const p of pref){const f=en.find(v=>v.name.includes(p));if(f)return f;}
+  return en[0]||null;
+}
+function chosenVoice(){
+  const v=S.voice?VOICES.find(x=>x.name===S.voice):null;
+  return v||bestVoice();
+}
+function makeUtt(txt,rateMul){
+  const u=new SpeechSynthesisUtterance(txt);
+  const v=chosenVoice();
+  if(v){u.voice=v;u.lang=v.lang;}else u.lang='en-GB';
+  u.rate=S.rate*(rateMul||1);u.pitch=1.03;u.volume=1;
+  return u;
+}
+function speak(txt,el,rateMul){
+  if(!S.sound){toast('🔇','sound is off — tap 🔊 in the top bar to switch it on');return;}
+  if(!('speechSynthesis'in window)){toast('🥺','your browser can’t speak — try Chrome, Edge or Safari');return;}
+  try{
+    speechSynthesis.cancel();
+    const u=makeUtt(txt,rateMul);
+    if(el){
+      el.classList.add('speaking');
+      const off=()=>el.classList.remove('speaking');
+      u.onend=off;u.onerror=off;u.oncancel=off;
+    }
+    setTimeout(()=>{try{speechSynthesis.speak(u);}catch(e){}},50);
+  }catch(e){}
+}
+function speakList(words,btn){
+  if(!S.sound){toast('🔇','sound is off — tap 🔊 to switch it on');return;}
+  if(!('speechSynthesis'in window)){toast('🥺','your browser can’t speak here');return;}
+  if(speakingAll===btn){speechSynthesis.cancel();speakingAll=null;btn.textContent='🔊 Pronounce all keywords';return;}
+  if(speakingAll){speechSynthesis.cancel();speakingAll.textContent='🔊 Pronounce all keywords';}
+  speakingAll=btn;let i=0;btn.textContent='⏹️ Stop';
+  const step=()=>{
+    if(speakingAll!==btn)return;
+    if(i>=words.length){btn.textContent='🔊 Pronounce all keywords';speakingAll=null;toast('💖','all keywords read — gorgeous!');return;}
+    const u=makeUtt(words[i++],1);
+    u.onend=()=>setTimeout(step,380);
+    u.onerror=()=>setTimeout(step,380);
+    try{speechSynthesis.speak(u);}catch(e){setTimeout(step,380);}
+  };
+  speechSynthesis.cancel();setTimeout(step,80);
+}
+if('speechSynthesis'in window){
+  loadVoices();
+  speechSynthesis.onvoiceschanged=loadVoices;
+  document.addEventListener('pointerdown',function once(){speechSynthesis.speak(new SpeechSynthesisUtterance(''));document.removeEventListener('pointerdown',once);},{once:true});
+}
+$('#voiceSel').onchange=e=>{S.voice=e.target.value;save();speak('Perfect. Let’s revise biology together.');};
+$('#voiceTest').onclick=()=>speak('Osmosis. Mitochondria. Haemoglobin. You’ve got this, queen!');
+$('#rateBtn').onclick=()=>{
+  S.rate=S.rate<0.72?0.86:(S.rate<0.84?0.68:0.78);
+  save();$('#rateLab').textContent=S.rate<0.72?'slow & clear':(S.rate<0.84?'calm':'natural');
+  speak('Clear pronunciation, at your pace.');
+};
+$('#rateLab').textContent='calm';
+
+document.addEventListener('click',e=>{
+  const say=e.target.closest('.say');
+  if(say){speak(say.dataset.w||say.textContent.replace('🔊','').trim(),say);return;}
+  const hot=e.target.closest('.hot');
+  if(hot){speak(hot.dataset.w||'',hot);return;}
+});
+document.addEventListener('click',e=>{
+  const all=e.target.closest('.sayall');
+  if(!all)return;
+  const card=all.closest('.gcard');
+  const words=[...card.querySelectorAll('[data-w]')].map(x=>x.dataset.w).filter(Boolean);
+  speakList(words.slice(0,40),all);
+});
+/* read-tick */
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.readtick');if(!b)return;
+  const i=b.dataset.s;
+  if(S.sess[i]){toast('💖',`session ${+i+1} is already ticked — icon!`);return;}
+  S.sess[i]=1;S.xp+=10;save();
+  const done=Object.keys(S.sess).length;
+  if(done>=9)award('reader');
+  confetti(22);blip(true);toast('📖',`session ticked 💖 +10 XP · ${done}/9 read`.replace('/9 read',''));
+  render();syncGuideTicks();
+});
+function syncGuideTicks(){
+  $$('.gcard').forEach(c=>{
+    const i=c.dataset.s;const on=!!S.sess[i];
+    const d=c.querySelector('.done');if(d)d.classList.toggle('hide',!on);
+    const b=c.querySelector('.readtick');
+    if(b){b.textContent=on?'💖 Read':'📖 Tick as read 💖';b.classList.toggle('ghost',on);}
+  });
+}
+
+/* ================= LIGHTBOX ================= */
+document.addEventListener('click',e=>{
+  const f=e.target.closest('.fig[data-lb]');if(!f)return;
+  const svg=f.querySelector('svg').cloneNode(true);
+  const cap=f.querySelector('.figcap')?f.querySelector('.figcap').textContent:'';
+  const ov=document.createElement('div');ov.className='lightbox';
+  ov.innerHTML=`<div class="lb-in"><div class="lb-bar"><button class="pill sm ghost">✕ Close</button></div>${svg.outerHTML}<div class="figcap" style="border-top:2px dashed var(--line);margin-top:.4rem">${cap}</div></div>`;
+  document.body.appendChild(ov);
+  ov.addEventListener('click',ev=>{if(ev.target===ov||ev.target.closest('.lb-bar'))ov.remove();});
+});
+
+/* ================= AUDIO BLIPS ================= */
+let ac=null;
+function blip(ok){
+  if(!S.sound)return;
+  try{
+    ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+    const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();
+    o.type='sine';o.connect(g);g.connect(ac.destination);
+    if(ok){o.frequency.setValueAtTime(660,t);o.frequency.exponentialRampToValueAtTime(990,t+.12);}
+    else{o.frequency.setValueAtTime(320,t);o.frequency.exponentialRampToValueAtTime(180,t+.18);}
+    g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.13,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+.32);
+    o.start(t);o.stop(t+.34);
+  }catch(e){}
+}
+
+/* ================= TOAST / MODAL ================= */
+function toast(em,msg){
+  const t=document.createElement('div');t.className='toast';t.innerHTML=`<span>${em}</span><span>${msg}</span>`;
+  $('#toasts').appendChild(t);
+  setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),320)},3200);
+}
+function openModal(em,title,msg,btns,extra){
+  $('#resOverlay').classList.add('hidden');
+  const old=$('#genModal');if(old)old.remove();
+  const ov=document.createElement('div');ov.className='overlay';ov.id='genModal';
+  ov.innerHTML=`<div class="modal"><span class="big">${em}</span><h3>${title}</h3><p>${msg}</p>${extra||''}<div class="mrow" id="genBtns"></div></div>`;
+  document.body.appendChild(ov);document.body.style.overflow='hidden';
+  btns.forEach(b=>{const el=document.createElement('button');el.className='pill sm '+(b.cls||'');el.textContent=b.t;el.onclick=b.f;$('#genBtns',ov).appendChild(el);});
+  ov.addEventListener('click',e=>{if(e.target===ov)closeModal();});
+}
+function closeModal(){const m=$('#genModal');if(m)m.remove();if(!act&&(!quiz||$('#quizOverlay').classList.contains('hidden')))document.body.style.overflow='';}
+
+/* ================= XP / BADGES ================= */
+function rankOf(xp){let r=RANKS[0];for(const k of RANKS)if(xp>=k.xp)r=k;return r;}
+function nextRank(xp){return RANKS.find(r=>r.xp>xp)||null;}
+function award(id){
+  if(S.badges[id])return false;
+  S.badges[id]=1;save();
+  const b=BADGES.find(x=>x.id===id);
+  if(b)setTimeout(()=>toast(b.e,`badge unlocked — <b>${b.n}</b>! 🏅`),260);
+  return true;
+}
+
+/* ================= RENDER ================= */
+function render(){
+  const lvN=Object.keys(S.ticked).length,seN=Object.keys(S.sess).length,acN=Object.keys(S.act).length;
+  const ticks=totalTicks(),badgeN=Object.keys(S.badges).length;
+  const rk=rankOf(S.xp),nx=nextRank(S.xp);
+  $('#sStreak').textContent=S.streak;$('#sXp').textContent=S.xp;$('#sDone').textContent=ticks;
+  $('#sRank').textContent=`${rk.e} ${rk.n}`;
+  $('#mXp').textContent=S.xp;$('#mNext').textContent=nx?nx.xp:'max ✨';$('#mBadges').textContent=badgeN;
+  const bv=Object.values(S.best);$('#mBest').textContent=bv.length?Math.max(...bv)+'/10':'–';
+  $('#ringPct').textContent=Math.round(ticks/ALL_IDS.length*100)+'%';
+  $('#ring').style.setProperty('--p',ticks/ALL_IDS.length*100);
+  $('#cSess').textContent=seN+'/9';$('#bSess').style.width=(seN/9*100)+'%';
+  $('#cAct').textContent=acN+'/3';$('#bAct').style.width=(acN/3*100)+'%';
+  $('#cLv').textContent=lvN+'/10';$('#bLv').style.width=(lvN/10*100)+'%';
+  $('#cBadges').textContent=badgeN+'/'+BADGES.length;$('#bBadges').style.width=(badgeN/BADGES.length*100)+'%';
+  $('#rankLine').textContent=`${rk.e} ${rk.n} · ${S.xp} XP`;
+  if(nx){$('#bRank').style.width=Math.min(100,((S.xp-rk.xp)/(nx.xp-rk.xp))*100)+'%';$('#rankHint').textContent=`next rank at ${nx.xp} XP ✨ (${nx.xp-S.xp} to go, cutie)`;}
+  else{$('#bRank').style.width='100%';$('#rankHint').textContent='max rank reached — you ARE the frame 👑';}
+  $('#terms').innerHTML=TERMS.map(t=>{
+    const d=t.ids.filter(isDone).length;
+    return `<div class="term"><h4>${t.em} ${t.n}</h4><p>${t.d}</p><div class="bar"><div style="width:${d/t.ids.length*100}%"></div></div><span class="cnt">🎖 ${d}/${t.ids.length} ticks</span></div>`;
+  }).join('');
+  $('#badgeShelf').innerHTML=BADGES.map(b=>{
+    const on=S.badges[b.id];
+    return `<div class="badge ${on?'on':''}" title="${b.d}"><span class="e">${b.e}</span><b>${on?b.n:'???'}</b><small>${b.d}</small></div>`;
+  }).join('');
+  $('#levelGrid').innerHTML=LEVELS.map((L,i)=>{
+    const on=S.ticked[i],best=S.best[i];
+    return `<article class="level" style="--tint:${L.tint}">
+      <button class="tick ${on?'on':''}" data-tick="${i}" title="${on?'ticked 💖':'pass 6/10 to tick'}" aria-label="tick level ${i+1}"><span>○</span></button>
+      <div class="em">${L.em}</div>
+      <div class="info"><div class="lv">level ${i+1} ${on?'💖':''}</div><h3>${L.t.toLowerCase()}</h3><p>${L.s}</p>
+      <div class="row"><button class="pill sm" data-play="${i}">🚀 Start</button><span class="best">best ${best!=null?best+'/10':'—'}</span></div></div>
+    </article>`;
+  }).join('');
+  $('#actGrid').innerHTML=ACTS.map(a=>{
+    const on=S.act[a.id];
+    return `<article class="act"><div class="em">${a.em}</div><h3>${a.t.toLowerCase()} ${on?'💖':''}</h3><p>${a.d}</p>
+      <div class="row"><button class="pill sm" data-act="${a.id}">${on?'🔁 Play again':'🎨 Play'}</button>
+      <button class="tick ${on?'on':''}" data-atick="${a.id}" aria-label="activity tick"><span>○</span></button></div></article>`;
+  }).join('');
+  const today=new Date().toDateString(),claimed=S.lastSpark===today;
+  $('#sparkleBtn').disabled=claimed;
+  $('#sparkleBtn').innerHTML=claimed?'🤍 Sparkle claimed':'✨ Claim sparkle';
+  $('#soundBtn').textContent=S.sound?'🔊':'🔇';$('#soundBtn').classList.toggle('off',!S.sound);
+  if(S.cloudId)$('#myCloudId').value=S.cloudId;
+}
+
+/* ================= SPARKLE ================= */
+$('#sparkleBtn').onclick=()=>{
+  const today=new Date().toDateString();
+  if(S.lastSpark===today){toast('🤍','already sparkled today — come back tomorrow, babe!');return;}
+  const y=new Date(Date.now()-864e5).toDateString();
+  S.streak=(S.lastSpark===y)?S.streak+1:1;
+  S.lastSpark=today;S.xp+=5;award('spark');save();confetti(26);blip(true);
+  toast('✨',`+5 XP · ${S.streak}-day streak 🔥`);render();
+};
+$('#soundBtn').onclick=()=>{S.sound=!S.sound;save();render();toast(S.sound?'🔊':'🔇',S.sound?'sound & pronunciation on':'sound muted');};
+$('#printBtn').onclick=()=>window.print();
+$('#resetBtn').onclick=()=>{
+  openModal('♻️','start again, cutie?','This wipes your XP, ticks, badges and streak — locally and in the cloud. There’s no undo! 🥺',[
+    {t:'🤍 Keep my progress',cls:'ghost',f:closeModal},
+    {t:'♻️ Reset everything',cls:'',f:()=>{
+      const id=S.cloudId;S=JSON.parse(JSON.stringify(DEF));S.cloudId=id;save();closeModal();render();syncGuideTicks();
+      cloudPush();toast('🌸','fresh frame — let’s bloom again!');}}
+  ]);
+};
+
+/* ================= ROUTING ================= */
+document.addEventListener('click',e=>{
+  const p=e.target.closest('[data-play]');if(p){startLevel(+p.dataset.play);return;}
+  const tk=e.target.closest('[data-tick]');
+  if(tk){const i=+tk.dataset.tick;
+    if(S.ticked[i])toast('💖',`level ${i+1} is already ticked — queen behaviour 👑`);
+    else{toast('🎯',`score 6/10 or more in level ${i+1} to tick it, babe!`);startLevel(i);}return;}
+  const at=e.target.closest('[data-act]');if(at){openAct(at.dataset.act);return;}
+  const atk=e.target.closest('[data-atick]');
+  if(atk){const id=atk.dataset.atick;
+    if(S.act[id])toast('💖','activity already done — replay it if you fancy ✨');
+    else{toast('🎨','play the activity to tick it, cutie!');openAct(id);}return;}
+  const sc=e.target.closest('[data-scroll]');
+  if(sc){const el=$(sc.dataset.scroll);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+});
+
+/* ================= QUIZ ================= */
+let quiz=null;
+function startLevel(i){
+  const L=LEVELS[i];
+  quiz={i,order:shuffle(L.qs.map((_,k)=>k)),n:0,score:0,results:[],earned:0};
+  $('#quizOverlay').classList.remove('hidden');
+  $('#qTitle').innerHTML=`${L.em} Level ${i+1} · ${L.t}`;
+  document.body.style.overflow='hidden';
+  normanSay(quizTips);renderQ();
+}
+function closeQuiz(){$('#quizOverlay').classList.add('hidden');if(!act)document.body.style.overflow='';quiz=null;normanSay(tips);}
+$('#quitBtn').onclick=()=>{
+  if(quiz&&quiz.n>0&&!$('#qFb').classList.contains('show')){}
+  if(quiz&&quiz.n>0){
+    openModal('🚪','quit this level?','Your ticks and XP stay safe — you can replay any time. 💗',[
+      {t:'🤍 Keep going',cls:'ghost',f:closeModal},
+      {t:'🚪 Quit level',cls:'',f:()=>{closeModal();closeQuiz();toast('🎀','back to the frame!');}}
+    ]);
+  }else closeQuiz();
+};
+function renderQ(){
+  const L=LEVELS[quiz.i],q=L.qs[quiz.order[quiz.n]];
+  $('#qScore').textContent=quiz.score;$('#qNum').textContent=quiz.n+1;$('#qText').textContent=q.q;
+  $('#qHint').textContent=quiz.n===0?'tap an answer, babe 💗':'keep going, gorgeous ✨';
+  $('#nextBtn').style.display='none';$('#qFb').className='fb';$('#qFb').innerHTML='';
+  $('#qDots').innerHTML=quiz.order.map((_,k)=>{const r=quiz.results[k];return `<div class="dot ${r==null?'':(r?'right':'wrong')} ${k===quiz.n?'now':''}"></div>`;}).join('');
+  const shown=shuffle(q.a.map((_,k)=>k));
+  $('#qOpts').innerHTML=shown.map((orig,k)=>`<button class="opt" data-o="${orig}"><k>${'ABCD'[k]}</k><span>${q.a[orig]}</span></button>`).join('');
+  $$('#qOpts .opt').forEach(b=>b.onclick=()=>answer(+b.dataset.o,b));
+}
+function answer(orig,btn){
+  const L=LEVELS[quiz.i],q=L.qs[quiz.order[quiz.n]],ok=orig===q.c;
+  $$('#qOpts .opt').forEach(b=>{
+    b.disabled=true;const v=+b.dataset.o;
+    if(v===q.c)b.classList.add('right');else if(b===btn)b.classList.add('wrong');else b.classList.add('dim');
+  });
+  const qid=`L${quiz.i+1}Q${quiz.order[quiz.n]}`;
+  if(ok){quiz.score++;quiz.results[quiz.n]=true;if(!S.xpQ[qid]){S.xpQ[qid]=1;quiz.earned+=10;S.xp+=10;save();}blip(true);}
+  else{quiz.results[quiz.n]=false;blip(false);}
+  const fb=$('#qFb');fb.className='fb show '+(ok?'good':'bad');
+  fb.innerHTML=`<b>${ok?rnd(['slay! 💖','yes queen! 👑','absolutely correct ✨','iconic answer 🎀']):rnd(['oof, cutie 🥺','not quite, babe 💗','almost there 🌸'])}</b>${q.why}
+    <div class="next"><button class="pill sm" id="goNext">${quiz.n===9?'See results 🏁':'Next question ➔'}</button>
+    ${q.why.match(/\b[A-Z][a-z]+/)?'<button class="pill sm ghost" id="sayWhy">🔊 Hear why</button>':''}</div>`;
+  $('#goNext').onclick=nextQ;
+  const sw=$('#sayWhy');if(sw)sw.onclick=()=>speak(q.why,sw);
+  $('#qScore').textContent=quiz.score;
+  $$('#qDots .dot').forEach((d,k)=>{d.className='dot '+(quiz.results[k]==null?'':(quiz.results[k]?'right':'wrong'))+(k===quiz.n?' now':'');});
+  render();
+}
+function nextQ(){quiz.n++;if(quiz.n>=quiz.order.length){finish();return;}renderQ();}
+$('#nextBtn').onclick=nextQ;
+document.addEventListener('keydown',e=>{
+  if(quiz&&!$('#quizOverlay').classList.contains('hidden')){
+    if(['1','2','3','4'].includes(e.key)){const b=$$('#qOpts .opt')[+e.key-1];if(b&&!b.disabled)b.click();}
+    if(e.key==='Enter'){const g=$('#goNext');if(g)g.click();else if($('#nextBtn').style.display!=='none')$('#nextBtn').click();}
+    if(e.key==='Escape')$('#quitBtn').click();
+  }else if(act&&e.key==='Escape')$('#actClose').click();
+});
+function finish(){
+  const i=quiz.i,score=quiz.score,pass=score>=6;
+  if(S.best[i]==null||score>S.best[i])S.best[i]=score;
+  let bonus=0;
+  if(pass&&!S.ticked[i]){S.ticked[i]=1;bonus+=20;S.xp+=20;award('l'+(i+1));}
+  if(score===10){award('perfect');bonus+=15;S.xp+=15;}
+  const t=totalTicks();
+  if(t>=11)award('half');
+  if(t>=ALL_IDS.length)award('legend');
+  save();
+  $('#quizOverlay').classList.add('hidden');$('#resOverlay').classList.remove('hidden');
+  $('#rScore').textContent=score+'/10';$('#rRing').style.setProperty('--p',score*10);
+  $('#rEmoji').textContent=score===10?'👑':pass?'🎉':'🥺';
+  $('#rTitle').textContent=pass?'level complete, queen! 👑':'almost, gorgeous 🌸';
+  $('#rMsg').textContent=score===10?'FLAWLESS. every single question — absolutely iconic behaviour. 👑✨'
+    :score>=8?'so close to perfect — you clearly read the guide, babe! 💖'
+    :pass?'passed and ticked! that level is officially yours 💗'
+    :'under 6/10 — re-read the session card and run it back, queen 🌸';
+  $('#rXp').innerHTML=`<span class="chip xp">⭐ +${quiz.earned+bonus} XP this run</span><span class="chip">✅ ${Object.keys(S.xpQ).length}/100 aced</span><span class="chip hot">🏆 best ${S.best[i]}/10</span>`;
+  if(pass)confetti(score===10?90:50);
+  render();
+  const left=ALL_IDS.length-totalTicks();
+  normanSay(score===10?['👑 ten out of TEN — legendary behaviour!','🏆 perfect level! go claim your sparkle ✨']:pass?['🎉 ticked! '+left+' tick(s) left to Bio Legend.','💖 lovely work — the next level is waiting, cutie.']:['🌸 re-read the session card, then run it back!','💗 6/10 ticks a level — nearly there, queen!']);
+}
+$('#moreBtn').onclick=()=>{$('#resOverlay').classList.add('hidden');document.body.style.overflow='';quiz=null;$('#levels').scrollIntoView({behavior:'smooth'});normanSay(tips);};
+$('#replayBtn').onclick=()=>{$('#resOverlay').classList.add('hidden');const i=quiz?quiz.i:0;startLevel(i);};
+
+/* ================= ACTIVITIES ================= */
+let act=null;
+function openAct(id){
+  const A=ACTS.find(a=>a.id===id);if(!A)return;
+  act={id,step:0,done:0,total:id==='sort'?SORT_ITEMS.length:id==='karaoke'?KARAOKE.length:FLASH.length,order:null,flip:false};
+  if(id==='sort')act.order=shuffle(SORT_ITEMS.map((_,i)=>i));
+  $('#actOverlay').classList.remove('hidden');document.body.style.overflow='hidden';
+  $('#actTitle').innerHTML=`${A.em} ${A.t}`;
+  renderAct();
+}
+function closeAct(){$('#actOverlay').classList.add('hidden');if(!quiz)document.body.style.overflow='';act=null;normanSay(tips);}
+$('#actClose').onclick=closeAct;
+function actProgress(){
+  $('#actProg').textContent=`${act.done}/${act.total}`;
+  $('#actBar').style.width=(act.done/act.total*100)+'%';
+}
+function renderAct(){
+  actProgress();
+  const b=$('#actBody');
+  if(act.done>=act.total){finishAct();return;}
+  if(act.id==='karaoke'){
+    const k=KARAOKE[act.step%KARAOKE.length];
+    b.innerHTML=`<div class="wordstage"><span class="w">${k[0]}</span><span class="m">${k[1]}</span>
+      <div class="mrow"><button class="pill" data-k="hear">🔊 Hear it</button><button class="pill ghost" data-k="slow">🐢 Slow</button><button class="pill mint" data-k="ok">I said it ✅</button></div></div>`;
+    b.querySelector('[data-k="hear"]').onclick=ev=>speak(k[0],ev.currentTarget);
+    b.querySelector('[data-k="slow"]').onclick=ev=>speak(k[0],ev.currentTarget,0.62);
+    b.querySelector('[data-k="ok"]').onclick=()=>{act.done++;act.step++;blip(true);renderAct();};
+    setTimeout(()=>speak(k[0]),220);
+  }
+  if(act.id==='sort'){
+    const it=SORT_ITEMS[act.order[act.step%act.order.length]];
+    b.innerHTML=`<div class="sortstage"><span class="item">${it.n}</span><span class="sub">which arthropod group does it belong to?</span>
+      <div class="buckets">${['Insects','Arachnids','Crustaceans','Myriapods'].map(g=>`<button class="bucket" data-g="${g}">${g}</button>`).join('')}</div>
+      <p class="sub" id="sortFb" style="margin:.7rem 0 0"></p></div>`;
+    $$('.bucket',b).forEach(btn=>btn.onclick=()=>{
+      const g=btn.dataset.g;
+      if(g===it.g){btn.classList.add('good');blip(true);act.done++;act.step++;
+        $('#sortFb').textContent='yes queen! 💖';setTimeout(renderAct,480);}
+      else{btn.classList.add('bad');blip(false);$('#sortFb').textContent='not that one, babe — try again 🌸';
+        setTimeout(()=>btn.classList.remove('bad'),420);}
+    });
+  }
+  if(act.id==='flash'){
+    const f=FLASH[act.step%FLASH.length];
+    b.innerHTML=`<div class="flash" id="flash"><div class="flashcard">
+      <div class="fside ffront"><div><span class="e">${f[0]}</span><b>${f[1]}</b><div style="font-size:.72rem;color:var(--ink2);margin-top:.3rem">tap to flip 🔄</div></div></div>
+      <div class="fside fback"><div>${f[2]}<div style="margin-top:.5rem"><button class="pill sm ghost" data-fsay>🔊 Hear it</button></div></div></div>
+    </div></div>
+    <div class="mrow"><button class="pill ghost" data-flip>🔄 Flip</button><button class="pill mint" data-got>💖 Got it</button></div>`;
+    const wrap=b.querySelector('#flash');
+    wrap.onclick=e=>{if(e.target.closest('[data-fsay]'))return;wrap.classList.toggle('flip');};
+    b.querySelector('[data-flip]').onclick=()=>wrap.classList.toggle('flip');
+    b.querySelector('[data-fsay]').onclick=ev=>{ev.stopPropagation();speak(f[2],ev.currentTarget);};
+    b.querySelector('[data-got]').onclick=()=>{act.done++;act.step++;blip(true);renderAct();};
+  }
+}
+function finishAct(){
+  const A=ACTS.find(a=>a.id===act.id);
+  const first=!S.act[act.id];
+  if(first){S.act[act.id]=1;S.xp+=10;save();}
+  const t=totalTicks();
+  if(Object.keys(S.act).length>=3)award('player');
+  if(t>=11)award('half');if(t>=ALL_IDS.length)award('legend');
+  confetti(first?50:24);
+  $('#actBody').innerHTML=`<div class="wordstage"><span class="w" style="font-size:2rem">${A.em}</span>
+    <span class="m">activity complete${first?' · +10 XP 💖':' · replayed 🎀'}</span>
+    <div class="mrow"><button class="pill" data-again>🔁 Play again</button><button class="pill ghost" data-goquiz>🎯 Go to quizzes</button></div></div>`;
+  $('#actBody').querySelector('[data-again]').onclick=()=>{act.done=0;act.step=0;if(act.id==='sort')act.order=shuffle(SORT_ITEMS.map((_,i)=>i));renderAct();};
+  $('#actBody').querySelector('[data-goquiz]').onclick=()=>{closeAct();$('#levels').scrollIntoView({behavior:'smooth'});};
+  actProgress();render();
+  normanSay(['🎨 activity done! on to the quizzes, queen 🎯','💖 lovely — that’s +10 XP in your frame!']);
+}
+
+/* ================= GUIDE SEARCH ================= */
+let gCat='all';
+$('#gfilters').onclick=e=>{const b=e.target.closest('.fbtn');if(!b)return;gCat=b.dataset.f;$$('#gfilters .fbtn').forEach(x=>x.classList.toggle('on',x===b));applyGuide();};
+$('#gsearch').addEventListener('input',applyGuide);
+function applyGuide(){
+  const q=$('#gsearch').value.trim().toLowerCase();let shown=0;
+  $$('#guideGrid .gcard').forEach(c=>{
+    const catOk=gCat==='all'||c.dataset.cat.split(' ').includes(gCat);
+    const txtOk=!q||(c.dataset.key+' '+c.textContent).toLowerCase().includes(q);
+    const ok=catOk&&txtOk;c.classList.toggle('hide',!ok);if(ok)shown++;
+  });
+  $('#gEmpty').classList.toggle('show',shown===0);
+}
+
+/* ================= CONFETTI ================= */
+function confetti(n=50){
+  const em=['💖','✨','🎀','🌸','⭐','🤍','👑','🧬','🔬'];
+  for(let i=0;i<n;i++){
+    const d=document.createElement('div');d.className='conf';d.textContent=rnd(em);
+    d.style.left=Math.random()*100+'vw';d.style.fontSize=(11+Math.random()*16)+'px';
+    d.style.animationDuration=(2.2+Math.random()*2.4)+'s';d.style.animationDelay=(Math.random()*.5)+'s';
+    document.body.appendChild(d);setTimeout(()=>d.remove(),5200);
+  }
+}
+
+/* ================= NORMAN ================= */
+const tips=[
+ ['📔','tap any pink keyword — or a diagram label — to hear it 🔊'],
+ ['🎀','read the session card first, THEN quiz. it works every time'],
+ ['💖','every new tick and every new question aced = +10 XP'],
+ ['🔥','claim your daily sparkle to keep the streak alive'],
+ ['🧬','KPCOFGS: King Philip Came Over From Great Spain'],
+ ['💧','osmosis always goes HIGH ➔ LOW water potential'],
+ ['⚡','active transport = against the gradient + ATP + carrier proteins'],
+ ['🦠','bacteria are prokaryotes: no nucleus, but they DO have ribosomes'],
+ ['🩸','biconcave RBC = bigger surface area for gas diffusion'],
+ ['🪵','xylem carries water and is strengthened by lignin'],
+ ['☁️','your Cloud ID restores your progress on any device'],
+ ['🎨','play the activities to warm up before a level'],
+ ['👑','pass a level with 6/10 to tick it and earn its badge'],
+ ['🏆','all 22 ticks = Bio Legend. go get it, queen']
+];
+const quizTips=[
+ ['🎯','keys 1–4 pick an answer, Enter moves on 💗'],
+ ['✨','wrong answers still teach you — read the explanation'],
+ ['🔊','tap “hear why” to listen to the explanation'],
+ ['👑','6/10 ticks the level, 10/10 earns Perfect Queen']
+];
+let tipI=Math.floor(Math.random()*tips.length),tipPool=tips;
+function normanSay(pool){tipPool=pool;tipI=Math.floor(Math.random()*pool.length);showTip();}
+function showTip(){const t=tipPool[tipI%tipPool.length];$('#nbubble').innerHTML=`<em>${t[0]}</em>${t[1]}`;}
+$('#nface').onclick=()=>{tipI++;showTip();};
+$('#nbubble').onclick=()=>{tipI++;showTip();};
+
+/* ================= NAV / REVEAL / DECO ================= */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)$$('#nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));
+}),{rootMargin:'-45% 0px -50% 0px'});
+['hero','dash','guide','acts','levels','badges'].forEach(id=>{const s=$('#'+id);if(s)io.observe(s);});
+const rv=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.06});
+$$('.reveal').forEach(e=>rv.observe(e));
+(function(){
+  const d=$('#deco'),em=['✨','🎀','💖','🌸','🧬','⭐','🤍','🔬'];
+  for(let i=0;i<14;i++){
+    const s=document.createElement('span');s.textContent=em[i%em.length];
+    s.style.left=Math.random()*100+'vw';s.style.top=Math.random()*100+'vh';
+    s.style.animationDelay=(Math.random()*8)+'s';s.style.animationDuration=(11+Math.random()*10)+'s';
+    s.style.fontSize=(14+Math.random()*16)+'px';d.appendChild(s);
+  }
+})();
+
+/* ================= GO ================= */
+render();syncGuideTicks();showTip();loadVoices();
+cloudStart();
+if(!S.lastSpark)setTimeout(()=>toast('✨','claim your daily sparkle for +5 XP!'),900);
+setTimeout(()=>{if(!S.cloudId)toast('☁️','tap “Sync now” to create your cloud save 💗');},2200);
+</script>
+</body>
+</html>
