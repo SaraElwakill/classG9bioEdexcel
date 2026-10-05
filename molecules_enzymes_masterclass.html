@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀 Molecules & Enzymes Academy ✨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pink-deep: #ff66b2;
+            --pink-light: #fff0f5;
+            --pink-border: #ffb3d9;
+            --purple-cute: #b366ff;
+            --mint-cute: #b3ffcc;
+            --mint-deep: #009933;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ffe6f2 0%, #e6e6ff 100%);
+            min-height: 100vh;
+            color: #4a4a4a;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+        @keyframes pop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+        @keyframes unlockBlink {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 102, 178, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(255, 102, 178, 1); }
+        }
+
+        /* Main Elements */
+        .floating-bg {
+            position: fixed;
+            opacity: 0.3;
+            animation: float 5s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .gcard {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            box-shadow: 0 15px 35px rgba(255, 153, 204, 0.3);
+            border: 4px solid var(--pink-light);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            z-index: 10;
+            animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 20px;
+        }
+
+        .btn-cute {
+            background: linear-gradient(to right, #b366ff, #ff66b2);
+            border: none;
+            color: white;
+            padding: 15px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 102, 178, 0.4);
+            transition: all 0.2s;
+        }
+        .btn-cute:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 102, 178, 0.6); }
+
+        .btn-fact {
+            background: white; border: 4px solid var(--mint-cute); color: var(--mint-deep);
+            border-radius: 1.5rem; padding: 15px; font-weight: 900; font-size: 1.2rem; width: 100%;
+            transition: all 0.2s; box-shadow: 0 4px 10px rgba(179, 255, 204, 0.5);
+        }
+        .btn-fact:hover { background: var(--mint-cute); transform: translateY(-3px); }
+
+        .btn-fiction {
+            background: white; border: 4px solid #ffcccc; color: #cc0000;
+            border-radius: 1.5rem; padding: 15px; font-weight: 900; font-size: 1.2rem; width: 100%;
+            transition: all 0.2s; box-shadow: 0 4px 10px rgba(255, 204, 204, 0.5);
+        }
+        .btn-fiction:hover { background: #ffe6e6; transform: translateY(-3px); }
+
+        /* Level Map Styles */
+        .level-node {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 15px 25px; border-radius: 20px; margin-bottom: 15px;
+            font-weight: 900; font-size: 1.2rem; transition: all 0.3s; position: relative;
+        }
+        .level-locked { background: #f0f0f0; color: #a0a0a0; border: 2px dashed #d0d0d0; cursor: not-allowed; }
+        .level-unlocked { background: white; color: var(--pink-deep); border: 3px solid #ffb3d9; box-shadow: 0 5px 15px rgba(255, 102, 178, 0.2); cursor: pointer; }
+        .level-unlocked:hover { transform: scale(1.03); background: var(--pink-light); }
+        .level-current { background: linear-gradient(to right, #ff99cc, #ff66b2); color: white; border: 3px solid white; animation: unlockBlink 2s infinite; cursor: pointer; }
+        .level-current:hover { transform: scale(1.03); }
+
+        h3.card-title { color: var(--pink-deep); font-size: 1.8rem; font-weight: 900; margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        .n-badge { background: var(--pink-deep); color: white; border-radius: 50%; width: 35px; height: 35px; display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+        
+        .fig { background: white; border: 2px dashed var(--pink-border); border-radius: 1.5rem; overflow: hidden; margin-bottom: 20px; cursor: pointer; }
+        .figcap { background: var(--pink-light); text-align: center; padding: 10px; font-weight: 700; color: var(--pink-deep); font-size: 0.9rem; }
+        
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .chips span { background: white; border: 2px solid var(--pink-border); color: var(--pink-deep); padding: 5px 12px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; }
+        
+        .say { color: var(--pink-deep); font-weight: bold; cursor: pointer; transition: transform 0.2s; display: inline-block; }
+        .say:hover { transform: scale(1.1); }
+        
+        .info-box { background: #e6f9ff; border: 2px solid #b3ecff; padding: 15px; border-radius: 1rem; color: #0088cc; margin: 15px 0; font-size: 0.95rem; }
+        .warn-box { background: #fffae6; border: 2px solid #ffe680; padding: 15px; border-radius: 1rem; color: #cca300; margin: 15px 0; font-weight: bold; }
+
+        .hidden { display: none !important; }
+        .confetti { position: fixed; width: 10px; height: 10px; animation: fall linear forwards; z-index: 100; border-radius: 50%; }
+        @keyframes fall { to { transform: translateY(100vh) rotate(720deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="floating-bg text-5xl" style="top: 10%; left: 5%;">🧁</div>
+    <div class="floating-bg text-6xl" style="top: 20%; right: 10%; animation-delay: 1s;">🧪</div>
+    <div class="floating-bg text-5xl" style="top: 80%; left: 15%; animation-delay: 2s;">💖</div>
+    <div class="floating-bg text-6xl" style="top: 75%; right: 5%; animation-delay: 0.5s;">🧚‍♀️</div>
+
+    <!-- MAIN MENU -->
+    <div id="main-menu" class="gcard text-center w-full max-w-md mx-auto mt-10">
+        <div class="text-6xl mb-4 animate-[float_3s_ease-in-out_infinite]">🎀</div>
+        <h1 class="text-3xl font-black text-[#ff66b2] mb-2">Bio Beauty<br>Masterclass</h1>
+        <p class="text-gray-500 font-bold mb-8">Master your Molecules & Enzymes!</p>
+        
+        <div class="flex flex-col gap-4">
+            <button class="btn-cute bg-gradient-to-r from-purple-400 to-pink-400" onclick="showStudyNotes()">📖 Read Cute Notes</button>
+            <button class="btn-cute" onclick="showMap()">🌟 Play Level Quest</button>
+        </div>
+    </div>
+
+    <!-- STUDY NOTES SCREEN -->
+    <div id="study-screen" class="hidden w-full max-w-2xl mx-auto pb-10">
+        <button onclick="showMainMenu()" class="mb-4 bg-white text-pink-500 font-bold py-2 px-4 rounded-full shadow hover:bg-pink-50 transition">⬅ Back to Menu</button>
+        
+        <!-- CARD 1: MOLECULES -->
+        <article class="gcard">
+            <h3 class="card-title"><span class="n-badge">1</span> 🧁 Biological Molecules</h3>
+            
+            <div class="fig" onclick="speakText('Biological molecules. Carbohydrates, Proteins, and Lipids are the building blocks of life!')">
+                <svg viewBox="0 0 400 200" role="img" aria-label="Cute Chemistry Beaker">
+                    <rect width="400" height="200" fill="#f0fdf4"/>
+                    <path d="M170,40 L170,90 L130,160 A20,20 0 0,0 150,190 L250,190 A20,20 0 0,0 270,160 L230,90 L230,40 Z" fill="none" stroke="#b3b3b3" stroke-width="6" stroke-linejoin="round"/>
+                    <line x1="160" y1="40" x2="240" y2="40" stroke="#b3b3b3" stroke-width="6" stroke-linecap="round"/>
+                    <path d="M142,140 L258,140 L266,155 A15,15 0 0,1 250,185 L150,185 A15,15 0 0,1 134,155 Z" fill="#ff99cc"/>
+                    <circle cx="170" cy="170" r="6" fill="#fff"/><circle cx="200" cy="155" r="4" fill="#fff"/><circle cx="230" cy="175" r="8" fill="#fff"/>
+                    <text x="280" y="80" font-size="24">✨</text><text x="110" y="100" font-size="20">🌸</text>
+                </svg>
+                <div class="figcap">🧪 What are your snacks made of? — tap to hear 🔊</div>
+            </div>
+
+            <div class="chips">
+                <span>🍞 Carbohydrates</span><span>🥩 Proteins</span><span>🧈 Lipids</span><span>🍊 Vitamins</span>
+            </div>
+
+            <ul class="pl-5 space-y-2 mb-4">
+                <li><span class="say" data-w="Carbohydrates">Carbohydrates 🔊</span> (C, H, O): Ratio of H to O is 2:1. 
+                    <br>• <b>Monosaccharides</b> (Glucose) & <b>Disaccharides</b> (Sucrose, Maltose) are sweet & soluble. 
+                    <br>• <b>Polysaccharides</b> (Starch, Glycogen, Cellulose) are not sweet & insoluble. 
+                    <br>• Energy supply: <span class="say" data-w="1 gram equals 17 kilojoules">1g = 17kJ 🔊</span>.
+                </li>
+                <li><span class="say" data-w="Proteins">Proteins 🔊</span> (C, H, O, N): Built from <span class="say" data-w="Amino Acids">Amino Acids 🔊</span> (20 types). Used for growth, tissue repair, enzymes, and antibodies.</li>
+                <li><span class="say" data-w="Lipids">Lipids / Fats 🔊</span> (C, H, O): 1 Glycerol + 3 Fatty Acids. 
+                    <br>• <b>Unsaturated</b> fats precipitate less blood cholesterol than saturated fats. Energy: 1g = 39kJ.
+                </li>
+            </ul>
+
+            <h4 class="font-bold text-purple-500 text-lg border-b-2 border-dotted border-purple-200 mb-2">🧪 Food Tests Lab</h4>
+            <div class="info-box"><b>🍬 Glucose:</b> Add <span class="say" data-w="Benedict's reagent">Benedict's 🔊</span> + Boiling water bath. Turns <b>Brick Red</b>.</div>
+            <div class="info-box"><b>🥔 Starch:</b> Add <span class="say" data-w="Iodine solution">Iodine 🔊</span>. Turns <b>Blue-Black</b>.</div>
+            <div class="info-box"><b>🥩 Protein:</b> Add <span class="say" data-w="Biuret test">Biuret 🔊</span>. Turns <b>Purple</b>.</div>
+            <div class="info-box"><b>🧈 Lipids:</b> <span class="say" data-w="Ethanol Emulsion">Ethanol Emulsion 🔊</span>. Turns into a <b>Cloudy white emulsion</b>.</div>
+            <div class="info-box"><b>🍋 Vitamin C:</b> Add <span class="say" data-w="D C P I P">DCPIP 🔊</span>. Turns from Blue to <b>Colourless</b>.</div>
+        </article>
+
+        <!-- CARD 2: ENZYMES -->
+        <article class="gcard">
+            <h3 class="card-title"><span class="n-badge">2</span> 🧚‍♀ Enzyme Magic</h3>
+            
+            <div class="fig" onclick="speakText('Enzymes are biological catalysts! They work like a lock and key.')">
+                <svg viewBox="0 0 400 200" role="img" aria-label="Enzyme Lock and Key Diagram">
+                    <rect width="400" height="200" fill="#fffafc"/>
+                    <path d="M120,100 A60,60 0 1,1 120,150 L120,135 A20,20 0 0,0 140,115 L140,85 A20,20 0 0,0 120,65 Z" fill="#ffb3d9"/>
+                    <text x="70" y="160" font-size="14" font-weight="bold" fill="#ff66b2">ENZYME</text>
+                    <text x="110" y="105" font-size="12" font-weight="bold" fill="#fff">Active Site</text>
+                    <path d="M220,115 A20,20 0 0,1 200,135 L170,135 L170,65 L200,65 A20,20 0 0,1 220,85 Z" fill="#b3ffcc"/>
+                    <text x="165" y="55" font-size="14" font-weight="bold" fill="#009933">SUBSTRATE</text>
+                    <path d="M240,100 L270,100 M260,90 L270,100 L260,110" fill="none" stroke="#b3b3b3" stroke-width="4"/>
+                    <path d="M310,100 A20,20 0 0,0 330,80 L300,80 L300,100 Z" fill="#b3ccff"/>
+                    <path d="M330,120 A20,20 0 0,0 310,100 L340,100 L340,120 Z" fill="#b3ccff"/>
+                    <text x="295" y="145" font-size="14" font-weight="bold" fill="#4d88ff">PRODUCTS</text>
+                </svg>
+                <div class="figcap">🧚‍♀️ The Lock and Key model — tap to hear 🔊</div>
+            </div>
+
+            <div class="chips">
+                <span>⚡ Biological Catalyst</span><span>🔑 Active Site</span><span>🌡 Optimum</span><span>🔥 Denatured</span>
+            </div>
+
+            <ul class="pl-5 space-y-2 mb-4">
+                <li><span class="say" data-w="Enzymes">Enzymes 🔊</span> are proteins that act as <span class="say" data-w="Biological Catalysts">Biological Catalysts 🔊</span>. They speed up reactions without being changed!</li>
+                <li><b>Lock & Key:</b> The <span class="say" data-w="Substrate">substrate 🔊</span> fits exactly into the enzyme's <span class="say" data-w="Active Site">Active Site 🔊</span>.</li>
+            </ul>
+
+            <div class="warn-box">
+                <b>🌡️ Temperature:</b> As heat rises to the <b>Optimum</b> (37°C in humans), molecules gain kinetic energy and collide more. Above optimum, the active site loses its shape. The enzyme is <span class="say" data-w="Denatured"><b>Denatured</b> 🔊</span> and stops working!
+            </div>
+            <div class="warn-box">
+                <b>🧪 pH Level:</b> Highly acidic or alkaline extremes will also denature enzymes. (Pepsin prefers acidic, Trypsin prefers alkaline).
+            </div>
+        </article>
+    </div>
+
+    <!-- MAP SCREEN -->
+    <div id="map-screen" class="gcard text-center hidden mx-auto mt-10">
+        <button onclick="showMainMenu()" class="absolute top-4 left-4 text-gray-400 hover:text-pink-500 font-bold transition">⬅ Menu</button>
+        <div class="text-5xl mb-2 mt-4 animate-[float_3s_ease-in-out_infinite]">🗺️</div>
+        <h1 class="text-3xl font-black text-[#ff66b2] mb-1">Quest Map</h1>
+        <p class="text-gray-500 font-bold mb-6">Score 100% on Fact or Fiction to advance!</p>
+        
+        <div id="level-container" class="flex flex-col relative w-full max-w-[350px] mx-auto">
+            <div class="absolute left-1/2 top-10 bottom-10 w-1 bg-pink-200 -z-10 -ml-0.5 border-dashed border-l-4 border-pink-100"></div>
+            <!-- Levels injected here via JS -->
+        </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="game-screen" class="gcard text-center hidden mx-auto mt-10">
+        <div class="flex justify-between items-center mb-4">
+            <button onclick="showMap()" class="text-gray-400 hover:text-pink-500 font-bold transition">✖ Quit</button>
+            <div class="bg-pink-100 text-pink-600 font-black px-3 py-1 rounded-full text-sm" id="progress-hud">1 / 4</div>
+        </div>
+        
+        <h2 id="level-title" class="text-xl font-bold text-purple-500 mb-2 border-b-2 border-dashed border-purple-200 pb-2">Level Title</h2>
+        
+        <div class="bg-blue-50 border-2 border-blue-100 rounded-2xl p-6 mb-6 mt-4 min-h-[150px] flex items-center justify-center relative">
+            <div class="absolute -top-4 -right-2 text-4xl">🤔</div>
+            <p id="question-text" class="text-xl font-black text-gray-700 leading-snug">Question goes here?</p>
+        </div>
+
+        <div class="flex gap-4">
+            <button class="btn-fact" onclick="handleAnswer(true)">💖 FACT</button>
+            <button class="btn-fiction" onclick="handleAnswer(false)">🙅‍♀️ FICTION</button>
+        </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="result-screen" class="gcard text-center hidden mx-auto mt-10">
+        <div class="text-7xl mb-4 animate-[float_2s_ease-in-out_infinite]" id="result-icon">🌟</div>
+        <h1 class="text-3xl font-black mb-2" id="result-title">Level Cleared!</h1>
+        <p class="text-lg font-bold text-gray-500 mb-6" id="result-message">You are a bio queen!</p>
+        <button class="btn-cute" onclick="showMap()">Return to Map 🗺️</button>
+    </div>
+
+    <script>
+        // --- AUDIO SYNTH (No external files needed!) ---
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new AudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function playSound(type) {
+            if (!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            if (type === 'correct') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(250, audioCtx.currentTime);
+                osc.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.3);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            } else if (type === 'win') {
+                let time = audioCtx.currentTime;
+                [440, 554.37, 659.25, 880].forEach((freq, i) => { 
+                    let o = audioCtx.createOscillator();
+                    let g = audioCtx.createGain();
+                    o.type = 'sine'; o.frequency.value = freq;
+                    o.connect(g); g.connect(audioCtx.destination);
+                    g.gain.setValueAtTime(0, time + i * 0.1);
+                    g.gain.linearRampToValueAtTime(0.1, time + i * 0.1 + 0.05);
+                    g.gain.linearRampToValueAtTime(0, time + i * 0.1 + 0.3);
+                    o.start(time + i * 0.1); o.stop(time + i * 0.1 + 0.3);
+                });
+            } else if (type === 'fail') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                osc.frequency.linearRampToValueAtTime(150, audioCtx.currentTime + 0.5);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.5);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.5);
+            }
+        }
+
+        // TTS
+        const synth = window.speechSynthesis;
+        function speakText(text) {
+            initAudio(); // user interaction trigger
+            if (synth.speaking) synth.cancel();
+            const utterThis = new SpeechSynthesisUtterance(text);
+            utterThis.rate = 0.9; utterThis.pitch = 1.2; 
+            synth.speak(utterThis);
+        }
+
+        document.querySelectorAll('.say').forEach(item => {
+            item.addEventListener('click', () => speakText(item.getAttribute('data-w')));
+        });
+
+        // --- LEVEL DATA (Tailored strictly to Molecules & Enzymes) ---
+        const levels = [
+            {
+                id: 1, title: "Lvl 1: Sugar & Spice 🧁", icon: "🍞",
+                questions: [
+                    { q: "Carbohydrates contain the elements Carbon, Hydrogen, and Nitrogen.", fact: false }, // No Nitrogen
+                    { q: "Animals store their extra glucose as a complex carbohydrate called glycogen.", fact: true },
+                    { q: "A single lipid molecule is built from 1 glycerol and 3 fatty acids.", fact: true },
+                    { q: "Saturated fats precipitate less blood cholesterol than unsaturated fats like olive oil.", fact: false } // Unsaturated is better
+                ]
+            },
+            {
+                id: 2, title: "Lvl 2: Protein Power 💪", icon: "🥩",
+                questions: [
+                    { q: "Proteins are large molecules built from smaller basic units called amino acids.", fact: true },
+                    { q: "A lack of Vitamin C leads to a disease called Rickets, causing soft bones.", fact: false }, // Vit C = Scurvy
+                    { q: "Iron is a crucial mineral needed to form haemoglobin in red blood cells.", fact: true },
+                    { q: "Dietary fiber is fully digested by human enzymes to provide high amounts of energy.", fact: false } // Indigestible, prevents constipation
+                ]
+            },
+            {
+                id: 3, title: "Lvl 3: Food Test Lab 🧪", icon: "🧫",
+                questions: [
+                    { q: "To test for starch, you add Iodine solution. A positive result turns blue-black.", fact: true },
+                    { q: "The Biuret test is used for proteins and turns from blue to brick-red if positive.", fact: false }, // Turns purple
+                    { q: "Testing for reducing sugars requires Benedict's solution and boiling in a water bath.", fact: true },
+                    { q: "In the Ethanol Emulsion test for lipids, a positive result forms a cloudy white layer.", fact: true }
+                ]
+            },
+            {
+                id: 4, title: "Lvl 4: Enzyme Spells 🧚‍♀️", icon: "✨",
+                questions: [
+                    { q: "Enzymes are biological catalysts made of lipids that speed up metabolic reactions.", fact: false }, // Made of proteins
+                    { q: "The 'Lock and Key' model means a specific substrate fits exactly into the enzyme's active site.", fact: true },
+                    { q: "Heating an enzyme far above its optimum temperature gives it more energy so it works faster forever.", fact: false }, // It denatures
+                    { q: "Extremes of pH, whether highly acidic or highly alkaline, can denature an enzyme.", fact: true }
+                ]
+            }
+        ];
+
+        // --- GAME STATE ---
+        let currentUnlockedLevel = 1;
+        let activeLevelIndex = 0;
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // --- UI NAVIGATION ---
+        function hideAll() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('study-screen').classList.add('hidden');
+            document.getElementById('map-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.querySelectorAll('.confetti').forEach(e => e.remove());
+        }
+
+        function showMainMenu() {
+            initAudio();
+            hideAll();
+            document.getElementById('main-menu').classList.remove('hidden');
+        }
+
+        function showStudyNotes() {
+            initAudio();
+            hideAll();
+            document.getElementById('study-screen').classList.remove('hidden');
+        }
+
+        function showMap() {
+            initAudio();
+            hideAll();
+            document.getElementById('map-screen').classList.remove('hidden');
+            renderMap();
+        }
+
+        function renderMap() {
+            const container = document.getElementById('level-container');
+            container.innerHTML = ''; 
+            
+            levels.forEach((lvl, index) => {
+                const isUnlocked = lvl.id <= currentUnlockedLevel;
+                const isCurrent = lvl.id === currentUnlockedLevel;
+                
+                const btn = document.createElement('div');
+                
+                if (isCurrent) {
+                    btn.className = 'level-node level-current';
+                    btn.innerHTML = `<span>${lvl.title}</span> <span class="text-2xl">▶️</span>`;
+                    btn.onclick = () => startLevel(index);
+                } else if (isUnlocked) {
+                    btn.className = 'level-node level-unlocked';
+                    btn.innerHTML = `<span>${lvl.title}</span> <span class="text-2xl">✅</span>`;
+                    btn.onclick = () => startLevel(index);
+                } else {
+                    btn.className = 'level-node level-locked';
+                    btn.innerHTML = `<span>${lvl.title}</span> <span class="text-2xl">🔒</span>`;
+                }
+                container.appendChild(btn);
+            });
+        }
+
+        // --- GAME LOGIC ---
+        function startLevel(index) {
+            initAudio();
+            activeLevelIndex = index;
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            hideAll();
+            document.getElementById('game-screen').classList.remove('hidden');
+            document.getElementById('level-title').innerText = levels[activeLevelIndex].title;
+            
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const qData = levels[activeLevelIndex].questions[currentQuestionIndex];
+            const totalQ = levels[activeLevelIndex].questions.length;
+            
+            document.getElementById('progress-hud').innerText = `${currentQuestionIndex + 1} / ${totalQ}`;
+            
+            const qEl = document.getElementById('question-text');
+            qEl.innerText = qData.q;
+            
+            qEl.parentElement.classList.remove("animate-[pop_0.3s_ease]");
+            void qEl.parentElement.offsetWidth; 
+            qEl.parentElement.classList.add("animate-[pop_0.3s_ease]");
+            
+            document.querySelectorAll('#game-screen button').forEach(b => b.style.pointerEvents = 'auto');
+        }
+
+        function handleAnswer(userSaysFact) {
+            initAudio();
+            const qData = levels[activeLevelIndex].questions[currentQuestionIndex];
+            const isCorrect = (userSaysFact === qData.fact);
+            const card = document.getElementById('game-screen');
+            
+            document.querySelectorAll('#game-screen button').forEach(b => b.style.pointerEvents = 'none');
+            
+            if (isCorrect) {
+                playSound('correct');
+                score++;
+                card.style.boxShadow = "0 0 30px rgba(0, 255, 100, 0.6)"; 
+            } else {
+                playSound('wrong');
+                card.style.animation = 'none';
+                void card.offsetWidth;
+                card.style.animation = 'shake 0.4s ease'; 
+                card.style.boxShadow = "0 0 30px rgba(255, 0, 0, 0.4)"; 
+            }
+            
+            setTimeout(() => {
+                card.style.boxShadow = "0 15px 35px rgba(255, 153, 204, 0.3)";
+                currentQuestionIndex++;
+                if (currentQuestionIndex < levels[activeLevelIndex].questions.length) {
+                    renderQuestion();
+                } else {
+                    endLevel();
+                }
+            }, 600);
+        }
+
+        function endLevel() {
+            hideAll();
+            const resScreen = document.getElementById('result-screen');
+            resScreen.classList.remove('hidden');
+            
+            const totalQ = levels[activeLevelIndex].questions.length;
+            
+            if (score === totalQ) {
+                playSound('win');
+                document.getElementById('result-icon').innerText = "🏆";
+                document.getElementById('result-title').innerText = "Perfect Clear!";
+                document.getElementById('result-title').style.color = "var(--mint-deep)";
+                document.getElementById('result-message').innerText = "You unlocked the next level, gorgeous! ✨";
+                
+                if (currentUnlockedLevel === levels[activeLevelIndex].id) {
+                    currentUnlockedLevel++;
+                }
+                shootConfetti();
+            } else {
+                playSound('fail');
+                document.getElementById('result-icon').innerText = "🥀";
+                document.getElementById('result-title').innerText = "Almost!";
+                document.getElementById('result-title').style.color = "#cc0000";
+                document.getElementById('result-message').innerText = `You scored ${score}/${totalQ}. You need 100% to advance. Try again! 💕`;
+            }
+        }
+
+        function shootConfetti() {
+            const colors = ['#ff99cc', '#ff66b2', '#b3ffcc', '#ffffff', '#b366ff'];
+            for (let i = 0; i < 60; i++) {
+                let conf = document.createElement("div");
+                conf.className = "confetti";
+                conf.style.left = Math.random() * 100 + "vw";
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                let duration = Math.random() * 2 + 2; 
+                let delay = Math.random() * 0.5;
+                conf.style.animationDuration = duration + "s";
+                conf.style.animationDelay = delay + "s";
+                conf.style.top = "-20px";
+                document.body.appendChild(conf);
+                setTimeout(() => { if(conf.parentNode) conf.parentNode.removeChild(conf); }, (duration + delay) * 1000);
+            }
+        }
+    </script>
+</body>
+</html>
